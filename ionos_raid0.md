@@ -78,7 +78,7 @@ mdadm -D /dev/md4 | grep -e "Array Size" -e "Dev Size"
 ##### or
 `watch -n 3 cat /proc/mdstat`
 
-## Creating new partition for /root/solana
+## Creating new partition for /root/ledger
 
 ##### Create partition on 1st disk
 `parted -a opt /dev/nvme0n1 mkpart primary ext4 90.0GB 100%`
