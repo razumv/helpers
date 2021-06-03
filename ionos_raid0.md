@@ -113,9 +113,9 @@ mkfs.ext4 /dev/md5
 pvcreate /dev/md5
 vgcreate vg01 /dev/md5
 lvcreate -L 1T -n ledger vg01
-lvcreate -L 135G -n swap vg01
+#lvcreate -L 135G -n swap vg01
 mkfs.ext4 /dev/vg01/ledger
-mkfs.ext4 /dev/vg01/swap
+#mkfs.ext4 /dev/vg01/swap
 ```
 
 ##### Save mount info to /etc/fstab
@@ -174,35 +174,3 @@ Write      | 1.59 GB/s     (3.1k) | 1.74 GB/s     (1.6k)
 Total      | 3.11 GB/s     (6.0k) | 3.37 GB/s     (3.2k)
 
 ```
-
-
-## swapfile
-### create swapfile
-```
-swapoff -a && \
-dd if=/dev/zero of=/mnt/swap/swapfile bs=1G count=128 && \
-chmod 600 /mnt/swap/swapfile && \
-mkswap /mnt/swap/swapfile && \
-swapon /mnt/swap/swapfile
-```
-
-## ramdisk
-### add to /etc/fstab
-```
-echo 'tmpfs /mnt/ramdisk tmpfs nodev,nosuid,noexec,nodiratime,size=100G 0 0' >> /etc/fstab
-```
-
-***comment other swaps in /etc/fstab NOW!!!***
-
-```
-mkdir -p /mnt/ramdisk
-mount /mnt/ramdisk
-```
-
-#### donate if it was helpful
-
-SOL - `2Y4C2e5d6bUY1nb5mqFfkSCyAt39K7cYEim2gD7vAtKC`
-
-LTC - `MAaitfT32P9CZdQApTf6Mm4WZygakkGmg6`
-
-BTC - `36N8gkZ19Doem8hXv6GL7xXVuQv8aDMmoX`
