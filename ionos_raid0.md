@@ -121,8 +121,8 @@ mkfs.ext4 /dev/vg01/swap
 ##### Save mount info to /etc/fstab
 ```
 echo '/dev/vg01/ledger /root/ledger   ext4    defaults                0 0' >> /etc/fstab
-echo '/dev/vg01/swap   /mnt/swap      ext4    defaults                0 0' >> /etc/fstab
-echo '/mnt/swap/swapfile none swap sw 0 0' >> /etc/fstab
+#echo '/dev/vg01/swap   /mnt/swap      ext4    defaults                0 0' >> /etc/fstab
+#echo '/mnt/swap/swapfile none swap sw 0 0' >> /etc/fstab
 ```
 
 ##### Mount /root/ledger to RAID0
@@ -138,7 +138,7 @@ mkdir -p /mnt/swap && mount /dev/vg01/swap
 ##### Making speed test
 ```
 apt install fio -y
-cd /root/solana
+cd /root/ledger
 curl -sL yabs.sh | bash -s -- -ig
 
 # ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## #
