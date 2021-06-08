@@ -113,26 +113,17 @@ mkfs.ext4 /dev/md5
 pvcreate /dev/md5
 vgcreate vg01 /dev/md5
 lvcreate -L 1T -n ledger vg01
-#lvcreate -L 135G -n swap vg01
 mkfs.ext4 /dev/vg01/ledger
-#mkfs.ext4 /dev/vg01/swap
 ```
 
 ##### Save mount info to /etc/fstab
 ```
 echo '/dev/vg01/ledger /root/ledger   ext4    defaults                0 0' >> /etc/fstab
-#echo '/dev/vg01/swap   /mnt/swap      ext4    defaults                0 0' >> /etc/fstab
-#echo '/mnt/swap/swapfile none swap sw 0 0' >> /etc/fstab
 ```
 
 ##### Mount /root/ledger to RAID0
 ```
 mkdir -p /root/ledger && mount /dev/vg01/ledger
-```
-
-##### Mount /mnt/swapfile to RAID0
-```
-mkdir -p /mnt/swap && mount /dev/vg01/swap
 ```
 
 ##### Making speed test
