@@ -83,7 +83,7 @@ sudo tee <<EOF >/dev/null /etc/systemd/system/prometheus.service
   WantedBy=multi-user.target
 EOF
 
-sudo systemctl daemon-reload && systemctl enable prometheus && systemctl start prometheus
+sudo systemctl daemon-reload && systemctl enable prometheus && systemctl restart prometheus
 wget https://github.com/prometheus/node_exporter/releases/download/v1.1.2/node_exporter-1.1.2.linux-amd64.tar.gz
 tar xvf node_exporter-1.1.2.linux-amd64.tar.gz
 cp node_exporter-1.1.2.linux-amd64/node_exporter /usr/local/bin
@@ -103,6 +103,6 @@ ExecStart=/usr/local/bin/node_exporter --web.listen-address=":39100"
 WantedBy=multi-user.target
 EOF
 
-sudo systemctl daemon-reload && systemctl enable node_exporter && systemctl start node_exporter
+sudo systemctl daemon-reload && systemctl enable node_exporter && systemctl restart node_exporter
 
 echo "Monitoring Installed"
