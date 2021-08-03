@@ -37,16 +37,25 @@ global:
   external_labels:
     owner: $OWNER
     hostname: $HOSTNAME
-    instance: $(curl -s ifconfig.me)
 scrape_configs:
   - job_name: "prometheus"
     scrape_interval: 30s
     static_configs:
       - targets: ["localhost:39090"]
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: '.*'
+        target_label: instance
+        replacement: '$(curl -s ifconfig.me)'      
   - job_name: "node_exporter"
     scrape_interval: 30s
     static_configs:
-      - targets: ["localhost:39100"] 
+      - targets: ["localhost:39100"]
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: '.*'
+        target_label: instance
+        replacement: '$(curl -s ifconfig.me)'      
 remote_write:
   - url: http://doubletop:doubletop@vm.razumv.tech:8080/api/v1/write      
 EOF
