@@ -46,7 +46,7 @@ scrape_configs:
       - source_labels: [__address__]
         regex: '.*'
         target_label: instance
-        replacement: '$(curl -s ifconfig.me)'      
+        replacement: '$HOSTNAME'      
   - job_name: "node_exporter"
     scrape_interval: 30s
     static_configs:
@@ -55,7 +55,7 @@ scrape_configs:
       - source_labels: [__address__]
         regex: '.*'
         target_label: instance
-        replacement: '$(curl -s ifconfig.me)'      
+        replacement: '$HOSTNAME'      
 remote_write:
   - url: http://doubletop:doubletop@vm.razumv.tech:8080/api/v1/write      
 EOF
