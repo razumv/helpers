@@ -104,7 +104,7 @@ EOF
 
 sudo tee <<EOF >/dev/null $HOME/scripts/getversion.sh
 #!/bin/bash
-$HOME/snarkOS/target/release/snarkos --help | grep -o '[0-9]*\.[0-9]*\.[0-9]*'        
+$HOME/snarkOS/target/release/snarkos --help | grep -o '[0-9]*\.[0-9]*\.[0-9]*' | sed -e 's/[^0-9]//g'      
 EOF
 
 chmod +x $HOME/scripts/*.sh
