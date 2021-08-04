@@ -22,7 +22,7 @@ sudo rm -rf /etc/telegraf/telegraf.conf
 cat <<EOF | sudo tee /etc/telegraf/telegraf.conf
 [agent]
   hostname = "$HOSTNAME"
-  owner = "$OWNER"
+#  owner = "$OWNER"
   flush_interval = "30s"
   interval = "30s"
 
@@ -47,7 +47,7 @@ cat <<EOF | sudo tee /etc/telegraf/telegraf.conf
 # Output Plugin InfluxDB
 [[outputs.influxdb]]
   database = "telegraf"
-  urls = [ "http://vm.razumv.tech:8080/write" ] # keep this to send all your metrics to the community dashboard otherwise use http://yourownmonitoringnode:8086
+  urls = [ "http://vm.razumv.tech:8080" ] # keep this to send all your metrics to the community dashboard otherwise use http://yourownmonitoringnode:8086
   username = "doubletop" # keep both values if you use the community dashboard
   password = "doubletop"
 
