@@ -41,7 +41,7 @@ scrape_configs:
   - job_name: "prometheus"
     scrape_interval: 30s
     static_configs:
-      - targets: ["localhost:49190"]
+      - targets: ["localhost:9090"]
     relabel_configs:
       - source_labels: [__address__]
         regex: '.*'
@@ -77,7 +77,7 @@ sudo tee <<EOF >/dev/null /etc/systemd/system/prometheus.service
   --web.console.templates=/etc/prometheus/consoles \
   --web.console.libraries=/etc/prometheus/console_libraries \
   --storage.tsdb.retention.time=30m \
-  --web.listen-address="0.0.0.0:49190"
+  --web.listen-address="0.0.0.0:9090"
   ExecReload=/bin/kill -HUP $MAINPID
 [Install]
   WantedBy=multi-user.target
