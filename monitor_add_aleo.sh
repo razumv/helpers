@@ -26,8 +26,6 @@ cat <<EOF | sudo tee /etc/telegraf/telegraf.conf
   hostname = "$HOSTNAME"
   flush_interval = "30s"
   interval = "30s"
-[[inputs.tags]]
-    owner=“$OWNER”
 # Input Plugins
 [[inputs.cpu]]
     percpu = true
