@@ -22,10 +22,12 @@ sudo rm -rf /etc/telegraf/telegraf.conf
 cat <<EOF | sudo tee /etc/telegraf/telegraf.conf
 [agent]
   hostname = "$HOSTNAME"
-#  owner = "$OWNER"
   flush_interval = "30s"
   interval = "30s"
-
+[[inputs.snmp]]
+  # other stuff
+  [inputs.snmp.tags]
+    owner=“$OWNER”
 # Input Plugins
 [[inputs.cpu]]
     percpu = true
