@@ -54,7 +54,7 @@ cat <<EOF | sudo tee /etc/telegraf/telegraf.conf
 [[inputs.exec]]
 #  ## override the default metric name of "exec"
   name_override = "connections"
-  commands = ["sudo su -c $HOME/scipts/getconnection.sh  -s /bin/bash $USER"]
+  commands = ["sudo su -c $HOME/scripts/getconnection.sh  -s /bin/bash $USER"]
   interval = "1m"
   timeout = "1m"
   data_format = "value"
@@ -62,7 +62,7 @@ cat <<EOF | sudo tee /etc/telegraf/telegraf.conf
 
  [[inputs.exec]]
   name_override = "blockheight"
-  commands = ["sudo su -c $HOME/scipts/getheight.sh   -s /bin/bash $USER"]
+  commands = ["sudo su -c $HOME/scripts/getheight.sh   -s /bin/bash $USER"]
   interval = "1m"
   timeout = "1m"
   data_format = "value"
@@ -70,7 +70,7 @@ cat <<EOF | sudo tee /etc/telegraf/telegraf.conf
 
  [[inputs.exec]]
   name_override = "minedcounter"
-  commands = ["sudo su -c $HOME/scipts/getmindeblocks.sh   -s /bin/bash $USER"]
+  commands = ["sudo su -c $HOME/scripts/getmindeblocks.sh   -s /bin/bash $USER"]
   interval = "1m"
   timeout = "1m"
   data_format = "value"
@@ -78,7 +78,7 @@ cat <<EOF | sudo tee /etc/telegraf/telegraf.conf
   
  [[inputs.exec]]
   name_override = "getversion"
-  commands = ["sudo su -c $HOME/scipts/getversion.sh   -s /bin/bash $USER"]
+  commands = ["sudo su -c $HOME/scripts/getversion.sh   -s /bin/bash $USER"]
   interval = "1m"
   timeout = "1m"
   data_format = "value"
@@ -87,22 +87,22 @@ EOF
 
 mkdir $HOME/aleoscipt
 
-sudo tee <<EOF >/dev/null $HOME/scipts/getconnection.sh
+sudo tee <<EOF >/dev/null $HOME/scripts/getconnection.sh
 #!/bin/bash
 curl -s --data-binary '{"jsonrpc": "2.0", "id":"documentation", "method": "getconnectioncount", "params": [] }' -H 'content-type: application/json' http://localhost:3030/ | jq '.result?'
 EOF
 
-sudo tee <<EOF >/dev/null $HOME/scipts/getheight.sh
+sudo tee <<EOF >/dev/null $HOME/scripts/getheight.sh
 #!/bin/bash
 curl -s --data-binary '{"jsonrpc": "2.0", "id":"documentation", "method": "getblockcount", "params": [] }' -H 'content-type: application/json' http://localhost:3030/ | jq '.result?';
 EOF
 
-sudo tee <<EOF >/dev/null $HOME/scipts/getmindeblocks.sh
+sudo tee <<EOF >/dev/null $HOME/scripts/getmindeblocks.sh
 #!/bin/bash
 curl -s --data-binary '{"jsonrpc": "2.0", "id":"documentation", "method": "getnodestats", "params": [] }' -H 'content-type: application/json' http://localhost:3030/ | jq '.[].misc?.blocks_mined?'        
 EOF
 
-sudo tee <<EOF >/dev/null $HOME/scipts/getversion.sh
+sudo tee <<EOF >/dev/null $HOME/scripts/getversion.sh
 #!/bin/bash
 /root/.cargo/bin/snarkos --help | grep -o '[0-9]*\.[0-9]*\.[0-9]*'        
 EOF
