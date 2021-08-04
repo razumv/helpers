@@ -85,7 +85,7 @@ cat <<EOF | sudo tee /etc/telegraf/telegraf.conf
   data_type = "string" # required
 EOF
 
-mkdir $HOME/aleoscipt
+mkdir $HOME/scripts
 
 sudo tee <<EOF >/dev/null $HOME/scripts/getconnection.sh
 #!/bin/bash
