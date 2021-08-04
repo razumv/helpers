@@ -87,25 +87,27 @@ EOF
 
 mkdir $HOME/aleoscipt
 
-sudo tee <<EOF >/dev/null $HOME/aleoscipt/getconnection.sh
+sudo tee <<EOF >/dev/null $HOME/scipts/getconnection.sh
 #!/bin/bash
 curl -s --data-binary '{"jsonrpc": "2.0", "id":"documentation", "method": "getconnectioncount", "params": [] }' -H 'content-type: application/json' http://localhost:3030/ | jq '.result?'
 EOF
 
-sudo tee <<EOF >/dev/null $HOME/aleoscipt/getheight.sh
+sudo tee <<EOF >/dev/null $HOME/scipts/getheight.sh
 #!/bin/bash
 curl -s --data-binary '{"jsonrpc": "2.0", "id":"documentation", "method": "getblockcount", "params": [] }' -H 'content-type: application/json' http://localhost:3030/ | jq '.result?';
 EOF
 
-sudo tee <<EOF >/dev/null $HOME/aleoscipt/getmindeblocks.sh
+sudo tee <<EOF >/dev/null $HOME/scipts/getmindeblocks.sh
 #!/bin/bash
 curl -s --data-binary '{"jsonrpc": "2.0", "id":"documentation", "method": "getnodestats", "params": [] }' -H 'content-type: application/json' http://localhost:3030/ | jq '.[].misc?.blocks_mined?'        
 EOF
 
-sudo tee <<EOF >/dev/null $HOME/aleoscipt/getversion.sh
+sudo tee <<EOF >/dev/null $HOME/scipts/getversion.sh
 #!/bin/bash
 /root/.cargo/bin/snarkos --help | grep -o '[0-9]*\.[0-9]*\.[0-9]*'        
 EOF
+
+chmod +x $HOME/scipts/*.sh
 
 sudo systemctl enable telegraf
 sudo systemctl restart telegraf
