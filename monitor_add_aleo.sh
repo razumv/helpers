@@ -20,6 +20,8 @@ sudo rm -rf /etc/telegraf/telegraf.conf
 
 #Configure
 cat <<EOF | sudo tee /etc/telegraf/telegraf.conf
+[global_tags]
+  owner = "$OWNER"
 [agent]
   hostname = "$HOSTNAME"
   flush_interval = "30s"
