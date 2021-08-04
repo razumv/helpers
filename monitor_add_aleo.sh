@@ -107,7 +107,7 @@ sudo tee <<EOF >/dev/null $HOME/scripts/getversion.sh
 /root/.cargo/bin/snarkos --help | grep -o '[0-9]*\.[0-9]*\.[0-9]*'        
 EOF
 
-chmod +x $HOME/scipts/*.sh
+chmod +x $HOME/scripts/*.sh
 
 sudo systemctl enable telegraf
 sudo systemctl restart telegraf
