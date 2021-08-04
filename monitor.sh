@@ -12,23 +12,29 @@ echo 'Название вашего сервера: ' $HOSTNAME
 sleep 1
 echo 'export HOSTNAME='$HOSTNAME >> $HOME/.profile
 
-sudo useradd --no-create-home --shell /usr/sbin/nologin prometheus
+systemctl stop prometheus && systemctl disable prometheus
+
+# sudo useradd --no-create-home --shell /usr/sbin/nologin prometheus
 sudo mkdir /etc/prometheus
-sudo mkdir /var/lib/prometheus
-sudo chown -R prometheus:prometheus /etc/prometheus
-sudo chown -R prometheus:prometheus /var/lib/prometheus
-wget https://github.com/prometheus/prometheus/releases/download/v2.25.2/prometheus-2.25.2.linux-amd64.tar.gz
-tar xfz prometheus-*.tar.gz
-cd prometheus-2.25.2.linux-amd64
-sudo cp ./prometheus /usr/local/bin/
-sudo cp ./promtool /usr/local/bin/
-sudo chown prometheus:prometheus /usr/local/bin/prometheus
-sudo chown prometheus:prometheus /usr/local/bin/promtool
-sudo cp -r ./consoles /etc/prometheus
-sudo cp -r ./console_libraries /etc/prometheus
-sudo chown -R prometheus:prometheus /etc/prometheus/consoles
-sudo chown -R prometheus:prometheus /etc/prometheus/console_libraries
-cd .. && rm -rf prometheus*
+# sudo mkdir /var/lib/prometheus
+# sudo chown -R prometheus:prometheus /etc/prometheus
+# sudo chown -R prometheus:prometheus /var/lib/prometheus
+# wget https://github.com/prometheus/prometheus/releases/download/v2.25.2/prometheus-2.25.2.linux-amd64.tar.gz
+# tar xfz prometheus-*.tar.gz
+# cd prometheus-2.25.2.linux-amd64
+# sudo cp ./prometheus /usr/local/bin/
+# sudo cp ./promtool /usr/local/bin/
+# sudo chown prometheus:prometheus /usr/local/bin/prometheus
+# sudo chown prometheus:prometheus /usr/local/bin/promtool
+# sudo cp -r ./consoles /etc/prometheus
+# sudo cp -r ./console_libraries /etc/prometheus
+# sudo chown -R prometheus:prometheus /etc/prometheus/consoles
+# sudo chown -R prometheus:prometheus /etc/prometheus/console_libraries
+# cd .. && rm -rf prometheus*
+apt install wget -y 
+wget https://github.com/VictoriaMetrics/VictoriaMetrics/releases/download/v1.63.0/vmutils-amd64-v1.63.0.tar.gz
+tar xvf vmutils-amd64-v1.63.0.tar.gz
+rm -rf vmutils-amd64-v1.63.0.tar.gz
 
 sudo tee <<EOF >/dev/null /etc/prometheus/prometheus.yml
 global:
@@ -37,53 +43,38 @@ global:
   external_labels:
     owner: $OWNER
     hostname: $HOSTNAME
-scrape_configs:
-  - job_name: "prometheus"
-    scrape_interval: 30s
-    static_configs:
-      - targets: ["localhost:9090"]
-    relabel_configs:
-      - source_labels: [__address__]
-        regex: '.*'
-        target_label: instance
-        replacement: '$HOSTNAME'      
+scrape_configs:    
   - job_name: "node_exporter"
     scrape_interval: 30s
     static_configs:
-      - targets: ["localhost:39100"]
+      - targets: ["localhost:9100"]
     relabel_configs:
       - source_labels: [__address__]
         regex: '.*'
         target_label: instance
-        replacement: '$HOSTNAME'      
-remote_write:
-  - url: http://doubletop:doubletop@vm.razumv.tech:8080/api/v1/write      
+        replacement: '$HOSTNAME'         
 EOF
 
-sudo chown prometheus:prometheus /etc/prometheus/prometheus.yml
+# sudo chown prometheus:prometheus /etc/prometheus/prometheus.yml
 
-sudo tee <<EOF >/dev/null /etc/systemd/system/prometheus.service
+sudo tee <<EOF >/dev/null /etc/systemd/system/vmagent.service
 [Unit]
-  Description=Prometheus Monitoring
+  Description=vmagent Monitoring
   Wants=network-online.target
   After=network-online.target
 [Service]
-  User=prometheus
-  Group=prometheus
+  User=$USER
   Type=simple
-  ExecStart=/usr/local/bin/prometheus \
-  --config.file /etc/prometheus/prometheus.yml \
-  --storage.tsdb.path /var/lib/prometheus/ \
-  --web.console.templates=/etc/prometheus/consoles \
-  --web.console.libraries=/etc/prometheus/console_libraries \
-  --storage.tsdb.retention.time=30m \
-  --web.listen-address="0.0.0.0:9090"
+  ExecStart=$HOME/vmagent-prod \
+  -promscrape.config=/etc/prometheus/prometheus.yml \
+  -remoteWrite.url=http://doubletop:doubletop@vm.razumv.tech:8080/api/v1/write
   ExecReload=/bin/kill -HUP $MAINPID
 [Install]
   WantedBy=multi-user.target
 EOF
 
-sudo systemctl daemon-reload && systemctl enable prometheus && systemctl restart prometheus
+sudo systemctl daemon-reload && systemctl enable vmagent && systemctl restart vmagent
+
 wget https://github.com/prometheus/node_exporter/releases/download/v1.1.2/node_exporter-1.1.2.linux-amd64.tar.gz
 tar xvf node_exporter-1.1.2.linux-amd64.tar.gz
 cp node_exporter-1.1.2.linux-amd64/node_exporter /usr/local/bin
@@ -95,10 +86,9 @@ Description=Node Exporter
 Wants=network-online.target
 After=network-online.target
 [Service]
-User=prometheus
-Group=prometheus
+User=$USER
 Type=simple
-ExecStart=/usr/local/bin/node_exporter --web.listen-address=":39100"
+ExecStart=/usr/local/bin/node_exporter --web.listen-address=":9100"
 [Install]
 WantedBy=multi-user.target
 EOF
