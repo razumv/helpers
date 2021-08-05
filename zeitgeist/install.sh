@@ -1,0 +1,46 @@
+#!/bin/bash
+if [ ! $NODENAME ]; then
+	read -p "Enter node name: " NODENAME
+fi
+echo 'Your node name: ' $NODENAME
+sleep 1
+echo 'export NODENAME='$NODENAME >> $HOME/.profile
+
+sudo apt update
+sudo apt install make clang pkg-config libssl-dev build-essential git mc jq -y
+curl https://getsubstrate.io -sSf | bash -s -- --fast 
+source $HOME/.cargo/env
+sleep 1
+
+git clone https://github.com/zeitgeistpm/zeitgeist.git
+cd zeitgeist
+git checkout v0.1.2
+./scripts/init.sh
+#cargo build --release
+wget https://github.com/zeitgeistpm/zeitgeist/releases/download/v0.1.2/zeitgeist -O $HOME/zeitgeist/target/release/zeitgeist
+
+sudo tee <<EOF >/dev/null /etc/systemd/journald.conf
+Storage=persistent
+EOF
+sudo systemctl restart systemd-journald
+
+sudo tee <<EOF >/dev/null /etc/systemd/system/zeitgeist.service
+[Unit]
+Description=Zeitgeist Node
+After=network-online.target
+[Service]
+User=$USER
+ExecStart=$HOME/zeitgeist/target/release/zeitgeist --chain battery_park --bootnodes /ip4/139.162.171.58/tcp/30333/p2p/12D3KooWPvu5rpH2FNYnAmiQ8X8XqkMiuSFTjH2jwMCSjoam7RGQ --name "$NODENAME | DOUBLETOP" --validator --telemetry-url "wss://telemetry.zeitgeist.pm/submit/ 0"
+Restart=always
+RestartSec=10
+LimitNOFILE=10000
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo systemctl daemon-reload
+sudo systemctl enable zeitgeist
+sudo systemctl restart zeitgeist
+
+echo -e '\n\e[44mRun command to see logs: \e[0m\n'
+echo 'journalctl -n 100 -f -u zeitgeist'
