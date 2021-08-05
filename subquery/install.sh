@@ -18,16 +18,9 @@ sudo sh get-docker.sh
 sudo apt install -y docker-compose
 rm -f get-docker.sh
 
-git clone https://github.com/subquery/subql-init
 npm install -g @subql/cli
-subql init --init $SUBQUERY_NODENAME
-yarn
-npm install
-yarn codegen
-npm run-script codegen
-yarn build
-npm run-script build
+yarn global add @subql/cli
 
-docker-compose up -d
+
 
 
