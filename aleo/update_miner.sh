@@ -5,7 +5,6 @@ sudo systemctl stop miner
 cd $HOME/snarkOS
 git fetch
 git checkout v1.3.13
-rm -rf target/
 cargo build --release --verbose
 rm -rf $HOME/.snarkOS/snarkos_testnet1
 rm -rf $HOME/.snarkOS/snarkos_testnet1_secondary
