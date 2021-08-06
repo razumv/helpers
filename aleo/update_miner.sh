@@ -1,5 +1,6 @@
 #!/bin/bash
-systemctl stop miner
+sudo apt install unzip -y
+sudo systemctl stop miner
 cd $HOME/snarkOS
 git fetch
 git checkout v1.3.13
@@ -20,7 +21,7 @@ tar xvf backup_snarkOS_$block.tar.gz
 mv backup_snarkOS_$block/.snarkOS/* $HOME/.snarkOS/
 rm -rf backup_snarkOS_$block*
 
-systemctl start miner
+sudo systemctl start miner
 
 version=`$HOME/snarkOS/target/release/snarkos help | grep snarkOS | head -n 1`
 echo 'Current version' $version
