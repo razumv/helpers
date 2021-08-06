@@ -7,11 +7,13 @@ cargo build --release --verbose
 rm -rf $HOME/.snarkOS/snarkos_testnet1
 rm -rf $HOME/.snarkOS/snarkos_testnet1_secondary
 cd
-wget 188.166.34.137/backup_snarkOS_347400.tar.gz
-tar xvf backup_snarkOS_347400.tar.gz
-mv backup_snarkOS_347400/.snarkOS/* $HOME/.snarkOS/
-rm -rf backup_snarkOS_347400*
-systemctl start aleo
+
+#update snapshot
+block=380000
+wget 188.166.34.137/backup_snarkOS_$block.tar.gz
+tar xvf backup_snarkOS_$block.tar.gz
+mv backup_snarkOS_$block/.snarkOS/* $HOME/.snarkOS/
+rm -rf backup_snarkOS_$block*
 
 version=`$HOME/snarkOS/target/release/snarkos help | grep snarkOS | head -n 1`
 echo 'Current version' $version
