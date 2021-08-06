@@ -1,6 +1,6 @@
 #!/bin/bash
 sudo apt update
-sudo apt install make clang pkg-config libssl-dev build-essential git mc jq unzip -y
+sudo apt install make clang pkg-config libssl-dev build-essential git mc jq unzip wget -y
 curl https://getsubstrate.io -sSf | bash -s -- --fast 
 source $HOME/.cargo/env
 sleep 1
