@@ -3,7 +3,11 @@ systemctl stop aleo
 cd $HOME/snarkOS
 git fetch
 git checkout v1.3.13
-cargo build --release --verbose
+#cargo build --release --verbose
+wget https://github.com/AleoHQ/snarkOS/releases/download/v1.3.13/aleo-testnet1-v1.3.13-x86_64-unknown-linux-gnu.zip
+unzip aleo-testnet1-v1.3.13-x86_64-unknown-linux-gnu.zip
+mkdir -p $HOME/snarkOS/target/release/
+mv snarkos $HOME/snarkOS/target/release/
 rm -rf $HOME/.snarkOS/snarkos_testnet1
 rm -rf $HOME/.snarkOS/snarkos_testnet1_secondary
 cd
