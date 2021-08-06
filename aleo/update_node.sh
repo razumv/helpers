@@ -17,6 +17,11 @@ tar xvf backup_snarkOS_$block.tar.gz
 mv backup_snarkOS_$block/.snarkOS/* $HOME/.snarkOS/
 rm -rf backup_snarkOS_$block*
 
+sudo tee <<EOF >/dev/null /etc/systemd/journald.conf
+Storage=persistent
+EOF
+sudo systemctl restart systemd-journald
+
 sudo systemctl start aleo
 
 version=`$HOME/snarkOS/target/release/snarkos help | grep snarkOS | head -n 1`
