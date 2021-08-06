@@ -1,5 +1,6 @@
 #!/bin/bash
-sudo apt install unzip wget -y
+sudo apt install wget -y
+rustup update
 sudo systemctl stop aleo
 cd $HOME/snarkOS
 git fetch
