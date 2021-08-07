@@ -1,4 +1,6 @@
 #!/bin/bash
+sed -i -e "s/^prometheus *=.*/prometheus = true/" $HOME/.*/config/config.toml
+
 cat <<EOF | tee -a /etc/prometheus/prometheus.yml
   - job_name: "cosmos"
     scrape_interval: 30s
