@@ -15,8 +15,8 @@ sudo tee <<EOF >/dev/null /etc/systemd/system/minima.service
 [Unit]
 Description=minima
 [Service]
-User=root
-ExecStart=/usr/bin/java -Xmx1G -jar /root/minima.jar
+User=$USER
+ExecStart=/usr/bin/java -Xmx1G -jar $HOME/minima.jar
 Restart=always
 RestartSec=100
 [Install]
