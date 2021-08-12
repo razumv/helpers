@@ -31,9 +31,9 @@ ExecStart=$HOME/massa/target/release/massa-node
 [Install]
 WantedBy=multi-user.target
 EOF
-sudo systemctl enable massad
+sudo systemctl enable massa
 sudo systemctl daemon-reload
-sudo systemctl restart massad
+sudo systemctl restart massa
 
 cd $HOME/massa/massa-client/
 cargo run --release our_ip
