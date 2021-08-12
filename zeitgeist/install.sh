@@ -18,8 +18,8 @@ git checkout v0.1.2
 ./scripts/init.sh
 #cargo build --release
 mkdir -p $HOME/zeitgeist/target/release/
-chmod +x $HOME/zeitgeist/target/release/zeitgeist
 wget https://github.com/zeitgeistpm/zeitgeist/releases/download/v0.1.2/zeitgeist -O $HOME/zeitgeist/target/release/zeitgeist
+chmod +x $HOME/zeitgeist/target/release/zeitgeist
 
 sudo tee <<EOF >/dev/null /etc/systemd/journald.conf
 Storage=persistent
