@@ -28,7 +28,7 @@ EOF
 
 sudo systemctl restart systemd-journald
 
-if [ ! -d $HOME/kichain.tar.gz ]; then
+if [ ! -e $HOME/kichain.tar.gz ]; then
 	tar cvzf kichain.tar.gz $HOME/testnet/
 fi
 
