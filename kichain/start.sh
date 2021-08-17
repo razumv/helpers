@@ -5,7 +5,7 @@ peers="454d1bfb5db8082dadf5dcf81c200f0d37c1ac72@51.195.101.107:26656,1515ae1aa71
 seeds="815d447b182bbfcf729ac016bc8bb44aa8e14520@94.23.3.107:27756"
 echo $peers
 echo $seeds
-sed -i.bak -e "s/^seeds *=.*/seeds = $seeds/; s/^persistent_peers *=.*/persistent_peers = $peers/" $HOME/testnet/kid/config/config.toml
+sed -i.bak -e "s/^seeds *=.*/seeds = \"$seeds\"/; s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/testnet/kid/config/config.toml
 sed -i -e 's/^\(timeout_commit *=\).*/\1 "5s"/' $HOME/testnet/kid/config/config.toml
 
 sudo tee <<EOF >/dev/null /etc/systemd/system/kichain.service
