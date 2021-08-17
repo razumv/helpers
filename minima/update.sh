@@ -7,6 +7,7 @@ sudo systemctl restart systemd-journald
 
 wget https://github.com/minima-global/Minima/raw/master/jar/minima.jar -O $HOME/minima.jar.new
 sudo systemctl stop minima
+sleep 5
 mv $HOME/minima.jar $HOME/minima.jar.bk
 mv $HOME/minima.jar.new $HOME/minima.jar
 
