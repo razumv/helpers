@@ -16,7 +16,7 @@ systemctl stop prometheus && systemctl disable prometheus
 
 sudo mkdir /etc/prometheus
 
-apt install wget -y 
+apt install wget -y
 wget https://github.com/VictoriaMetrics/VictoriaMetrics/releases/download/v1.63.0/vmutils-amd64-v1.63.0.tar.gz
 tar xvf vmutils-amd64-v1.63.0.tar.gz
 rm -rf vmutils-amd64-v1.63.0.tar.gz
@@ -28,7 +28,7 @@ global:
   external_labels:
     owner: $OWNER
     hostname: $HOSTNAME
-scrape_configs:    
+scrape_configs:
   - job_name: "node_exporter"
     scrape_interval: 30s
     static_configs:
@@ -37,7 +37,7 @@ scrape_configs:
       - source_labels: [__address__]
         regex: '.*'
         target_label: instance
-        replacement: '$HOSTNAME'         
+        replacement: '$HOSTNAME'
 EOF
 
 sudo tee <<EOF >/dev/null /etc/systemd/system/vmagent.service
@@ -61,6 +61,7 @@ sudo systemctl daemon-reload && systemctl enable vmagent && systemctl restart vm
 wget https://github.com/prometheus/node_exporter/releases/download/v1.1.2/node_exporter-1.1.2.linux-amd64.tar.gz
 tar xvf node_exporter-1.1.2.linux-amd64.tar.gz
 cp node_exporter-1.1.2.linux-amd64/node_exporter /usr/local/bin
+rm -rf node_exporter-1.1.2.linux-amd64*
 
 sudo tee <<EOF >/dev/null /etc/systemd/system/node_exporter.service
 [Unit]
