@@ -2,7 +2,7 @@
 ```
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/monitor.sh | bash
 ```
-## When need a custom OWNER or HOSTNAME on dashboards:
+##### When need a custom OWNER or HOSTNAME on dashboards:
 ```
 export OWNER=new_custom_owner
 export NODENAME=new_custom_nodename
