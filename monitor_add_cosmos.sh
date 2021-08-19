@@ -1,5 +1,10 @@
 #!/bin/bash
-sed -i -e "s/^prometheus *=.*/prometheus = true/" $HOME/.*/config/config.toml
+
+if [ ! -d $HOME/ki-tools/ ]; then
+  sed -i -e "s/^prometheus *=.*/prometheus = true/" $HOME/testnet/kid/config/config.toml
+else
+  sed -i -e "s/^prometheus *=.*/prometheus = true/" $HOME/.*/config/config.toml
+fi
 
 cat <<EOF | tee -a /etc/prometheus/prometheus.yml
   - job_name: "cosmos"
