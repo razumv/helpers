@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ ! -d $HOME/ki-tools/ ]; then
+if [ -d $HOME/ki-tools/ ]; then
   sed -i -e "s/^prometheus *=.*/prometheus = true/" $HOME/testnet/kid/config/config.toml
 else
   sed -i -e "s/^prometheus *=.*/prometheus = true/" $HOME/.*/config/config.toml
