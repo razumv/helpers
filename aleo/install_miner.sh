@@ -7,7 +7,7 @@ sleep 1
 
 git clone https://github.com/AleoHQ/snarkOS
 cd snarkOS
-git checkout v1.3.13
+git checkout v1.3.14
 cargo build --release --verbose
 
 cd $HOME
@@ -45,12 +45,13 @@ EOF
 
 cd $HOME
 mkdir -p $HOME/.snarkOS
+
 #update snapshot
-block=380000
-wget 188.166.34.137/backup_snarkOS_$block.tar.gz
+block=403000
+wget 167.99.215.126/backup_snarkOS_$block.tar.gz
 tar xvf backup_snarkOS_$block.tar.gz
 mv backup_snarkOS_$block/.snarkOS/* $HOME/.snarkOS/
-rm -rf backup_snarkOS_$block*
+rm -rf backup_snarkOS_*
 
 sudo systemctl daemon-reload
 sudo systemctl enable miner
