@@ -11,6 +11,7 @@ git fetch
 git checkout testnet-ibc
 make install
 
+cd $HOME/testnet
 kid migrate kichain-t-2_genesis_export.json --chain-id=kichain-t-3 --initial-height 64801 > genesis.json
 
 mv ./kid/config/config.toml ./kid/config/config.toml.kichain-t-2.bak
