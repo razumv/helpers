@@ -21,4 +21,6 @@ kid unsafe-reset-all --home ./kid
 
 cp genesis.json ./kid/config/
 
-sudo systemctl stop kichain
+sed -i -e "s/^moniker *=.*/moniker = \"$KICHAIN_NODENAME\"/" $HOME/testnet/kid/config/config.toml
+
+sudo systemctl start kichain
