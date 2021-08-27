@@ -47,11 +47,11 @@ cd $HOME
 mkdir -p $HOME/.snarkOS
 
 #update snapshot
-block=403000
-wget 167.99.215.126/backup_snarkOS_$block.tar.gz
-tar xvf backup_snarkOS_$block.tar.gz
-mv backup_snarkOS_$block/.snarkOS/* $HOME/.snarkOS/
-rm -rf backup_snarkOS_*
+#block=403000
+#wget 167.99.215.126/backup_snarkOS_$block.tar.gz
+#tar xvf backup_snarkOS_$block.tar.gz
+#mv backup_snarkOS_$block/.snarkOS/* $HOME/.snarkOS/
+#rm -rf backup_snarkOS_*
 
 sudo systemctl daemon-reload
 sudo systemctl enable miner
