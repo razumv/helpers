@@ -23,7 +23,7 @@ sleep 1
 
 git clone https://github.com/KiFoundation/ki-tools.git
 cd ki-tools
-git checkout testnet
+git checkout testnet-ibc
 make install
 
 mkdir testnet
