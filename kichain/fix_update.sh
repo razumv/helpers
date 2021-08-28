@@ -3,7 +3,6 @@
 if [ ! $KICHAIN_NODENAME ]; then
 	read -p "Введите имя ноды, которое у вас было раньше(1в1 как было): " KICHAIN_NODENAME
 fi
-echo 'Ваше имя ноды: ' $KICHAIN_NODENAME
 sleep 1
 echo 'export KICHAIN_NODENAME='$KICHAIN_NODENAME >> $HOME/.profile
 
