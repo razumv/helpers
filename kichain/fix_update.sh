@@ -25,4 +25,4 @@ sed -i -e 's/^\(timeout_commit *=\).*/\1 "5s"/' $HOME/testnet/kid/config/config.
 
 sudo systemctl start kichain; sleep 30
 
-kicli status
+kid status
