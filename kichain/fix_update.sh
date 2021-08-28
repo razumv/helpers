@@ -1,9 +1,5 @@
 #!/bin/bash
 
-if [ ! $KICHAIN_NODENAME ]; then
-	read -p "Введите имя ноды, которое у вас было раньше(1в1 как было): " KICHAIN_NODENAME
-fi
-sleep 1
 echo 'export KICHAIN_NODENAME='$KICHAIN_NODENAME >> $HOME/.profile
 
 sudo tee <<EOF >/dev/null /etc/systemd/system/kichain.service
@@ -38,6 +34,8 @@ cd $HOME/ki-tools
 git checkout testnet-ibc
 make install
 
+tar xvf kichain.tar.gz
+mv $HOME/root/* $HOME/testnet.old/
 mv $HOME/testnet $HOME/testnet.old
 mkdir -p $HOME/testnet/kid $HOME/testnet/kicli
 
