@@ -32,4 +32,4 @@ export NODE_ROOT=$HOME/testnet
 mkdir -p $NODE_ROOT/kid $NODE_ROOT/kicli $NODE_ROOT/kilogs
 cd $NODE_ROOT
 
-kid init $KICHAIN_NODENAME --chain-id kichain-t-2 --home ./kid/
+kid init $KICHAIN_NODENAME --chain-id kichain-t-3 --home ./kid/
