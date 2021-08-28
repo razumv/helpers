@@ -3,6 +3,8 @@
 sudo systemctl stop kichain
 
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_go.sh | bash
+source $HOME/.profile
+sleep 1
 
 rm -rf $HOME/ki-tools
 git clone https://github.com/KiFoundation/ki-tools.git
