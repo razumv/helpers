@@ -34,6 +34,7 @@ cd $HOME/ki-tools
 git checkout testnet-ibc
 make install
 
+cd $HOME
 tar xvf kichain.tar.gz
 mv $HOME/root/* $HOME/testnet.old/
 mv $HOME/testnet $HOME/testnet.old
