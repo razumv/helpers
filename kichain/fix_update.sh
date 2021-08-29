@@ -21,6 +21,7 @@ Storage=persistent
 EOF
 
 sudo systemctl restart systemd-journald
+sudo systemctl enable kichain
 
 sudo systemctl stop kichain
 
