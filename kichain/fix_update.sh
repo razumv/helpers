@@ -51,6 +51,6 @@ seeds="815d447b182bbfcf729ac016bc8bb44aa8e14520@94.23.3.107:27756"
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$seeds\"/; s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/testnet/kid/config/config.toml
 sed -i -e 's/^\(timeout_commit *=\).*/\1 "5s"/' $HOME/testnet/kid/config/config.toml
 
-sudo systemctl start kichain; sleep 30
+sudo systemctl restart kichain; sleep 30
 
 kid status
