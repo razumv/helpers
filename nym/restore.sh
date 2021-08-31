@@ -10,6 +10,9 @@ else
   source $HOME/.cargo/env
   tar xvf nym_keys.tar.gz
   export NYM_NODENAME=`ls ~/.nym/mixnodes/`
+  ip_addr=$(curl -s ifconfig.me)
+  sed -i -e 's/^\(listening_address *=\).*/\1 '\"$ip_addr\"'/' $HOME/testnet/kid/config/config.toml
+  sed -i -e 's/^\(announce_address *=\).*/\1 '\"$ip_addr\"'/' $HOME/testnet/kid/config/config.toml
   git clone https://github.com/nymtech/nym.git
   cd $HOME/nym
   git checkout v0.11.0
