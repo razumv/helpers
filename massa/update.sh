@@ -15,6 +15,13 @@ git stash
 git checkout testnet
 git pull
 
+cd $HOME/massa/massa-node/
+RUST_BACKTRACE=full cargo run --release compile |& tee logs.txt/ &
+while [ ! -d $HOME/massa/massa-node/ledger/ ]
+do
+  sleep 10
+done
+
 cp $HOME/bk/node_privkey.key $HOME/massa/massa-node/config/
 cp $HOME/bk/wallet.dat $HOME/massa/massa-client/
 
