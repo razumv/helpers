@@ -9,7 +9,6 @@ if [ ! -e $HOME/massa_bk.tar.gz ]; then
 	tar cvzf massa_bk.tar.gz bk
 fi
 
-
 cd $HOME/massa
 git stash
 git checkout testnet
