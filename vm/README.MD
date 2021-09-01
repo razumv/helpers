@@ -8,10 +8,8 @@ git clone https://github.com/razumv/helpers/
 cd helpers/vm
 ```
 3. Install docker, docker-compose
-```wget -O get-docker.sh https://get.docker.com
-sudo sh get-docker.sh
-sudo apt install -y docker-compose
-rm -f get-docker.sh
+```
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_docker.sh | bash
 ```
 4. Start VictoriaMetrics and Grafana in background
 ```
