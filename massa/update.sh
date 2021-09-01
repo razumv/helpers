@@ -10,8 +10,8 @@ git stash
 git checkout testnet
 git pull
 
-cp $HOME/bk/ $HOME/massa/massa-node/config/node_privkey.key
-cp $HOME/bk/ $HOME/massa/massa-client/wallet.dat
+cp $HOME/bk/node_privkey.key $HOME/massa/massa-node/config/
+cp $HOME/bk/wallet.dat $HOME/massa/massa-client/
 
 sed -i "/\[network\]/a routable_ip=\"$(wget -qO- eth0.me)\"" "$HOME/massa/massa-node/config/config.toml"
 
