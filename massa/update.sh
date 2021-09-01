@@ -1,9 +1,14 @@
 #!/bin/bash
 sudo systemctl stop massa
 
+cd $HOME
 mkdir -p $HOME/bk
 cp $HOME/massa/massa-node/config/node_privkey.key $HOME/bk/
 cp $HOME/massa/massa-client/wallet.dat $HOME/bk/
+if [ ! -e $HOME/massa_bk.tar.gz ]; then
+	tar cvzf massa_bk.tar.gz bk
+fi
+
 
 cd $HOME/massa
 git stash
