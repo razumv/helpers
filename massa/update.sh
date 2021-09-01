@@ -15,15 +15,16 @@ git checkout testnet
 git pull
 
 cd $HOME/massa/massa-node/
-RUST_BACKTRACE=full cargo run --release compile |& tee logs.txt/ &
-while [ ! -d $HOME/massa/massa-node/ledger/ ]
-do
-  sleep 10
-done
+cargo build --release
+sed -i "/\[network\]/a routable_ip=\"$(curl -s ifconfig.me)\"" "$HOME/massa/massa-node/config/config.toml"
+cp $HOME/bk/node_privkey.key $HOME/massa/massa-node/config/node_privkey.key
 
-cp $HOME/bk/node_privkey.key $HOME/massa/massa-node/config/
-cp $HOME/bk/wallet.dat $HOME/massa/massa-client/
-
-sed -i "/\[network\]/a routable_ip=\"$(wget -qO- eth0.me)\"" "$HOME/massa/massa-node/config/config.toml"
+cd $HOME/massa/massa-client/
+cargo build --release
+cp $HOME/bk/wallet.dat $HOME/massa/massa-client/wallet.dat
+#Thanks SecorD0 :)
+massa_wallet_address=$(cargo run --release wallet_info | jq -r ".balances | keys[]")
+cargo run --release -- buy_rolls $massa_wallet_address 20 0
+cargo run --release -- register_staking_keys $(cargo run --release wallet_info | jq -r ".wallet[0]")
 
 sudo systemctl start massa
