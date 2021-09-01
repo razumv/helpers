@@ -11,12 +11,8 @@ if [ ! -d $HOME/massa/ ]; then
 	git clone --branch testnet https://gitlab.com/massalabs/massa.git
 fi
 cd $HOME/massa/massa-node/
-RUST_BACKTRACE=full cargo run --release compile |& tee logs.txt/ &
-while [ ! -d $HOME/massa/massa-node/ledger/ ]
-do
-  sleep 10
-done
-kill -9 $(pgrep "massa-node")
+cargo build --release
+
 sudo tee <<EOF >/dev/null /etc/systemd/system/massa.service
 [Unit]
 Description=Massa Node
