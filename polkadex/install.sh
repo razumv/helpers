@@ -1,10 +1,10 @@
 #!/bin/bash
 
-if [ ! $NODENAME ]; then
-	read -p "Введите ваше имя ноды(придумайте): " NODENAME
+if [ ! $POLKADEX_NODENAME ]; then
+	read -p "Введите ваше имя ноды(придумайте): " POLKADEX_NODENAME
 fi
 sleep 1
-echo 'export NODENAME='$NODENAME >> $HOME/.profile
+echo 'export POLKADEX_NODENAME='$POLKADEX_NODENAME >> $HOME/.profile
 
 sudo apt install git mc jq htop net-tools -y
 
