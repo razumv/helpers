@@ -9,12 +9,8 @@ echo 'export OMNIFLIX_NODENAME='$OMNIFLIX_NODENAME >> $HOME/.profile
 
 sudo apt update
 sudo apt install curl -y
-if [ ! -e /usr/local/go ]; then
-  curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_go.sh | bash
-else
-  echo 'У вас уже установлен GO'
-  go version
-fi
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_go.sh | bash
+
 
 source $HOME/.profile
 sleep 1
