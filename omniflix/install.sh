@@ -8,15 +8,12 @@ echo 'export OMNIFLIX_NODENAME='$OMNIFLIX_NODENAME >> $HOME/.profile
 
 
 sudo apt update
-sudo apt install mc jq curl build-essential git wget -y
-curl https://dl.google.com/go/go1.16.7.linux-amd64.tar.gz | sudo tar -C /usr/local -zxvf -
-
-cat <<'EOF' >>$HOME/.profile
-export GOROOT=/usr/local/go
-export GOPATH=$HOME/go
-export GO111MODULE=on
-export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
-EOF
+if [ ! -e /usr/local/go ]; then
+  curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_go.sh | bash
+else
+  echo 'У вас уже установлен GO'
+  go version
+fi
 
 source $HOME/.profile
 sleep 1
