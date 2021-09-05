@@ -36,7 +36,7 @@ Wants=network-online.target
 
 [Service]
 User=$USER
-ExecStart=$HOME/Polkadex/target/release/polkadex-node --chain=$HOME/customSpecRaw.json --rpc-cors=all --bootnodes /ip4/13.235.92.50/tcp/30333/p2p/12D3KooWBRsL9KPkMeWxTMq5aSbgUWEMgwzWpWDA6EqQ6A2KTDoR --validator --name '$POLKADEX_NODENAME | DOUBLETOP'
+ExecStart=$HOME/Polkadex/target/release/polkadex-node --chain=$HOME/customSpecRaw.json --bootnodes /ip4/13.235.92.50/tcp/30333/p2p/12D3KooWL8Kcdvrhp5JyTYFeXSS5HR9csJnaLmJWRJYxnKakjBby --pruning=archive --validator --name '$POLKADEX_NODENAME | DOUBLETOP'
 Restart=on-failure
 
 [Install]
