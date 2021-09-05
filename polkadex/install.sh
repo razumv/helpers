@@ -35,8 +35,7 @@ After=network-online.target
 Wants=network-online.target
 
 [Service]
-User=ubuntu
-Group=ubuntu
+User=$USER
 ExecStart=$HOME/Polkadex/target/release/polkadex-node --chain=$HOME/customSpecRaw.json --rpc-cors=all --bootnodes /ip4/13.235.92.50/tcp/30333/p2p/12D3KooWBRsL9KPkMeWxTMq5aSbgUWEMgwzWpWDA6EqQ6A2KTDoR --validator --name '$POLKADEX_NODENAME | DOUBLETOP'
 Restart=on-failure
 
