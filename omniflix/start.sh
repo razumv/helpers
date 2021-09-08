@@ -1,5 +1,10 @@
 #!/bin/bash
 
+sudo tee <<EOF >/dev/null /etc/systemd/journald.conf
+Storage=persistent
+EOF
+sudo systemctl restart systemd-journald
+
 rm -rf $HOME/.omniflixhub/config/genesis*
 wget -O $HOME/.omniflixhub/config/genesis.json https://raw.githubusercontent.com/OmniFlix/testnets/main/flixnet-2/genesis.json
 
