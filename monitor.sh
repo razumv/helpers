@@ -12,11 +12,11 @@ echo 'Название вашего сервера: ' $HOSTNAME
 sleep 1
 echo 'export HOSTNAME='$HOSTNAME >> $HOME/.profile
 
-systemctl stop prometheus && systemctl disable prometheus
+sudo systemctl stop prometheus && systemctl disable prometheus
 
 sudo mkdir /etc/prometheus
 
-apt install wget -y
+sudo apt install wget -y
 wget https://github.com/VictoriaMetrics/VictoriaMetrics/releases/download/v1.63.0/vmutils-amd64-v1.63.0.tar.gz
 tar xvf vmutils-amd64-v1.63.0.tar.gz
 rm -rf vmutils-amd64-v1.63.0.tar.gz
@@ -56,11 +56,11 @@ sudo tee <<EOF >/dev/null /etc/systemd/system/vmagent.service
   WantedBy=multi-user.target
 EOF
 
-sudo systemctl daemon-reload && systemctl enable vmagent && systemctl restart vmagent
+sudo systemctl daemon-reload && sudo systemctl enable vmagent && sudo systemctl restart vmagent
 
 wget https://github.com/prometheus/node_exporter/releases/download/v1.1.2/node_exporter-1.1.2.linux-amd64.tar.gz
 tar xvf node_exporter-1.1.2.linux-amd64.tar.gz
-cp node_exporter-1.1.2.linux-amd64/node_exporter /usr/local/bin
+sudo cp node_exporter-1.1.2.linux-amd64/node_exporter /usr/local/bin
 rm -rf node_exporter-1.1.2.linux-amd64*
 
 sudo tee <<EOF >/dev/null /etc/systemd/system/node_exporter.service
@@ -76,6 +76,6 @@ ExecStart=/usr/local/bin/node_exporter --web.listen-address=":9100"
 WantedBy=multi-user.target
 EOF
 
-sudo systemctl daemon-reload && systemctl enable node_exporter && systemctl restart node_exporter
+sudo systemctl daemon-reload && sudo systemctl enable node_exporter && sudo systemctl restart node_exporter
 
 echo "Monitoring Installed"
