@@ -17,7 +17,7 @@ rustup target add wasm32-unknown-unknown --toolchain nightly-2021-05-11
 rustup target add x86_64-unknown-linux-gnu --toolchain nightly-2021-05-11
 
 cd $HOME
-curl -O -L https://github.com/Polkadex-Substrate/Polkadex/releases/download/v0.4.0/customSpecRaw.json
+curl -O -L https://github.com/Polkadex-Substrate/Polkadex/releases/download/v0.4.1-rc5/customSpecRaw.json
 git clone https://github.com/Polkadex-Substrate/Polkadex.git
 cd $HOME/Polkadex
 git checkout v0.4.1-rc5
