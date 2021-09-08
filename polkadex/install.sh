@@ -20,7 +20,7 @@ cd $HOME
 curl -O -L https://github.com/Polkadex-Substrate/Polkadex/releases/download/v0.4.0/customSpecRaw.json
 git clone https://github.com/Polkadex-Substrate/Polkadex.git
 cd $HOME/Polkadex
-git checkout v0.4.0
+git checkout v0.4.1-rc5
 cargo build --release
 
 sudo tee <<EOF >/dev/null /etc/systemd/journald.conf
