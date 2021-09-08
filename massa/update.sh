@@ -10,6 +10,8 @@ if [ ! -e $HOME/massa_bk.tar.gz ]; then
 fi
 
 cd $HOME/massa
+git checkout -- massa-node/config/config.toml
+git checkout -- massa-node/config/peers.json
 git stash
 git checkout testnet
 git pull
