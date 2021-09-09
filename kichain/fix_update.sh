@@ -1,28 +1,5 @@
 #!/bin/bash
 
-echo 'export KICHAIN_NODENAME='$KICHAIN_NODENAME >> $HOME/.profile
-
-sudo tee <<EOF >/dev/null /etc/systemd/system/kichain.service
-[Unit]
-Description=Kichain Cosmos daemon
-After=network-online.target
-[Service]
-User=$USER
-ExecStart=$HOME/go/bin/kid start --home $HOME/testnet/kid/
-Restart=on-failure
-RestartSec=3
-LimitNOFILE=4096
-[Install]
-WantedBy=multi-user.target
-EOF
-
-sudo tee <<EOF >/dev/null /etc/systemd/journald.conf
-Storage=persistent
-EOF
-
-sudo systemctl restart systemd-journald
-sudo systemctl enable kichain
-
 sudo systemctl stop kichain
 
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_go.sh | bash
