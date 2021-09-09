@@ -18,11 +18,9 @@ cp $HOME/testnet/kid/config/node_key.json $HOME/bk/kid/config/node_key.json
 cp $HOME/testnet/kid/config/priv_validator_key.json $HOME/bk/kid/config/priv_validator_key.json
 
 rm -rf $HOME/testnet
-#tar xvf kichain.tar.gz
-#mv $HOME/root/* $HOME/testnet.old/
 mkdir -p $HOME/testnet/kid $HOME/testnet/kicli
 
-#kid init $KICHAIN_NODENAME --chain-id kichain-t-3 --home $HOME/testnet/kid/
+kid init $KICHAIN_NODENAME --chain-id kichain-t-4 --home $HOME/testnet/kid/
 cp $HOME/bk/kid/config/node_key.json $HOME/testnet/kid/config/
 cp $HOME/bk/kid/config/priv_validator_key.json $HOME/testnet/kid/config/
 wget -qO $HOME/testnet/kid/config/genesis.json https://raw.githubusercontent.com/KiFoundation/ki-networks/v0.1/Testnet/kichain-t-4/genesis.json
