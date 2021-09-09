@@ -39,6 +39,7 @@ cd $HOME
 tar xvf kichain.tar.gz
 mv $HOME/root/* $HOME/testnet.old/
 mkdir -p $HOME/testnet/kid $HOME/testnet/kicli
+rm -f /root/testnet/kid/config/genesis.json
 
 kid init $KICHAIN_NODENAME --chain-id kichain-t-3 --home $HOME/testnet/kid/
 cp $HOME/testnet.old/kid/config/node_key.json $HOME/testnet/kid/config/
