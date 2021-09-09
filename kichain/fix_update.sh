@@ -14,8 +14,8 @@ make install
 
 cd $HOME
 mkdir $HOME/bk/kid/config/
-cp $HOME/testnet/kid/config/node_key.json $HOME/bk/kid/config/
-cp $HOME/testnet/kid/config/priv_validator_key.json $HOME/bk/kid/config/
+cp $HOME/testnet/kid/config/node_key.json $HOME/bk/kid/config/node_key.json
+cp $HOME/testnet/kid/config/priv_validator_key.json $HOME/bk/kid/config/priv_validator_key.json
 
 rm -rf $HOME/testnet
 #tar xvf kichain.tar.gz
