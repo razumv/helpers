@@ -13,7 +13,7 @@ git checkout testnet-ibc
 make install
 
 cd $HOME
-mkdir $HOME/bk
+mkdir $HOME/bk/kid/config/
 cp $HOME/testnet/kid/config/node_key.json $HOME/bk/kid/config/
 cp $HOME/testnet/kid/config/priv_validator_key.json $HOME/bk/kid/config/
 
