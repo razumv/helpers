@@ -6,4 +6,7 @@ if [[ $version != "0.2.2" ]]; then
   git checkout v0.2.2
   make install
   sudo systemctl restart omniflixhubd
+  echo "version updated"
+else
+  echo "version correct, update not needed"
 fi
