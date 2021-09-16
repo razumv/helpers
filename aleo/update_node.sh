@@ -4,7 +4,7 @@ rustup update
 sudo systemctl stop aleo
 cd $HOME/snarkOS
 git fetch
-git checkout v1.3.14
+git checkout v1.3.15
 cargo build --release --verbose
 #rm -rf $HOME/.snarkOS/snarkos_testnet1
 #rm -rf $HOME/.snarkOS/snarkos_testnet1_secondary
