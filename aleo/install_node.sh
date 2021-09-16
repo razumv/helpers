@@ -7,7 +7,7 @@ sleep 1
 
 git clone https://github.com/AleoHQ/snarkOS
 cd snarkOS
-git checkout v1.3.14
+git checkout v1.3.15
 cargo build --release --verbose
 
 sudo tee <<EOF >/dev/null /etc/systemd/system/aleo.service
