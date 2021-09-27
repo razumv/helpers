@@ -1,4 +1,5 @@
 #!/bin/bash
+cd $HOME
 if [ ! $OWNER ]; then
 	read -p "Введите свой ник, например телеграмм(без @): " OWNER
 fi
