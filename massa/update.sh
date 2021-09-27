@@ -18,6 +18,7 @@ git pull
 
 cd $HOME/massa/massa-node/
 cargo build --release
+sed -i 's/.*routable_ip/# \0/' "$HOME/massa/massa-node/config/config.toml"
 sed -i "/\[network\]/a routable_ip=\"$(curl -s ifconfig.me)\"" "$HOME/massa/massa-node/config/config.toml"
 cp $HOME/bk/node_privkey.key $HOME/massa/massa-node/config/node_privkey.key
 
