@@ -6,6 +6,8 @@ dpkg -i zulu11.48.21-ca-jdk11.0.11-linux_amd64.deb
 
 wget https://github.com/minima-global/Minima/raw/master/jar/minima.jar
 
+sudo apt install --fix-broken -y
+
 sudo tee <<EOF >/dev/null /etc/systemd/journald.conf
 Storage=persistent
 EOF
