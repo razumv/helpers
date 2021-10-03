@@ -56,3 +56,10 @@ cd
 
 echo "alias client='cd $HOME/massa/massa-client/ && cargo run --release && cd'" >> ~/.profile
 echo "alias clientw='cd $HOME/massa/massa-client/; cargo run -- --wallet wallet.dat; cd'" >> ~/.profile
+
+mkdir -p $HOME/bk
+cp $HOME/massa/massa-node/config/node_privkey.key $HOME/bk/
+cp $HOME/massa/massa-client/wallet.dat $HOME/bk/
+if [ ! -e $HOME/massa_bk.tar.gz ]; then
+	tar cvzf massa_bk.tar.gz bk
+fi
