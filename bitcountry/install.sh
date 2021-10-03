@@ -37,7 +37,7 @@ Description=bitcountry Node
 After=network-online.target
 [Service]
 User=$USER
-ExecStart=$HOME/Bit-Country-Blockchain/target/release/bitcountry-node --chain tewai --bootnodes /ip4/65.21.227.180/tcp/30333/p2p/12D3KooWKdVWge2uoUbhUZF4Rn4tCFKKCgiiRcPFXWFnx5ufwF1h --telemetry-url 'wss://telemetry.polkadot.io/submit/ 0' --validator --name "$NODENAME | DOUBLETOP"
+ExecStart=$HOME/Bit-Country-Blockchain/target/release/bitcountry-node --chain tewai --bootnodes /ip4/167.99.210.123/tcp/30333/p2p/12D3KooWLSUUiRKJ9WUYoe8gx6gt1CABuwh2bAhEoAZ7CjhRLERq --telemetry-url 'wss://telemetry.polkadot.io/submit/ 0' --validator --name "$NODENAME | DOUBLETOP"
 Restart=always
 RestartSec=10
 LimitNOFILE=10000
