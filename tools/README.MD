@@ -13,3 +13,8 @@ curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_rust
 ```
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_docker.sh | bash
 ```
+
+## To install firewall ufw enter command:
+```
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash
+```
