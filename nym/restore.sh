@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#add ufw rules
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash
+
 if [ ! -e $HOME/nym_keys.tar.gz ]; then
 	echo "Отсутствует архив с бекапом, загрузите его и повторите заново"
 else

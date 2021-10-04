@@ -1,4 +1,8 @@
 #!/bin/bash
+
+#add ufw rules
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash
+
 apt update
 apt install mc wget jq libfontconfig1 libxtst6 libxrender1 libxi6 java-common -y
 wget https://cdn.azul.com/zulu/bin/zulu11.48.21-ca-jdk11.0.11-linux_amd64.deb

@@ -1,4 +1,8 @@
 #!/bin/bash
+
+#add ufw rules
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash
+
 CASPER_VERSION=1_0_0
 CASPER_NETWORK=casper-test
 

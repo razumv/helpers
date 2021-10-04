@@ -1,4 +1,7 @@
 #!/bin/bash
+#add ufw rules
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash
+
 version=`omniflixhubd version`
 if [[ $version != "0.2.2" ]]; then
   cd $HOME/omniflixhub

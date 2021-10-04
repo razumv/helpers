@@ -1,4 +1,8 @@
 #!/bin/bash
+
+#add ufw rules
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash
+
 sudo apt install wget -y
 rustup update
 sudo systemctl stop aleo

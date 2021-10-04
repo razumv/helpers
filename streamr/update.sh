@@ -1,4 +1,6 @@
 #!/bin/bash
+#add ufw rules
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash
 
 docker stop streamr
 docker container rm streamr

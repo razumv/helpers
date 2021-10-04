@@ -1,4 +1,6 @@
 #!/bin/bash
+#add ufw rules
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash
 
 if [ ! $SUBSOCIAL_NODENAME ]; then
 	read -p "Введите имя ноды: " SUBSOCIAL_NODENAME

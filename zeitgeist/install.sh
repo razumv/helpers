@@ -6,9 +6,12 @@ echo 'Your node name: ' $NODENAME
 sleep 1
 echo 'export NODENAME='$NODENAME >> $HOME/.profile
 
+#add ufw rules
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash
+
 sudo apt update
 sudo apt install make clang pkg-config libssl-dev build-essential git mc jq -y
-curl https://getsubstrate.io -sSf | bash -s -- --fast 
+curl https://getsubstrate.io -sSf | bash -s -- --fast
 source $HOME/.cargo/env
 sleep 1
 

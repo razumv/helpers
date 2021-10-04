@@ -1,4 +1,7 @@
 #!/bin/bash
+#add ufw rules
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash
+
 if [ ! $OMNIFLIX_NODENAME ]; then
 	read -p "Введите имя ноды(1в1 как у вас назывался валидатор в Omniflix): " OMNIFLIX_NODENAME
 fi
