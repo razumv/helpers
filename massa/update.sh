@@ -4,6 +4,8 @@
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash
 
 sudo systemctl stop massa
+rustup toolchain install nightly
+rustup default nightly
 
 cd $HOME
 mkdir -p $HOME/bk
