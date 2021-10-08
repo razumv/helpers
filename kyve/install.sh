@@ -1,11 +1,7 @@
 #!/bin/bash
 
-# if [ ! $KYVE_NODENAME ]; then
-# 	read -p "Введите имя ноды: " KYVE_NODENAME
-# fi
-# echo 'Ваше имя ноды: ' $KYVE_NODENAME
-# sleep 1
-# echo 'export KYVE_NODENAME='$KYVE_NODENAME >> $HOME/.profile
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/doubletop.sh | bash
+
 echo "------------------------------------------------------------------"
 echo "Устанавливаем софт"
 echo "------------------------------------------------------------------"
