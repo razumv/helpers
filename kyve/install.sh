@@ -8,6 +8,7 @@ echo "--------------------------------------------------------------------------
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash &>/dev/null
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_docker.sh | bash &>/dev/null
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_node14.sh | bash &>/dev/null
+sudo apt install --fix-broken -y &>/dev/null
 source .profile
 source .bashrc
 sleep 1
