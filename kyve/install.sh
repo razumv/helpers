@@ -7,9 +7,9 @@ echo 'Ваше имя ноды: ' $KYVE_NODENAME
 sleep 1
 echo 'export KYVE_NODENAME='$KYVE_NODENAME >> $HOME/.profile
 
-curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash >/dev/null
-curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_docker.sh | bash >/dev/null
-curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_node14.sh | bash >/dev/null
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash &>/dev/null
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_docker.sh | bash &>/dev/null
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_node14.sh | bash &>/dev/null
 source .profile
 source .bashrc
 sleep 1
@@ -18,7 +18,7 @@ echo "Весь необходимый софт установлен"
 echo "------------------------------------------------------------------"
 
 if [ ! -d $HOME/kyve/ ]; then
-  git clone https://github.com/KYVENetwork/kyve.git >/dev/null
+  git clone https://github.com/KYVENetwork/kyve.git &>/dev/null
 fi
 
 if [ ! -e $HOME/metamask.txt ]; then
@@ -53,10 +53,10 @@ echo "Репозиторий склонирован, конфиг на мест�
 echo "------------------------------------------------------------------"
 
 cd $HOME/kyve
-yarn setup >/dev/null
+yarn setup &>/dev/null
 
 cd $HOME/kyve/integrations/node
-yarn node:build >/dev/null
+yarn node:build &>/dev/null
 
 docker run -d -it --restart=always --name=kyve kyve-node:latest
 
