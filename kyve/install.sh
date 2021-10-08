@@ -33,6 +33,11 @@ SEND_STATISTICS=true
 PK=private_key_from_metamask
 EOF
 
+if [ ! -e $HOME/metamask.txt ]; then
+	echo "Файл с приватником от ММ отсутствует"
+  exit 1
+fi
+
 if [ ! -e $HOME/arweave.json ]; then
 	echo "Файл от расширения arweave.json отсутствует"
   exit 1
