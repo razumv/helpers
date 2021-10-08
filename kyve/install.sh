@@ -1,8 +1,8 @@
 #!/bin/bash
-
-curl -s https://raw.githubusercontent.com/razumv/helpers/main/doubletop.sh | bash
-
 echo "-----------------------------------------------------------------------------"
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/doubletop.sh | bash
+echo "-----------------------------------------------------------------------------"
+
 echo "Устанавливаем софт"
 echo "-----------------------------------------------------------------------------"
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash &>/dev/null
