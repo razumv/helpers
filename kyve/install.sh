@@ -30,7 +30,7 @@ else
   cp $HOME/arweave.json $HOME/kyve/integrations/node/
 fi
 
-tee <<EOF >/dev/null $HOME/kyve/integrations/config.json
+tee <<EOF >/dev/null $HOME/kyve/integrations/node/config.json
 {
   "pools": {
     "0xbBBfbE9A731634eDdf84C67A106CEE1F981F3f7e": 10
