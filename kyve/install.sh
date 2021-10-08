@@ -9,6 +9,7 @@ echo 'export KYVE_NODENAME='$KYVE_NODENAME >> $HOME/.profile
 source .profile
 sleep 1
 
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_docker.sh | bash
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_nvm_yarn_npm.sh | bash
 
