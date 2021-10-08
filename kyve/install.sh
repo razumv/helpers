@@ -11,6 +11,7 @@ curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_docker.sh | bash
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_nvm_yarn_npm.sh | bash
 source .profile
+source .bashrc
 sleep 1
 
 git clone https://github.com/KYVENetwork/kyve.git
