@@ -13,6 +13,9 @@ curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_node
 source .profile
 source .bashrc
 sleep 1
+echo "------------------------------------------------------------------"
+echo "Весь необходимый софт установлен"
+echo "------------------------------------------------------------------"
 
 if [ ! -d $HOME/kyve/ ]; then
   git clone https://github.com/KYVENetwork/kyve.git >/dev/null
@@ -45,6 +48,10 @@ SEND_STATISTICS=true
 PK=`cat $HOME/metamask.txt`
 EOF
 
+echo "------------------------------------------------------------------"
+echo "Репозиторий склонирован, конфиг на месте, начинаем билд приложения"
+echo "------------------------------------------------------------------"
+
 cd $HOME/kyve
 yarn setup >/dev/null
 
@@ -52,3 +59,7 @@ cd $HOME/kyve/integrations/node
 yarn node:build >/dev/null
 
 docker run -d -it --restart=always --name=kyve kyve-node:latest
+
+echo "------------------------------------------------------------------"
+echo "Нода запущена, переходим к следующему пункту гайды"
+echo "------------------------------------------------------------------"
