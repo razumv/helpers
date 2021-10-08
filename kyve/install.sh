@@ -1,11 +1,11 @@
 #!/bin/bash
 
-if [ ! $KYVE_NODENAME ]; then
-	read -p "Введите имя ноды: " KYVE_NODENAME
-fi
-echo 'Ваше имя ноды: ' $KYVE_NODENAME
-sleep 1
-echo 'export KYVE_NODENAME='$KYVE_NODENAME >> $HOME/.profile
+# if [ ! $KYVE_NODENAME ]; then
+# 	read -p "Введите имя ноды: " KYVE_NODENAME
+# fi
+# echo 'Ваше имя ноды: ' $KYVE_NODENAME
+# sleep 1
+# echo 'export KYVE_NODENAME='$KYVE_NODENAME >> $HOME/.profile
 echo "------------------------------------------------------------------"
 echo "Устанавливаем софт"
 echo "------------------------------------------------------------------"
