@@ -1,15 +1,7 @@
 #!/bin/bash
 
-sudo apt update
-sudo apt-get install curl gnupg -y
-wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash && source ~/.profile && source ~/.bashrc
-sleep 1
-nvm install 14.18.0
-nvm use 14.18.0
+curl https://deb.nodesource.com/setup_14.x | sudo bash
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 sudo apt update
-sudo apt install --no-install-recommends yarn
-yarn --version
-npm --version
-node --version
+sudo apt install nodejs=14.* yarn build-essential jq git -y
