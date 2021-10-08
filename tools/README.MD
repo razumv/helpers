@@ -16,7 +16,7 @@ curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_dock
 
 ## To install nvm,yarn,npm enter command:
 ```
-curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_nvm_yarn_npm.sh | bash
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_node14.sh | bash
 ```
 
 ## To install firewall ufw enter command:
