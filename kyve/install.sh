@@ -14,7 +14,9 @@ source .profile
 source .bashrc
 sleep 1
 
-git clone https://github.com/KYVENetwork/kyve.git >/dev/null
+if [ ! -d $HOME/kyve/ ]; then
+  git clone https://github.com/KYVENetwork/kyve.git >/dev/null
+fi
 
 tee <<EOF >/dev/null $HOME/kyve/integrations/config.json
 {
