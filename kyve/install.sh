@@ -18,6 +18,18 @@ if [ ! -d $HOME/kyve/ ]; then
   git clone https://github.com/KYVENetwork/kyve.git >/dev/null
 fi
 
+if [ ! -e $HOME/metamask.txt ]; then
+	echo "Файл с приватником от ММ отсутствует"
+  exit 1
+fi
+
+if [ ! -e $HOME/arweave.json ]; then
+	echo "Файл от расширения arweave.json отсутствует"
+  exit 1
+else
+  cp $HOME/arweave.json $HOME/kyve/integrations/node/
+fi
+
 tee <<EOF >/dev/null $HOME/kyve/integrations/config.json
 {
   "pools": {
@@ -30,20 +42,8 @@ tee <<EOF >/dev/null $HOME/kyve/integrations/node/.env
 CONFIG=config.json
 WALLET=arweave.json
 SEND_STATISTICS=true
-PK=private_key_from_metamask
+PK=`cat $HOME/metamask.txt`
 EOF
-
-if [ ! -e $HOME/metamask.txt ]; then
-	echo "Файл с приватником от ММ отсутствует"
-  exit 1
-fi
-
-if [ ! -e $HOME/arweave.json ]; then
-	echo "Файл от расширения arweave.json отсутствует"
-  exit 1
-else
-  cp $HOME/arweave.json $HOME/kyve/integrations/node/
-fi
 
 cd $HOME/kyve
 yarn setup >/dev/null
