@@ -4,6 +4,7 @@ sudo apt update
 sudo apt-get install curl gnupg -y && \
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash && \
 source ~/.profile && \
+source ~/.bashrc && \
 nvm install 14.18.0 && \
 nvm use 14.18.0 && \
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
