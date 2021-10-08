@@ -54,7 +54,8 @@ yarn setup &>/dev/null
 cd $HOME/kyve/integrations/node
 yarn node:build &>/dev/null
 
-docker run -d -it --restart=always --name=kyve kyve-node:latest
+docker rm -f kyve &>/dev/null
+docker run -d -it --restart=always --name=kyve kyve-node:latest &>/dev/null
 
 echo "Нода запущена, переходим к следующему пункту гайда"
 echo "-----------------------------------------------------------------------------"
