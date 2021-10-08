@@ -6,7 +6,9 @@ fi
 echo 'Ваше имя ноды: ' $KYVE_NODENAME
 sleep 1
 echo 'export KYVE_NODENAME='$KYVE_NODENAME >> $HOME/.profile
-
+echo "------------------------------------------------------------------"
+echo "Устанавливаем софт"
+echo "------------------------------------------------------------------"
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash &>/dev/null
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_docker.sh | bash &>/dev/null
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_node14.sh | bash &>/dev/null
