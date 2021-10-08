@@ -2,10 +2,7 @@
 
 sudo apt update
 sudo apt-get install curl gnupg -y
-wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
-source ~/.profile
-sleep 1
-source ~/.bashrc
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash && source ~/.profile && source ~/.bashrc
 sleep 1
 nvm install 14.18.0
 nvm use 14.18.0
