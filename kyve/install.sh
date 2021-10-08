@@ -33,6 +33,7 @@ EOF
 
 if [ ! -e $HOME/arweave.json ]; then
 	echo "Файл от расширения arweave.json отсутствует"
+  exit 1
 else
   cp $HOME/arweave.json $HOME/kyve/integrations/node/
 fi
