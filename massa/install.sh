@@ -4,8 +4,10 @@
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash
 
 sudo apt update
-sudo apt install curl make clang pkg-config libssl-dev build-essential git mc jq unzip -y
-curl https://getsubstrate.io -sSf | bash -s -- --fast
+#sudo apt install curl make clang pkg-config libssl-dev build-essential git mc jq unzip -y
+#curl https://getsubstrate.io -sSf | bash -s -- --fast
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_rust.sh | bash
+
 source $HOME/.cargo/env
 sleep 1
 rustup toolchain install nightly
