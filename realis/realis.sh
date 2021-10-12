@@ -21,6 +21,7 @@ source $HOME/.profile &>/dev/null
 source $HOME/.bashrc &>/dev/null
 source $HOME/.cargo/env &>/dev/null
 sleep 1
+rustup default nightly
 echo "Весь необходимый софт установлен"
 echo "-----------------------------------------------------------------------------"
 
