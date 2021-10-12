@@ -9,10 +9,11 @@ CASPER_NETWORK=casper-test
 sudo apt-get update
 sudo apt install dnsutils jq mc git -y
 
-echo "deb [trusted=yes] https://repo.casperlabs.io/releases" bionic main | sudo tee -a /etc/apt/sources.list.d/casper.list
+echo "deb https://repo.casperlabs.io/releases" bionic main | sudo tee -a /etc/apt/sources.list.d/casper.list
 curl -O https://repo.casperlabs.io/casper-repo-pubkey.asc
 sudo apt-key add casper-repo-pubkey.asc
-sudo apt update
+sudo apt update --allow-insecure-repositories
+
 
 sudo apt install casper-node-launcher -y
 sudo apt install casper-client -y
