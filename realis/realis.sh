@@ -25,7 +25,7 @@ echo "Весь необходимый софт установлен"
 echo "-----------------------------------------------------------------------------"
 
 if [ ! -d $HOME/Realis.Network/ ]; then
-  https://github.com/RealisNetwork/Realis.Network &>/dev/null
+  git clone https://github.com/RealisNetwork/Realis.Network &>/dev/null
 fi
 echo "Репозиторий успешно склонирован, начинаем билд"
 echo "-----------------------------------------------------------------------------"
