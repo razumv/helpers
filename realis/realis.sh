@@ -10,6 +10,7 @@ fi
 sleep 1
 echo 'export REALIS_NODENAME='$REALIS_NODENAME >> $HOME/.profile
 
+echo "-----------------------------------------------------------------------------"
 echo "Устанавливаем софт"
 echo "-----------------------------------------------------------------------------"
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash &>/dev/null
@@ -58,7 +59,7 @@ echo "--------------------------------------------------------------------------
 
 sudo systemctl daemon-reload
 sudo systemctl enable realis &>/dev/null
-sudo systemctl restart realis 
+sudo systemctl restart realis
 
 echo "Нода добавлена в автозагрузку на сервере, запущена"
 echo "-----------------------------------------------------------------------------"
