@@ -57,8 +57,8 @@ echo "Сервисные файлы созданы успешно"
 echo "-----------------------------------------------------------------------------"
 
 sudo systemctl daemon-reload
-sudo systemctl enable realis
-sudo systemctl restart realis
+sudo systemctl enable realis &>/dev/null
+sudo systemctl restart realis 
 
 echo "Нода добавлена в автозагрузку на сервере, запущена"
 echo "-----------------------------------------------------------------------------"
