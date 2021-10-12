@@ -15,8 +15,8 @@ sudo apt-key add casper-repo-pubkey.asc
 sudo apt update --allow-insecure-repositories
 
 
-sudo apt install casper-node-launcher -y
-sudo apt install casper-client -y
+sudo apt install casper-node-launcher -y --allow-insecure-repositories
+sudo apt install casper-client -y --allow-insecure-repositories
 
 cd ~
 sudo apt purge --auto-remove cmake -y
