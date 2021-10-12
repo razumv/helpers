@@ -22,6 +22,7 @@ source $HOME/.bashrc &>/dev/null
 source $HOME/.cargo/env &>/dev/null
 sleep 1
 rustup default nightly
+rustup target add wasm32-unknown-unknown
 echo "Весь необходимый софт установлен"
 echo "-----------------------------------------------------------------------------"
 
