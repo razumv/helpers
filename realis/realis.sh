@@ -33,7 +33,7 @@ echo "Репозиторий успешно склонирован, начина
 echo "-----------------------------------------------------------------------------"
 
 cd $HOME/Realis.Network
-$HOME/scripts/build_separately.sh &>/dev/null
+$HOME/Realis.Network/scripts/build_separately.sh &>/dev/null
 cargo build --release &>/dev/null
 echo "Билд завершен успешно"
 echo "-----------------------------------------------------------------------------"
