@@ -21,8 +21,8 @@ source $HOME/.profile &>/dev/null
 source $HOME/.bashrc &>/dev/null
 source $HOME/.cargo/env &>/dev/null
 sleep 1
-rustup install nightly-2021-06-09
-rustup target add wasm32-unknown-unknown --toolchain nightly-2021-06-09
+rustup install nightly-2021-06-09 &>/dev/null
+rustup target add wasm32-unknown-unknown --toolchain nightly-2021-06-09 &>/dev/null
 echo "Весь необходимый софт установлен"
 echo "-----------------------------------------------------------------------------"
 
@@ -33,7 +33,7 @@ echo "Репозиторий успешно склонирован, начина
 echo "-----------------------------------------------------------------------------"
 
 cd $HOME/Realis.Network
-$HOME/scripts/build_separately.sh
+$HOME/scripts/build_separately.sh &>/dev/null
 cargo build --release &>/dev/null
 echo "Билд завершен успешно"
 echo "-----------------------------------------------------------------------------"
