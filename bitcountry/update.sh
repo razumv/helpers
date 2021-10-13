@@ -27,7 +27,7 @@ echo "--------------------------------------------------------------------------
 make init &>/dev/null
 cargo build --release --features=with-tewai-runtime &>/dev/null
 rm -rf Bit-Country-Blockchain &>/dev/null
-#rm -rf .local/share/bitcountry-node/chains/tewai_testnet/db/ &>/dev/null
+rm -rf .local/share/bitcountry-node/chains/tewai_testnet/db/ &>/dev/null
 echo "Билд завершен успешно"
 echo "-----------------------------------------------------------------------------"
 
