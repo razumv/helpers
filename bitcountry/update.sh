@@ -1,0 +1,59 @@
+#!/bin/bash
+
+echo "-----------------------------------------------------------------------------"
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/doubletop.sh | bash
+echo "-----------------------------------------------------------------------------"
+echo "Устанавливаем софт"
+echo "-----------------------------------------------------------------------------"
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash &>/dev/null
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_rust.sh | bash &>/dev/null
+sudo apt install --fix-broken -y &>/dev/null
+sudo apt install nano mc -y &>/dev/null
+source $HOME/.profile &>/dev/null
+source $HOME/.bashrc &>/dev/null
+source $HOME/.cargo/env &>/dev/null
+sleep 1
+echo "Весь необходимый софт установлен"
+echo "-----------------------------------------------------------------------------"
+
+if [ ! -d $HOME/Realis.Network/ ]; then
+  git clone https://github.com/bit-country/Metaverse-Network.git &>/dev/null
+fi
+cd $HOME/Metaverse-Network
+git checkout tewai-v0.0.1 &>/dev/null
+echo "Репозиторий успешно склонирован, начинаем билд"
+echo "-----------------------------------------------------------------------------"
+
+make init &>/dev/null
+cargo build --release --features=with-tewai-runtime &>/dev/null
+echo "Билд завершен успешно"
+echo "-----------------------------------------------------------------------------"
+
+sudo tee <<EOF >/dev/null /etc/systemd/journald.conf
+Storage=persistent
+EOF
+sudo systemctl restart systemd-journald
+
+sudo tee <<EOF >/dev/null /etc/systemd/system/bitcountry.service
+[Unit]
+Description=Bitcountry Node
+After=network-online.target
+[Service]
+User=$USER
+ExecStart=$HOME/Metaverse-Network/target/release/metaverse-node --chain tewai --bootnodes /ip4/13.239.118.231/tcp/30344/p2p/12D3KooW9rDqyS5S5F6oGHYsmFjSdZdX6HAbTD88rPfxYfoXJdNU --name '$NODENAME' --telemetry-url 'wss://telemetry.polkadot.io/submit/ 0'
+Restart=always
+RestartSec=10
+LimitNOFILE=10000
+[Install]
+WantedBy=multi-user.target
+EOF
+
+echo "Сервисные файлы созданы успешно"
+echo "-----------------------------------------------------------------------------"
+
+sudo systemctl daemon-reload
+sudo systemctl enable bitcountry &>/dev/null
+sudo systemctl restart bitcountry
+
+echo "Нода добавлена в автозагрузку на сервере, запущена"
+echo "-----------------------------------------------------------------------------"
