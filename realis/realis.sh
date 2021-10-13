@@ -21,7 +21,7 @@ source $HOME/.profile &>/dev/null
 source $HOME/.bashrc &>/dev/null
 source $HOME/.cargo/env &>/dev/null
 sleep 1
-rustup install nightly-2021-06-09 &>/dev/null
+rustup default nightly-2021-06-09 &>/dev/null
 rustup target add wasm32-unknown-unknown --toolchain nightly-2021-06-09 &>/dev/null
 echo "Весь необходимый софт установлен"
 echo "-----------------------------------------------------------------------------"
