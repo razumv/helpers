@@ -16,7 +16,7 @@ sleep 1
 echo "Весь необходимый софт установлен"
 echo "-----------------------------------------------------------------------------"
 
-if [ ! -d $HOME/Realis.Network/ ]; then
+if [ ! -d $HOME/Metaverse-Network/ ]; then
   git clone https://github.com/bit-country/Metaverse-Network.git &>/dev/null
 fi
 cd $HOME/Metaverse-Network
