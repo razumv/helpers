@@ -1,5 +1,7 @@
 #!/bin/bash
-cd massa/massa-client
+#Thank's for https://raw.githubusercontent.com/bobu4/massa/main/bal.sh
+
+cd $HOME/massa/massa-client
 massa_wallet_address=$(cargo run --release wallet_info | jq -r '.balances | keys[0]')
 while true
 do
