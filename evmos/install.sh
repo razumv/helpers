@@ -65,7 +65,7 @@ WantedBy=multi-user.target
 EOF
 
 sudo systemctl daemon-reload
-sudo systemctl enable evmosd
-sudo systemctl start evmosd
+sudo systemctl enable evmos
+sudo systemctl start evmos
 echo "Сервисные файлы созданы успешно, возвращаемся к гайду"
 echo "-----------------------------------------------------------------------------"
