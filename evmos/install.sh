@@ -32,7 +32,7 @@ evmosd config chain-id evmos_9000-1 &>/dev/null
 evmosd config keyring-backend file &>/dev/null
 evmosd init "$EVMOS_NODENAME" --chain-id evmos_9000-1 &>/dev/null
 wget -qO $HOME/.evmosd/config/genesis.json https://raw.githubusercontent.com/tharsis/testnets/main/arsia_mons/genesis.json &>/dev/null
-live_peers="65516b494b5296d50161373b6e0b66ebe0fa7818@66.94.99.83:26656,148cce3293950d18a44225e9ee70ae1b8bb56299@161.97.74.88:26656,395d357ad66a187d02938c9801e811cbc4be7cd2@152.228.220.135:16657"
+live_peers="72160278cbce6192d376816fd715705eb41bc56a@194.163.187.219:26656"
 bootstrap_node="http://5.189.156.65:26657"; \
 latest_height=`wget -qO- "${bootstrap_node}/block" | jq -r ".result.block.header.height"`; \
 block_height=$((latest_height - 2000)); \
