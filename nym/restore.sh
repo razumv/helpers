@@ -10,6 +10,7 @@ else
   sudo apt update
   sudo apt install make clang pkg-config libssl-dev build-essential git mc -y
   sudo curl https://sh.rustup.rs -sSf | sh -s -- -y
+	rustup default stable
   source $HOME/.cargo/env
   tar xvf nym_keys.tar.gz
   export NYM_NODENAME=`ls ~/.nym/mixnodes/`
