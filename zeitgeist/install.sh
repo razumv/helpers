@@ -17,12 +17,14 @@ sleep 1
 
 git clone https://github.com/zeitgeistpm/zeitgeist.git
 cd zeitgeist
-git checkout v0.1.2
+git checkout v0.2.0
 ./scripts/init.sh
 #cargo build --release
 mkdir -p $HOME/zeitgeist/target/release/
-wget https://github.com/zeitgeistpm/zeitgeist/releases/download/v0.1.2/zeitgeist -O $HOME/zeitgeist/target/release/zeitgeist
+wget https://github.com/zeitgeistpm/zeitgeist/releases/download/v0.2.0/zeitgeist -O $HOME/zeitgeist/target/release/zeitgeist
 chmod +x $HOME/zeitgeist/target/release/zeitgeist
+curl -o battery-station-relay.json https://raw.githubusercontent.com/zeitgeistpm/polkadot/battery-station-relay/node/service/res/battery-station-relay.json
+
 
 sudo tee <<EOF >/dev/null /etc/systemd/journald.conf
 Storage=persistent
@@ -35,7 +37,12 @@ Description=Zeitgeist Node
 After=network-online.target
 [Service]
 User=$USER
-ExecStart=$HOME/zeitgeist/target/release/zeitgeist --chain battery_park --bootnodes /ip4/139.162.171.58/tcp/30333/p2p/12D3KooWPvu5rpH2FNYnAmiQ8X8XqkMiuSFTjH2jwMCSjoam7RGQ --name "$NODENAME | DOUBLETOP" --validator --telemetry-url "wss://telemetry.zeitgeist.pm/submit/ 0"
+ExecStart=$HOME/zeitgeist/target/release/zeitgeist --chain battery_station \
+--bootnodes=/ip4/45.33.117.205/tcp/31001/p2p/12D3KooWHgbvdWFwNQiUPbqncwPmGCHKE8gUQLbzbCzaVbkJ1crJ \
+--bootnodes=/ip4/45.33.117.205/tcp/31002/p2p/12D3KooWE5KxMrfJLWCpaJmAPLWDm9rS612VcZg2JP6AYgxrGuuE \
+--chain=$HOME/battery-station-relay.json \
+--name "$NODENAME | DOUBLETOP" --validator \
+--telemetry-url "wss://telemetry.zeitgeist.pm/submit/ 0"
 Restart=always
 RestartSec=10
 LimitNOFILE=10000
