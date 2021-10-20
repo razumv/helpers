@@ -23,7 +23,7 @@ git checkout v0.2.0
 mkdir -p $HOME/zeitgeist/target/release/
 wget https://github.com/zeitgeistpm/zeitgeist/releases/download/v0.2.0/zeitgeist_parachain -O $HOME/zeitgeist/target/release/zeitgeist
 chmod +x $HOME/zeitgeist/target/release/zeitgeist
-curl -o battery-station-relay.json https://raw.githubusercontent.com/zeitgeistpm/polkadot/battery-station-relay/node/service/res/battery-station-relay.json
+curl -o $HOME/battery-station-relay.json https://raw.githubusercontent.com/zeitgeistpm/polkadot/battery-station-relay/node/service/res/battery-station-relay.json
 
 sudo tee <<EOF >/dev/null /etc/systemd/journald.conf
 Storage=persistent
