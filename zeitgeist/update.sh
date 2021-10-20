@@ -4,6 +4,9 @@
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash
 
 sudo systemctl stop zeitgeist
+
+rm -rf $HOME/.local/share/zeitgeist/chains/battery_park/db/
+
 wget https://github.com/zeitgeistpm/zeitgeist/releases/download/v0.2.0/zeitgeist -O $HOME/zeitgeist/target/release/zeitgeist
 curl -o battery-station-relay.json https://raw.githubusercontent.com/zeitgeistpm/polkadot/battery-station-relay/node/service/res/battery-station-relay.json
 
