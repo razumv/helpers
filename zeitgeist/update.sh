@@ -6,9 +6,11 @@ curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.
 sudo systemctl stop zeitgeist
 
 rm -rf $HOME/.local/share/zeitgeist/chains/battery_park/db/
+rm -f $HOME/zeitgeist/target/release/zeitgeist
 
-wget https://github.com/zeitgeistpm/zeitgeist/releases/download/v0.2.0/zeitgeist -O $HOME/zeitgeist/target/release/zeitgeist
-curl -o battery-station-relay.json https://raw.githubusercontent.com/zeitgeistpm/polkadot/battery-station-relay/node/service/res/battery-station-relay.json
+wget https://github.com/zeitgeistpm/zeitgeist/releases/download/v0.2.0/zeitgeist_parachain -O $HOME/zeitgeist/target/release/zeitgeist
+curl -o $HOME/battery-station-relay.json https://raw.githubusercontent.com/zeitgeistpm/polkadot/battery-station-relay/node/service/res/battery-station-relay.json
+chmod +x $HOME/zeitgeist/target/release/zeitgeist
 
 sudo tee <<EOF >/dev/null /etc/systemd/journald.conf
 Storage=persistent
@@ -21,12 +23,25 @@ Description=Zeitgeist Node
 After=network-online.target
 [Service]
 User=$USER
-ExecStart=$HOME/zeitgeist/target/release/zeitgeist --chain battery_station \
---bootnodes=/ip4/45.33.117.205/tcp/30001/p2p/12D3KooWBMSGsvMa2A7A9PA2CptRFg9UFaWmNgcaXRxr1pE1jbe9 \
---bootnodes=/ip4/45.33.117.205/tcp/31001/p2p/12D3KooWHgbvdWFwNQiUPbqncwPmGCHKE8gUQLbzbCzaVbkJ1crJ \
---bootnodes=/ip4/45.33.117.205/tcp/31002/p2p/12D3KooWE5KxMrfJLWCpaJmAPLWDm9rS612VcZg2JP6AYgxrGuuE \
---chain=$HOME/battery-station-relay.json \
---name "$NODENAME | DOUBLETOP" --validator
+Nice=0
+ExecStart=$HOME/zeitgeist/target/release/zeitgeist \
+    --bootnodes=/ip4/45.33.117.205/tcp/30001/p2p/12D3KooWBMSGsvMa2A7A9PA2CptRFg9UFaWmNgcaXRxr1pE1jbe9 \
+    --chain=battery_station \
+    --name="$NODENAME | DOUBLETOP" \
+    --parachain-id=2050 \
+    --port=30333 \
+    --rpc-port=9933 \
+    --ws-port=9944 \
+    --rpc-external \
+    --ws-external \
+    --rpc-cors=all \
+    -- \
+    --bootnodes=/ip4/45.33.117.205/tcp/31001/p2p/12D3KooWHgbvdWFwNQiUPbqncwPmGCHKE8gUQLbzbCzaVbkJ1crJ \
+    --bootnodes=/ip4/45.33.117.205/tcp/31002/p2p/12D3KooWE5KxMrfJLWCpaJmAPLWDm9rS612VcZg2JP6AYgxrGuuE \
+    --chain=$HOME/battery-station-relay.json \
+    --port=30334 \
+    --rpc-port=9934 \
+    --ws-port=9945
 Restart=always
 RestartSec=10
 LimitNOFILE=10000
