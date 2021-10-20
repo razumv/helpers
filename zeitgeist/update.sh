@@ -22,11 +22,11 @@ After=network-online.target
 [Service]
 User=$USER
 ExecStart=$HOME/zeitgeist/target/release/zeitgeist --chain battery_station \
+--bootnodes=/ip4/45.33.117.205/tcp/30001/p2p/12D3KooWBMSGsvMa2A7A9PA2CptRFg9UFaWmNgcaXRxr1pE1jbe9 \
 --bootnodes=/ip4/45.33.117.205/tcp/31001/p2p/12D3KooWHgbvdWFwNQiUPbqncwPmGCHKE8gUQLbzbCzaVbkJ1crJ \
 --bootnodes=/ip4/45.33.117.205/tcp/31002/p2p/12D3KooWE5KxMrfJLWCpaJmAPLWDm9rS612VcZg2JP6AYgxrGuuE \
 --chain=$HOME/battery-station-relay.json \
---name "$NODENAME | DOUBLETOP" --validator \
---telemetry-url "wss://telemetry.zeitgeist.pm/submit/ 0"
+--name "$NODENAME | DOUBLETOP" --validator
 Restart=always
 RestartSec=10
 LimitNOFILE=10000
