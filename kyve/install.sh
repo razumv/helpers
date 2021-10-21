@@ -58,7 +58,7 @@ fi
 #
 # docker rm -f kyve &>/dev/null
 # docker run -d -it --restart=always --name=kyve kyve-node:latest &>/dev/null
-docker pull kyve/evm:latest
+docker pull kyve/evm:latest &>/dev/null
 docker stop kyve &>/dev/null
 docker container rm kyve &>/dev/null
 docker run -d -it --restart=always \
