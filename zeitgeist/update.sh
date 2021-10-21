@@ -11,6 +11,8 @@ rm -f $HOME/zeitgeist/target/release/zeitgeist
 wget https://github.com/zeitgeistpm/zeitgeist/releases/download/v0.2.0/zeitgeist_parachain -O $HOME/zeitgeist/target/release/zeitgeist
 curl -o $HOME/battery-station-relay.json https://raw.githubusercontent.com/zeitgeistpm/polkadot/battery-station-relay/node/service/res/battery-station-relay.json
 chmod +x $HOME/zeitgeist/target/release/zeitgeist
+mkdir -p $HOME/.local/share/zeitgeist/chains/battery_station_mainnet/
+cp -r $HOME/.local/share/zeitgeist/chains/battery_park/keystore $HOME/.local/share/zeitgeist/chains/battery_station_mainnet/
 
 sudo tee <<EOF >/dev/null /etc/systemd/journald.conf
 Storage=persistent
