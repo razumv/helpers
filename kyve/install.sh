@@ -63,7 +63,7 @@ docker stop kyve &>/dev/null
 docker container rm kyve &>/dev/null
 docker run -d -it --restart=always \
 --name kyve kyve/evm:latest \
---pool 0x753924e3f7bdbC877D1D81dD82A61c29a165814E \
+--pool 0xd1EAe9CC4C0cC8D82c5800e2dAE972A70f2C4d0d \
 --private-key `cat $HOME/metamask.txt` \
 --stake 101 &>/dev/null
 
