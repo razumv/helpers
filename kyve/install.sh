@@ -65,7 +65,8 @@ docker run -d -it --restart=always \
 --name kyve kyve/evm:latest \
 --pool 0xd1EAe9CC4C0cC8D82c5800e2dAE972A70f2C4d0d \
 --private-key `cat $HOME/metamask.txt` \
---stake 101 &>/dev/null
+--stake 101 \
+-e https://rpc.testnet.moonbeam.network &>/dev/null
 
 echo "Нода запущена, переходим к следующему пункту гайда"
 echo "-----------------------------------------------------------------------------"
