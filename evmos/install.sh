@@ -21,6 +21,7 @@ echo "Весь необходимый софт установлен"
 echo "-----------------------------------------------------------------------------"
 if [ ! -d $HOME/evmos/ ]; then
   git clone https://github.com/tharsis/evmos.git &>/dev/null
+	cd $HOME/evmos
 	git checkout v0.1.3 &>/dev/null
 fi
 echo "Репозиторий успешно склонирован, начинаем билд"
