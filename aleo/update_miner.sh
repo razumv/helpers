@@ -8,7 +8,7 @@ rustup update
 sudo systemctl stop miner
 cd $HOME/snarkOS
 git fetch
-git checkout v1.3.16
+git checkout v1.3.17
 cargo build --release --verbose
 #rm -rf $HOME/.snarkOS/snarkos_testnet1
 #rm -rf $HOME/.snarkOS/snarkos_testnet1_secondary

@@ -11,7 +11,7 @@ sleep 1
 
 git clone https://github.com/AleoHQ/snarkOS
 cd snarkOS
-git checkout v1.3.16
+git checkout v1.3.17
 cargo build --release --verbose
 
 cd $HOME
