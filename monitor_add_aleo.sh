@@ -75,7 +75,7 @@ cat <<EOF | sudo tee /etc/telegraf/telegraf.conf
   timeout = "1m"
   data_format = "value"
   data_type = "integer" # required
-  
+
  [[inputs.exec]]
   name_override = "getversion"
   commands = ["sudo su -c $HOME/scripts/getversion.sh   -s /bin/bash $USER"]
@@ -99,17 +99,15 @@ EOF
 
 sudo tee <<EOF >/dev/null $HOME/scripts/getmindeblocks.sh
 #!/bin/bash
-curl -s --data-binary '{"jsonrpc": "2.0", "id":"documentation", "method": "getnodestats", "params": [] }' -H 'content-type: application/json' http://localhost:3030/ | jq '.[].misc?.blocks_mined?'        
+curl -s --data-binary '{"jsonrpc": "2.0", "id":"documentation", "method": "getnodestats", "params": [] }' -H 'content-type: application/json' http://localhost:3030/ | jq '.[].blocks?.mined?'
 EOF
 
 sudo tee <<EOF >/dev/null $HOME/scripts/getversion.sh
 #!/bin/bash
-$HOME/snarkOS/target/release/snarkos --help | grep -o '[0-9]*\.[0-9]*\.[0-9]*' | sed -e 's/[^0-9]//g'      
+$HOME/snarkOS/target/release/snarkos --help | grep -o '[0-9]*\.[0-9]*\.[0-9]*' | sed -e 's/[^0-9]//g'
 EOF
 
 chmod +x $HOME/scripts/*.sh
 
 sudo systemctl enable telegraf
 sudo systemctl restart telegraf
-
- 
