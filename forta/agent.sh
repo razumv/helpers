@@ -16,4 +16,4 @@ source $HOME/forta/bin/activate
 cd $HOME/forta
 mkdir my-agent
 cd my-agent
-npx forta-agent@latest init --typescript
+#npx forta-agent@latest init --typescript
