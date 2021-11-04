@@ -12,7 +12,7 @@ sudo -u casper casper-client put-deploy \
     --node-address "http://127.0.0.1:7777/" \
     --secret-key "/etc/casper/validator_keys/secret_key.pem" \
     --session-path "/opt/add_bid.wasm" \
-    --payment-amount 5000000000 \
+    --payment-amount 10000000000 \
     --gas-price=1 \
     --session-arg=public_key:"public_key='$PUBLIC_KEY_HEX'" \
     --session-arg=amount:"u512='900000000000'" \
