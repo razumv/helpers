@@ -4,8 +4,8 @@ curl -s https://raw.githubusercontent.com/razumv/helpers/main/doubletop.sh | bas
 echo "-----------------------------------------------------------------------------"
 docker pull kyve/evm:latest &>/dev/null
 docker pull kyve/cosmos:latest &>/dev/null
-docker stop kyve &>/dev/null
-docker container rm kyve &>/dev/null
+docker stop kyve kyve-avalanche kyve-moonriver kyve-cosmos &>/dev/null
+docker container rm kyve kyve-avalanche kyve-moonriver kyve-cosmos &>/dev/null
 
 docker run -d -it --restart=always \
 --name kyve-avalanche kyve/evm:latest \
