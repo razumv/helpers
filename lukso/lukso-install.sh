@@ -10,7 +10,7 @@ echo 'export EVMOS_NODENAME='$LUKSO_NODENAME >> $HOME/.profile
 echo "-----------------------------------------------------------------------------"
 echo "Устанавливаем "
 echo "-----------------------------------------------------------------------------"
-curl https://install.l15.lukso.network | bash &>/dev/null
+curl -s https://install.l15.lukso.network | bash &>/dev/null
 lukso start --node-name "$LUKSO_NODENAME" | bash &>/dev/null
 echo "Установка завершена"
 echo "-----------------------------------------------------------------------------"
