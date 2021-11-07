@@ -53,7 +53,7 @@ sudo systemctl restart massa
 #   sleep 10
 # done
 # rm $HOME/massa/massa-client/config/history.txt
-# cargo run -- --wallet wallet.dat wallet_new_privkey
+cargo run -- --wallet wallet.dat wallet_new_privkey
 # while [ ! -f $HOME/massa/massa-client/config/history.txt ]
 # do
 #   sleep 10
