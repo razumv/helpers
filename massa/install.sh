@@ -46,7 +46,7 @@ sudo systemctl enable massa
 sudo systemctl daemon-reload
 sudo systemctl restart massa
 
-# cd $HOME/massa/massa-client/
+cd $HOME/massa/massa-client/
 # cargo run --release
 # while [ ! -f $HOME/massa/massa-client/config/history.txt ]
 # do
