@@ -46,19 +46,19 @@ sudo systemctl enable massa
 sudo systemctl daemon-reload
 sudo systemctl restart massa
 
-cd $HOME/massa/massa-client/
-cargo run --release
-while [ ! -f $HOME/massa/massa-client/config/history.txt ]
-do
-  sleep 10
-done
-rm $HOME/massa/massa-client/config/history.txt
-cargo run -- --wallet wallet.dat wallet_new_privkey
-while [ ! -f $HOME/massa/massa-client/config/history.txt ]
-do
-  sleep 10
-done
-cd
+# cd $HOME/massa/massa-client/
+# cargo run --release
+# while [ ! -f $HOME/massa/massa-client/config/history.txt ]
+# do
+#   sleep 10
+# done
+# rm $HOME/massa/massa-client/config/history.txt
+# cargo run -- --wallet wallet.dat wallet_new_privkey
+# while [ ! -f $HOME/massa/massa-client/config/history.txt ]
+# do
+#   sleep 10
+# done
+# cd
 
 echo "alias client='cd $HOME/massa/massa-client/ && cargo run --release && cd'" >> ~/.profile
 echo "alias clientw='cd $HOME/massa/massa-client/; cargo run -- --wallet wallet.dat; cd'" >> ~/.profile
