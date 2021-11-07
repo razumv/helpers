@@ -53,7 +53,7 @@ cd $HOME/massa/massa-client/
 #   sleep 10
 # done
 # rm $HOME/massa/massa-client/config/history.txt
-cargo run -- --wallet wallet.dat wallet_new_privkey
+cargo run -- --wallet wallet.dat wallet_generate_private_key
 # while [ ! -f $HOME/massa/massa-client/config/history.txt ]
 # do
 #   sleep 10
