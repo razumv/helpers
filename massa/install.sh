@@ -63,6 +63,7 @@ cargo run -- --wallet wallet.dat wallet_generate_private_key
 echo "alias client='cd $HOME/massa/massa-client/ && cargo run --release && cd'" >> ~/.profile
 echo "alias clientw='cd $HOME/massa/massa-client/; cargo run -- --wallet wallet.dat; cd'" >> ~/.profile
 
+cd $HOME
 mkdir -p $HOME/bk
 cp $HOME/massa/massa-node/config/node_privkey.key $HOME/bk/
 cp $HOME/massa/massa-client/wallet.dat $HOME/bk/
