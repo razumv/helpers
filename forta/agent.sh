@@ -11,6 +11,7 @@ npm install -g forta-agent bash &>/dev/null
 pip install virtualenv bash &>/dev/null
 
 useradd -m user -s /bin/bash bash &>/dev/null
+sudo usermod -aG docker user &>/dev/null
 sudo su user
 
 virtualenv $HOME/forta bash &>/dev/null
