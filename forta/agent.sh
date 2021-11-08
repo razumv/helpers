@@ -18,6 +18,7 @@ source $HOME/forta/bin/activate bash &>/dev/null
 cd $HOME/forta
 mkdir my-agent
 cd my-agent
+npm install &>/dev/null
 # npm install -g forta-agent bash &>/dev/null
 # npx forta-agent@latest init --typescript
 echo "Готово, возвращаемся к гайду"
