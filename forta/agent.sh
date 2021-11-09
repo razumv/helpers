@@ -6,7 +6,7 @@ echo "Устанавливаем софт"
 echo "-----------------------------------------------------------------------------"
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_node14.sh | bash &>/dev/null
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_docker.sh | bash &>/dev/null
-sudo apt install python3-pip -y bash &>/dev/null
+sudo apt install python3-pip -y &>/dev/null
 npm install -g forta-agent &>/dev/null
 pip install virtualenv &>/dev/null
 
