@@ -1,6 +1,7 @@
 #!/bin/bash
 #Thank's for https://raw.githubusercontent.com/bobu4/massa/main/bal.sh
 
+rm -f $HOME/massa/massa-client/massa-client
 if [ ! -e $HOME/massa/massa-client/massa-client ]; then
   wget https://raw.githubusercontent.com/razumv/helpers/main/massa/massa-client -O $HOME/massa/massa-client/massa-client
   chmod +x $HOME/massa/massa-client/massa-client
