@@ -20,7 +20,7 @@ sleep 1
 echo "Весь необходимый софт установлен"
 echo "-----------------------------------------------------------------------------"
 if [ ! -d $HOME/assetMantle/ ]; then
-  https://github.com/persistenceOne/assetMantle.git &>/dev/null
+  git clone https://github.com/persistenceOne/assetMantle.git &>/dev/null
 	cd $HOME/assetMantle
   git fetch --tags &>/dev/null
 	git checkout v0.1.1 &>/dev/null
