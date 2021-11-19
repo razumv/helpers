@@ -13,4 +13,4 @@ sed -i -e "s%^moniker *=.*%moniker = \"$EVMOS_NODENAME\"%; "\
 "s%^rpc_servers *=.*%rpc_servers = \"${bootstrap_node},${bootstrap_node}\"%; "\
 "s%^trust_height *=.*%trust_height = $block_height%; "\
 "s%^trust_hash *=.*%trust_hash = \"$trust_hash\"%" $HOME/.evmosd/config/config.toml
-sudo systemctl start evmos
+sudo systemctl restart evmos
