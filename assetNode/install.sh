@@ -35,7 +35,7 @@ assetNode init $ASSETN_NODENAME --chain-id test-mantle-1 &>/dev/null
 wget -O $HOME/.assetNode/config/genesis.json https://raw.githubusercontent.com/persistenceOne/genesisTransactions/master/test-mantle-1/final_genesis.json &>/dev/null
 assetNode unsafe-reset-all &>/dev/null
 sed -i.bak -e "s/^minimum-gas-prices = \"\"/minimum-gas-prices = \"0.005umantle\"/" $HOME/.assetNode/config/app.toml
-peers="9a8a1d3e135531dc452172ce439dc20386064560@75.119.141.248:26656,55e140356200cecaa8f47b24cbbef6147caadda2@192.168.61.24:26656,a9668820073e0d272431e2c30ca9334d3ed22141@192.168.1.77:26656,0c34daf66b3670322d00e0f4593ca07736377ced@142.4.216.69:26656"
+peers="`wget -qO - https://raw.githubusercontent.com/razumv/helpers/main/assetNode/peers.txt | tr '\n' ',' | sed 's%,$%%'`,9a8a1d3e135531dc452172ce439dc20386064560@75.119.141.248:26656,55e140356200cecaa8f47b24cbbef6147caadda2@192.168.61.24:26656,a9668820073e0d272431e2c30ca9334d3ed22141@192.168.1.77:26656,0c34daf66b3670322d00e0f4593ca07736377ced@142.4.216.69:26656"
 external_address=`curl -s ifconfig.me`
 sed -i.bak -e "s/^external_address = \"\"/external_address = \"$external_address:26656\"/; s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.assetNode/config/config.toml
 wget -O $HOME/.assetNode/config/addrbook.json https://raw.githubusercontent.com/razumv/helpers/main/assetNode/addrbook.json &>/dev/null
