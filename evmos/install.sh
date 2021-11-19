@@ -30,9 +30,9 @@ cd $HOME/evmos
 make install &>/dev/null
 echo "Билд закончен"
 echo "-----------------------------------------------------------------------------"
-evmosd config chain-id evmos_9000-1 &>/dev/null
+evmosd config chain-id evmos_9000-2 &>/dev/null
 evmosd config keyring-backend file &>/dev/null
-evmosd init "$EVMOS_NODENAME" --chain-id evmos_9000-1 &>/dev/null
+evmosd init "$EVMOS_NODENAME" --chain-id evmos_9000-2 &>/dev/null
 wget -qO $HOME/.evmosd/config/genesis.json https://raw.githubusercontent.com/tharsis/testnets/main/arsia_mons/genesis.json &>/dev/null
 bootstrap_node="http://5.189.156.65:26657"; \
 latest_height=`wget -qO- "${bootstrap_node}/block" | jq -r ".result.block.header.height"`; \
