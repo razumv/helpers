@@ -4,7 +4,6 @@ curl -s https://raw.githubusercontent.com/razumv/helpers/main/doubletop.sh | bas
 echo "-----------------------------------------------------------------------------"
 sudo systemctl stop evmos
 rm -f $HOME/.evmosd/config/genesis.json
-wget -qO $HOME/.evmosd/config/genesis.json https://github.com/tharsis/testnets/blob/2267211602bb6e004a10a7b6e0395eed7a74b689/olympus_mons/genesis.json
 cd $HOME/evmos
 git fetch --all && git checkout v0.2.0
 make install
