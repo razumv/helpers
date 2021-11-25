@@ -34,6 +34,10 @@ evmosd config chain-id evmos_9000-2
 curl https://raw.githubusercontent.com/tharsis/testnets/main/olympus_mons/genesis.json > ~/.evmosd/config/genesis.json
 
 evmosd unsafe-reset-all
+grep -qxF 'evm-timeout = "5s"' $HOME/.evmosd/config/app.toml || sed -i "/\[json-rpc\]/a evm-timeout = \"5s\"" $HOME/.evmosd/config/app.toml
+grep -qxF "txfee-cap = 1" $HOME/.evmosd/config/app.toml || sed -i "/\[json-rpc\]/a txfee-cap = 1" $HOME/.evmosd/config/app.toml
+grep -qxF "filter-cap = 200" $HOME/.evmosd/config/app.toml || sed -i "/\[json-rpc\]/a filter-cap = 200" $HOME/.evmosd/config/app.toml
+grep -qxF "feehistory-cap = 100" $HOME/.evmosd/config/app.toml || sed -i "/\[json-rpc\]/a feehistory-cap = 100" $HOME/.evmosd/config/app.toml
 
 sudo tee /etc/systemd/system/evmos.service > /dev/null <<EOF
 [Unit]
