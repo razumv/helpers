@@ -4,27 +4,47 @@ curl -s https://raw.githubusercontent.com/razumv/helpers/main/doubletop.sh | bas
 echo "-----------------------------------------------------------------------------"
 docker pull kyve/evm:latest &>/dev/null
 docker pull kyve/cosmos:latest &>/dev/null
-docker stop kyve kyve-avalanche kyve-moonriver kyve-cosmos &>/dev/null
-docker container rm kyve kyve-avalanche kyve-moonriver kyve-cosmos &>/dev/null
+docker pull kyve/solana-snapshots:latest &>/dev/null
+docker pull kyve/celo:latest &>/dev/null
+
+docker stop kyve kyve-avalanche kyve-moonriver kyve-cosmos kyve-solana kyve-celo &>/dev/null
+docker container rm kyve kyve-avalanche kyve-moonriver kyve-cosmos kyve-solana kyve-celo &>/dev/null
 
 docker run -d -it --restart=always \
 --name kyve-avalanche kyve/evm:latest \
---pool 0xd1EAe9CC4C0cC8D82c5800e2dAE972A70f2C4d0d \
+--pool 0x464200b29738367366FDb4c45f3b8fb582AE0Bf8 \
 --private-key `cat $HOME/metamask.txt` \
---stake 101 \
+--stake 150 \
 -e https://rpc.testnet.moonbeam.network &>/dev/null
 
 docker run -d -it --restart=always \
 --name kyve-moonriver kyve/evm:latest \
---pool 0x5A679d476757C18Ec49dfB6c3c3511c8E8a76906 \
+--pool 0x610D55fA573Bce4D2d36e8ADAAee517B785a69dF \
 --private-key `cat $HOME/metamask.txt` \
---stake 101 \
+--stake 150 \
 -e https://rpc.testnet.moonbeam.network &>/dev/null
 
 docker run -d -it --restart=always \
 --name kyve-cosmos kyve/cosmos:latest \
---pool 0x83748889798a93e4a816a6a9D2ecD40377D5530B \
+--pool 0x7Bb18C81BBA6B8dE8C17B97d78B65327024F681f \
 --private-key `cat $HOME/metamask.txt` \
---stake 101 \
+--stake 150 \
 -e https://rpc.testnet.moonbeam.network &>/dev/null
+
+docker run -d -it --restart=always \
+--name kyve-solana kyve/solana-snapshots:latest \
+--pool 0xB7CcAc5BCB7DBa5c66dF42C6872d2f6Dbf7529a7 \
+--private-key `cat $HOME/metamask.txt` \
+--stake 150 \
+-e https://rpc.testnet.moonbeam.network &>/dev/null
+
+docker run -d -it --restart=always \
+--name kyve-celo kyve/celo:latest \
+--pool 0x987aee4981CB2dd4759A76Fde56E77121b90929a \
+--private-key `cat $HOME/metamask.txt` \
+--stake 150 \
+-e https://rpc.testnet.moonbeam.network &>/dev/null
+
+
+
 echo Обновление завершено
