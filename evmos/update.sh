@@ -31,7 +31,7 @@ cp $GOPATH/bin/evmosd ~/.evmosd/cosmovisor/genesis/bin
 
 evmosd config chain-id evmos_9000-2
 
-curl https://raw.githubusercontent.com/tharsis/testnets/main/olympus_mons/genesis.json > ~/.evmosd/config/genesis.json
+curl -s https://raw.githubusercontent.com/tharsis/testnets/main/olympus_mons/genesis.json > ~/.evmosd/config/genesis.json
 
 evmosd unsafe-reset-all
 grep -qxF 'evm-timeout = "5s"' $HOME/.evmosd/config/app.toml || sed -i "/\[json-rpc\]/a evm-timeout = \"5s\"" $HOME/.evmosd/config/app.toml
