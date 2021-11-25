@@ -90,14 +90,14 @@ docker run -d -it --restart=always \
 
 docker run -d -it --restart=always \
 --name kyve-solana kyve/solana-snapshots:latest \
---pool 0xB7CcAc5BCB7DBa5c66dF42C6872d2f6Dbf7529a7 \
+--pool 0x3124375cA4de5FE5afD672EF2775c6bdcA1Cfdcc \
 --private-key `cat $HOME/metamask.txt` \
 --stake 150 \
 -e https://rpc.testnet.moonbeam.network &>/dev/null
 
 docker run -d -it --restart=always \
 --name kyve-celo kyve/celo:latest \
---pool 0x987aee4981CB2dd4759A76Fde56E77121b90929a \
+--pool 0x1588fd93715Aa08d67c32C6dF96fC730B15E1E1A \
 --private-key `cat $HOME/metamask.txt` \
 --stake 150 \
 -e https://rpc.testnet.moonbeam.network &>/dev/null
