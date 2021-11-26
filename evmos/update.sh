@@ -59,7 +59,7 @@ Environment="DAEMON_RESTART_AFTER_UPGRADE=true"
 [Install]
 WantedBy=multi-user.target
 EOF
-
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/evmos/update_peers.sh | bash
 sudo -S systemctl daemon-reload
 sudo -S systemctl enable evmos
 sudo -S systemctl start evmos
