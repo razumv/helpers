@@ -26,6 +26,9 @@ sudo systemctl restart systemd-journald
 
 export MINER_ADDRESS=$(cat $HOME/account_aleo.txt | awk '/Address/ {print $2}')
 
+sed -i "s/aleo1d5hg2z3ma00382pngntdp68e74zv54jdxy249qhaujhks9c72yrs33ddah/${MINER_ADDRESS}/g $HOME/snarkOS/run-miner.sh
+
+
 sudo tee <<EOF >/dev/null /etc/systemd/system/miner.service
 [Unit]
 Description=Aleo miner
