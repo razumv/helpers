@@ -1,5 +1,7 @@
 #!/bin/bash
-cp $HOME/aleo/account.txt $HOME/account_aleo.txt
+if [ ! -e $HOME/account_aleo.txt ]; then
+  cp $HOME/aleo/account.txt $HOME/account_aleo.txt
+fi
 #add ufw rules
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash
 
