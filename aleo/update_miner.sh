@@ -44,6 +44,3 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl enable miner
 sudo systemctl restart miner
-
-version=`$HOME/snarkOS/target/release/snarkos help | grep snarkOS | head -n 1`
-echo 'Current version' $version
