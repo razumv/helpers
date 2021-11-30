@@ -16,6 +16,8 @@ Storage=persistent
 EOF
 sudo systemctl restart systemd-journald
 
+echo 'export MINER_ADDRESS='$(cat $HOME/account_aleo.txt | awk '/Address/ {print $2}') >> $HOME/.profile
+source $HOME/.profile
 sed -i "s/MINER_ADDRESS=\".*\"/MINER_ADDRESS=\"${MINER_ADDRESS}\"/g" $HOME/snarkOS/run-miner.sh
 
 sudo tee <<EOF >/dev/null /etc/systemd/system/miner.service
