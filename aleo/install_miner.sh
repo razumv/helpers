@@ -12,7 +12,7 @@ sleep 1
 git clone https://github.com/AleoHQ/snarkOS.git --depth 1
 cd snarkOS
 cargo build --release --verbose
-snarkos experimental new_account >> $HOME/account_aleo.txt
+$HOME/snarkOS/target/release/snarkos experimental new_account >> $HOME/account_aleo.txt
 sleep 2
 echo 'export MINER_ADDRESS='$(cat $HOME/account_aleo.txt | awk '/Address/ {print $2}') >> $HOME/.profile
 source $HOME/.profile
