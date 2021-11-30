@@ -32,7 +32,7 @@ Description=Aleo miner
 After=network-online.target
 [Service]
 Environment=PATH="/root/.cargo/bin/:$PATH"
-Environment=MINER_ADDRESS=$(cat $HOME/aleo/account.txt | awk '/Address/ {print $2}')
+Environment=MINER_ADDRESS=$(cat $HOME/account_aleo.txt | awk '/Address/ {print $2}')
 User=$USER
 WorkingDirectory=$HOME/snarkOS
 ExecStart=$HOME/snarkOS/run-miner.sh
