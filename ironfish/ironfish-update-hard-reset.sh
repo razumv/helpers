@@ -9,6 +9,7 @@ docker cp ironfish:/usr/src/app/wallet .
 docker-compose down &>/dev/null
 docker-compose pull &>/dev/null
 docker-compose up -d &>/dev/null
+rm -f $HOME/.ironfish/accounts.backup.json
 docker exec ironfish-miner ./bin/run reset --confirm
 docker-compose restart
 docker cp wallet ironfish:/usr/src/app/wallet
