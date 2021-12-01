@@ -1,4 +1,5 @@
 #!/bin/bash
+cd $HOME
 wallet_name=`docker exec ironfish ./bin/run accounts:which`
 docker exec ironfish ./bin/run accounts:export $wallet_name wallet
 docker cp ironfish:/usr/src/app/wallet .
