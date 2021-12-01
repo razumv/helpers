@@ -4,7 +4,7 @@ curl -s https://raw.githubusercontent.com/razumv/helpers/main/doubletop.sh | bas
 echo "-----------------------------------------------------------------------------"
 cd $HOME
 wallet_name=`docker exec ironfish ./bin/run accounts:which` &>/dev/null
-mv wallet wallet.bk
+docker exec ironfish rm -f wallet
 docker exec ironfish ./bin/run accounts:export $wallet_name wallet &>/dev/null
 docker cp ironfish:/usr/src/app/wallet .
 docker-compose down &>/dev/null
