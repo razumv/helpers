@@ -54,7 +54,9 @@ evmosd config chain-id evmos_9000-2 &>/dev/null
 evmosd config keyring-backend file &>/dev/null
 evmosd init "$EVMOS_NODENAME" --chain-id evmos_9000-2 &>/dev/null
 curl -s https://raw.githubusercontent.com/tharsis/testnets/main/olympus_mons/genesis.json > ~/.evmosd/config/genesis.json
-
+curl -s https://raw.githubusercontent.com/tharsis/testnets/main/olympus_mons/peers.txt > peers.txt
+PEERS=`awk '{print $1}' peers.txt | paste -s -d, -`
+sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" ~/.evmosd/config/config.toml
 # bootstrap_node="http://5.189.156.65:26657"; \
 # latest_height=`wget -qO- "${bootstrap_node}/block" | jq -r ".result.block.header.height"`; \
 # block_height=$((latest_height - 2000)); \
