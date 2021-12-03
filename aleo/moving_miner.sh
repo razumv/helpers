@@ -60,7 +60,7 @@ EOF
 
 chmod +x $HOME/monitoring.sh
 
-curl -s https://raw.githubusercontent.com/razumv/helpers/main/aleo/auto_update.sh > miner_update.sh
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/aleo/auto_update.sh > $HOME/miner_update.sh
 
 #thanks nodes.guru for this script :)
 
