@@ -38,32 +38,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable miner
 sudo systemctl restart miner
 
-sudo tee <<EOF >/dev/null $HOME/miner_update.sh
-cd $HOME/snarkOS
-while :
-do
-  echo "Checking for updates..."
-  STATUS=$(git pull)
-
-  echo $STATUS
-
-  if [ "$STATUS" != "Already up to date." ]; then
-	source $HOME/.cargo/env
-	cargo clean
-	cargo build --release
-	# cargo clean
-	if [[ `service miner status | grep active` =~ "running" ]]; then
-	  echo "Aleo Miner is active"
-	  systemctl stop miner
-	  ALEO_IS_MINER=true
-	fi
-	if [[ `echo $ALEO_IS_MINER` =~ "true" ]]; then
-	  echo "Aleo Miner restarted"
-	  systemctl restart miner
-	fi
-  fi
-done
-EOF
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/aleo/miner_update.sh > miner_update.sh
 #thanks nodes.guru for this script :)
 
 chmod +x $HOME/miner_update.sh
