@@ -38,7 +38,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable miner
 sudo systemctl restart miner
 
-curl -s https://raw.githubusercontent.com/razumv/helpers/main/aleo/miner_update.sh > miner_update.sh
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/aleo/auto_update.sh > miner_update.sh
 #thanks nodes.guru for this script :)
 
 chmod +x $HOME/miner_update.sh
