@@ -55,8 +55,14 @@ evmosd config keyring-backend file &>/dev/null
 evmosd init "$EVMOS_NODENAME" --chain-id evmos_9000-2 &>/dev/null
 curl -s https://raw.githubusercontent.com/tharsis/testnets/main/olympus_mons/genesis.json > ~/.evmosd/config/genesis.json
 curl -s https://raw.githubusercontent.com/tharsis/testnets/main/olympus_mons/peers.txt > peers.txt
+evmosd unsafe-reset-all
 PEERS=`awk '{print $1}' peers.txt | paste -s -d, -`
 sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" ~/.evmosd/config/config.toml
+grep -qxF 'evm-timeout = "5s"' $HOME/.evmosd/config/app.toml || sed -i "/\[json-rpc\]/a evm-timeout = \"5s\"" $HOME/.evmosd/config/app.toml
+grep -qxF "txfee-cap = 1" $HOME/.evmosd/config/app.toml || sed -i "/\[json-rpc\]/a txfee-cap = 1" $HOME/.evmosd/config/app.toml
+grep -qxF "filter-cap = 200" $HOME/.evmosd/config/app.toml || sed -i "/\[json-rpc\]/a filter-cap = 200" $HOME/.evmosd/config/app.toml
+grep -qxF "feehistory-cap = 100" $HOME/.evmosd/config/app.toml || sed -i "/\[json-rpc\]/a feehistory-cap = 100" $HOME/.evmosd/config/app.toml
+
 # bootstrap_node="http://5.189.156.65:26657"; \
 # latest_height=`wget -qO- "${bootstrap_node}/block" | jq -r ".result.block.header.height"`; \
 # block_height=$((latest_height - 2000)); \
@@ -75,16 +81,23 @@ Storage=persistent
 EOF
 sudo systemctl restart systemd-journald
 
-sudo tee <<EOF >/dev/null /etc/systemd/system/evmos.service
+sudo tee /etc/systemd/system/evmos.service > /dev/null <<EOF
 [Unit]
-Description=Evmos Node
+Description=Evmos Daemon
 After=network-online.target
+
 [Service]
 User=$USER
-ExecStart=$(which evmosd) start
+ExecStart=$(which cosmovisor) start
 Restart=always
-RestartSec=10
-LimitNOFILE=10000
+RestartSec=3
+LimitNOFILE=infinity
+
+Environment="DAEMON_HOME=$HOME/.evmosd"
+Environment="DAEMON_NAME=evmosd"
+Environment="DAEMON_ALLOW_DOWNLOAD_BINARIES=false"
+Environment="DAEMON_RESTART_AFTER_UPGRADE=true"
+
 [Install]
 WantedBy=multi-user.target
 EOF
