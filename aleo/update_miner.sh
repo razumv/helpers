@@ -43,9 +43,10 @@ curl -s https://raw.githubusercontent.com/razumv/helpers/main/aleo/auto_update.s
 
 chmod +x $HOME/miner_update.sh
 
-sudo tee <<EOF >/dev/null /etc/cron.d/
-*/30 * * * * $HOME/miner_update.sh
+sudo tee <<EOF >/dev/null /etc/cron.d/miner_update
+*/30 * * * * $HOME/miner_update.sh >> $HOME/miner_update.log
 EOF
+
 
 tee <<EOF >/dev/null $HOME/monitoring.sh
 printf "Aleo.org TESTNET2 monitoring for:\tlocalhost:3032\n"
