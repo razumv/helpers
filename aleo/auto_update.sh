@@ -1,8 +1,8 @@
 #!/bin/bash
 
 cd $HOME/snarkOS
-while :
-do
+# while :
+# do
   echo "Checking for updates..."
   STATUS=$(git pull)
 
@@ -23,4 +23,4 @@ do
 	  systemctl restart miner
 	fi
   fi
-done
+# done
