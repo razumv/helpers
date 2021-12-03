@@ -43,17 +43,19 @@ sudo systemctl enable miner
 sudo systemctl restart miner
 
 tee <<EOF >/dev/null $HOME/monitoring.sh
-echo "PEERS:";
-curl -s --data-binary '{"jsonrpc": "2.0", "id":"documentation", "method": "getpeerinfo", "params": [] }' -H 'content-type: application/json' http://localhost:3030/   | jq '.[].peers?';
-echo "NODE INFO:";
-curl -s --data-binary '{"jsonrpc": "2.0", "id":"documentation", "method": "getnodeinfo", "params": [] }' -H 'content-type: application/json' http://localhost:3030/ | jq '.result?';
-printf "CONNECTION COUNT:\t";
-curl -s --data-binary '{"jsonrpc": "2.0", "id":"documentation", "method": "getconnectioncount", "params": [] }' -H 'content-type: application/json' http://localhost:3030/ | jq '.result?';
-printf "BLOCK COUNT:\t\t";
-curl -s --data-binary '{"jsonrpc": "2.0", "id":"documentation", "method": "getblockcount", "params": [] }' -H 'content-type: application/json' http://localhost:3030/ | jq '.result?';
-echo "OVERALL:";
-curl -s --data-binary '{"jsonrpc": "2.0", "id":"1", "method": "getnodestats" }' -H 'content-type:application/json' http://localhost:3030/ | jq '.result?';
+printf "Aleo.org TESTNET2 monitoring for:\tlocalhost:3032\n"
 echo ""
+echo "-----------------------------------------------"
+printf "CONNECTED PEERS:\n";
+curl -s --data-binary '{"jsonrpc": "2.0", "id":"documentation", "method": "getconnectedpeers", "params": [] }' -H 'content-type: application/json' http://localhost:3032/ | jq '.result[]';
+echo ""
+printf "LATEST BLOCK HEIGHT:\t";
+curl -s --data-binary '{"jsonrpc": "2.0", "id":"documentation", "method": "latestblockheight", "params": [] }' -H 'content-type: application/json' http://localhost:3032/ | jq '.result';
+echo "-----------------------------------------------"
+echo ""
+printf "NODE STATE:\t";
+curl -s --data-binary '{"jsonrpc": "2.0", "id":"documentation", "method": "getnodestate", "params": [] }' -H 'content-type: application/json' http://localhost:3032/ | jq '.result';
+echo "-----------------------------------------------"
 EOF
 
 chmod +x $HOME/monitoring.sh

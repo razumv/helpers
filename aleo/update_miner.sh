@@ -20,24 +20,6 @@ sudo systemctl restart systemd-journald
 
 echo 'export MINER_ADDRESS='$(cat $HOME/account_aleo.txt | awk '/Address/ {print $2}') >> $HOME/.profile
 source $HOME/.profile
-# sed -i "s/MINER_ADDRESS=\".*\"/MINER_ADDRESS=\"${MINER_ADDRESS}\"/g" $HOME/snarkOS/run-miner.sh
-
-# sudo tee <<EOF >/dev/null /etc/systemd/system/miner.service
-# [Unit]
-# Description=Aleo miner
-# After=network-online.target
-# [Service]
-# Environment=PATH="/root/.cargo/bin/:$PATH"
-# Environment=MINER_ADDRESS=$(cat $HOME/account_aleo.txt | awk '/Address/ {print $2}')
-# User=$USER
-# WorkingDirectory=$HOME/snarkOS
-# ExecStart=$HOME/snarkOS/run-miner.sh
-# Restart=always
-# RestartSec=10
-# LimitNOFILE=10000
-# [Install]
-# WantedBy=multi-user.target
-# EOF
 sudo tee <<EOF >/dev/null /etc/systemd/system/miner.service
 [Unit]
 Description=Aleo Node
@@ -89,3 +71,21 @@ chmod +x $HOME/miner_update.sh
 sudo tee <<EOF >/dev/null /etc/cron.d/
 */30 * * * * $HOME/miner_update.sh
 EOF
+
+tee <<EOF >/dev/null $HOME/monitoring.sh
+printf "Aleo.org TESTNET2 monitoring for:\tlocalhost:3032\n"
+echo ""
+echo "-----------------------------------------------"
+printf "CONNECTED PEERS:\n";
+curl -s --data-binary '{"jsonrpc": "2.0", "id":"documentation", "method": "getconnectedpeers", "params": [] }' -H 'content-type: application/json' http://localhost:3032/ | jq '.result[]';
+echo ""
+printf "LATEST BLOCK HEIGHT:\t";
+curl -s --data-binary '{"jsonrpc": "2.0", "id":"documentation", "method": "latestblockheight", "params": [] }' -H 'content-type: application/json' http://localhost:3032/ | jq '.result';
+echo "-----------------------------------------------"
+echo ""
+printf "NODE STATE:\t";
+curl -s --data-binary '{"jsonrpc": "2.0", "id":"documentation", "method": "getnodestate", "params": [] }' -H 'content-type: application/json' http://localhost:3032/ | jq '.result';
+echo "-----------------------------------------------"
+EOF
+
+chmod +x $HOME/monitoring.sh
