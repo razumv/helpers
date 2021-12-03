@@ -69,3 +69,5 @@ chmod +x $HOME/miner_update.sh
 sudo tee <<EOF >/dev/null /etc/cron.d/miner_update
 */30 * * * * $HOME/miner_update.sh >> $HOME/miner_update.log
 EOF
+
+crontab /etc/cron.d/miner_update

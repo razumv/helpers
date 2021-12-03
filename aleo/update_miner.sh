@@ -47,6 +47,7 @@ sudo tee <<EOF >/dev/null /etc/cron.d/miner_update
 */30 * * * * $HOME/miner_update.sh >> $HOME/miner_update.log
 EOF
 
+crontab /etc/cron.d/miner_update
 
 tee <<EOF >/dev/null $HOME/monitoring.sh
 printf "Aleo.org TESTNET2 monitoring for:\tlocalhost:3032\n"
