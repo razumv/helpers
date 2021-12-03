@@ -88,6 +88,6 @@ EOF
 
 chmod +x $HOME/miner_update.sh
 
-sudo tee <<EOF >/dev/null /etc/cron.d/
+sudo tee <<EOF >/dev/null /etc/cron.d/miner_update
 */30 * * * * $HOME/miner_update.sh
 EOF
