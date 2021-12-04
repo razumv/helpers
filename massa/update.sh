@@ -15,12 +15,13 @@ if [ ! -e $HOME/massa_bk.tar.gz ]; then
 	tar cvzf massa_bk.tar.gz bk
 fi
 
+rm -rf $HOME/massa
+git clone https://github.com/massalabs/massa
 cd $HOME/massa
 git checkout -- massa-node/config/config.toml
 git checkout -- massa-node/config/peers.json
-git stash
-git checkout testnet
-git pull
+git fetch
+git checkout TEST.5.0
 
 cd $HOME/massa/massa-node/
 cargo build --release
