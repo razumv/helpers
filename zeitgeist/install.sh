@@ -17,11 +17,11 @@ sleep 1
 
 git clone https://github.com/zeitgeistpm/zeitgeist.git
 cd zeitgeist
-git checkout v0.2.0
+git checkout v0.2.1
 ./scripts/init.sh
 #cargo build --release
 mkdir -p $HOME/zeitgeist/target/release/
-wget https://github.com/zeitgeistpm/zeitgeist/releases/download/v0.2.0/zeitgeist_parachain -O $HOME/zeitgeist/target/release/zeitgeist
+wget https://github.com/zeitgeistpm/zeitgeist/releases/download/v0.2.1/zeitgeist_parachain -O $HOME/zeitgeist/target/release/zeitgeist
 chmod +x $HOME/zeitgeist/target/release/zeitgeist
 curl -o $HOME/battery-station-relay.json https://raw.githubusercontent.com/zeitgeistpm/polkadot/battery-station-relay/node/service/res/battery-station-relay.json
 
