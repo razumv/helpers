@@ -6,6 +6,7 @@ curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.
 sudo systemctl stop zeitgeist
 
 # rm -rf $HOME/.local/share/zeitgeist/chains/battery_park/db/
+rm -rf .local/share/zeitgeist/chains/battery_station_mainnet/db/
 rm -f $HOME/zeitgeist/target/release/zeitgeist
 
 wget https://github.com/zeitgeistpm/zeitgeist/releases/download/v0.2.1/zeitgeist_parachain -O $HOME/zeitgeist/target/release/zeitgeist
