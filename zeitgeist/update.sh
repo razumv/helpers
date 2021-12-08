@@ -1,4 +1,5 @@
 #!/bin/bash
+echo 'export NODENAME='$NODENAME >> $HOME/.profile
 
 #add ufw rules
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash
