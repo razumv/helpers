@@ -14,9 +14,10 @@ wget https://github.com/zeitgeistpm/zeitgeist/releases/download/v0.2.1/zeitgeist
 curl -o $HOME/battery-station-relay.json https://raw.githubusercontent.com/zeitgeistpm/polkadot/battery-station-relay/node/service/res/battery-station-relay.json
 chmod +x $HOME/zeitgeist/target/release/zeitgeist
 # mkdir -p $HOME/.local/share/zeitgeist/chains/battery_station_mainnet/
-
-mkdir -p $HOME/zeitgeist_bk/
-cp $HOME/.local/share/zeitgeist/rococo/chains/rococo_battery_station_relay_testnet/network/secret_ed25519 $HOME/zeitgeist_bk/
+if [ ! -e $HOME/zeitgeist_bk/secret_ed25519 ]; then
+  mkdir -p $HOME/zeitgeist_bk/
+  cp $HOME/.local/share/zeitgeist/rococo/chains/rococo_battery_station_relay_testnet/network/secret_ed25519 $HOME/zeitgeist_bk/
+fi
 
 sudo tee <<EOF >/dev/null /etc/systemd/journald.conf
 Storage=persistent
