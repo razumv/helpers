@@ -5,15 +5,15 @@ curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.
 
 sudo systemctl stop zeitgeist
 
-rm -rf $HOME/.local/share/zeitgeist/chains/battery_park/db/
+# rm -rf $HOME/.local/share/zeitgeist/chains/battery_park/db/
 rm -f $HOME/zeitgeist/target/release/zeitgeist
 
-wget https://github.com/zeitgeistpm/zeitgeist/releases/download/v0.2.0/zeitgeist_parachain -O $HOME/zeitgeist/target/release/zeitgeist
+wget https://github.com/zeitgeistpm/zeitgeist/releases/download/v0.2.1/zeitgeist_parachain -O $HOME/zeitgeist/target/release/zeitgeist
 curl -o $HOME/battery-station-relay.json https://raw.githubusercontent.com/zeitgeistpm/polkadot/battery-station-relay/node/service/res/battery-station-relay.json
 chmod +x $HOME/zeitgeist/target/release/zeitgeist
-mkdir -p $HOME/.local/share/zeitgeist/chains/battery_station_mainnet/
-cp -r $HOME/.local/share/zeitgeist/chains/battery_park/keystore $HOME/.local/share/zeitgeist/chains/battery_station_mainnet/
-cp -r $HOME/.local/share/zeitgeist/chains/battery_park/keystore $HOME/.local/share/zeitgeist/polkadot/chains/rococo_battery_station_relay_testnet/
+# mkdir -p $HOME/.local/share/zeitgeist/chains/battery_station_mainnet/
+# cp -r $HOME/.local/share/zeitgeist/chains/battery_park/keystore $HOME/.local/share/zeitgeist/chains/battery_station_mainnet/
+# cp -r $HOME/.local/share/zeitgeist/chains/battery_park/keystore $HOME/.local/share/zeitgeist/polkadot/chains/rococo_battery_station_relay_testnet/
 sudo tee <<EOF >/dev/null /etc/systemd/journald.conf
 Storage=persistent
 EOF
