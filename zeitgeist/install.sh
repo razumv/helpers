@@ -68,3 +68,8 @@ sudo systemctl restart zeitgeist
 
 echo -e '\n\e[44mRun command to see logs: \e[0m\n'
 echo 'journalctl -n 100 -f -u zeitgeist'
+
+if [ ! -e $HOME/zeitgeist_bk/secret_ed25519 ]; then
+  mkdir -p $HOME/zeitgeist_bk/
+  cp $HOME/.local/share/zeitgeist/rococo/chains/rococo_battery_station_relay_testnet/network/secret_ed25519 $HOME/zeitgeist_bk/
+fi
