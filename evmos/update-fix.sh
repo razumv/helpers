@@ -13,8 +13,6 @@ make install
 
 sed -i.bak -e  "s/^halt-height *=.*/halt-height = 0/" $HOME/.evmosd/config/app.toml
 
-cp -rf $HOME/go/bin/evmosd /usr/bin/evmosd
-
 #cosmovisor
 
 cp $HOME/go/bin/evmosd $HOME/.evmosd/cosmovisor/genesis/bin
