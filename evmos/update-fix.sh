@@ -17,7 +17,7 @@ cp $HOME/go/bin/evmosd $HOME/.evmosd/cosmovisor/genesis/bin
 mkdir -p $HOME/.evmosd/cosmovisor/upgrades/Olympus-Mons-v0.4.1/bin/
 cp $HOME/go/bin/evmosd $HOME/.evmosd/cosmovisor/upgrades/Olympus-Mons-v0.4.1/bin/
 
-peers="29558c38f6894066ebafa9f156f2839db9d454f6@23.88.0.168:26656,c893e2bf76b60099eecc20d4a9671ed9d4114464@65.21.193.112:26656"
+peers="cccdaee68c9f051bd227371424b4d5db6558cbff@144.91.79.203:26656,29558c38f6894066ebafa9f156f2839db9d454f6@23.88.0.168:26656,c893e2bf76b60099eecc20d4a9671ed9d4114464@65.21.193.112:26656"
 
 sed -i.bak -e  "s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" ~/.evmosd/config/config.toml
 
