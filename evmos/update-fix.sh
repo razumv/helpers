@@ -33,4 +33,7 @@ s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
 s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" ~/.evmosd/config/config.toml
 
+sed -i.bak -e  "s/^discovery_time *=.*/discovery_time = \"30s\"/" ~/.evmosd/config/config.toml
+
+
 sudo systemctl restart evmos
