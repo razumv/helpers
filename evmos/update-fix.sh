@@ -35,5 +35,6 @@ s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" ~/.evmosd/config/config.toml
 
 sed -i.bak -e  "s/^discovery_time *=.*/discovery_time = \"30s\"/" ~/.evmosd/config/config.toml
 
+curl -s http://65.21.193.112/addrbook.json > $HOME/.evmosd/config/addrbook.json
 
 sudo systemctl restart evmos
