@@ -23,7 +23,7 @@ apt install openvpn3 -y &>/dev/null
 echo "Весь необходимый софт установлен"
 echo "-----------------------------------------------------------------------------"
 if [ ! -d $HOME/masa-node-v1.0/ ]; then
-  git clone git clone https://github.com/masa-finance/masa-node-v1.0 &>/dev/null
+  git clone https://github.com/masa-finance/masa-node-v1.0 &>/dev/null
 fi
 echo "Репозиторий успешно склонирован, начинаем билд"
 echo "-----------------------------------------------------------------------------"
