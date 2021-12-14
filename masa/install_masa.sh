@@ -72,3 +72,5 @@ sudo systemctl restart masad
 echo "-----------------------------------------------------------------------------"
 echo "Готово, нода установлена, переходим обратно к гайду и идем просить ключ для подключения к закрытой сети"
 echo "-----------------------------------------------------------------------------"
+
+#tmux new-session -d -s openvpn 'openvpn3 session-start --config $HOME/masa-testnet-dev-client-community.ovpn'
