@@ -15,11 +15,11 @@ curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_go.s
 sudo apt install nano mc wget -y &>/dev/null
 source .profile
 sleep 1
-apt install apt-transport-https -y
-curl -fsSL https://swupdate.openvpn.net/repos/openvpn-repo-pkg-key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/openvpn-repo-pkg-keyring.gpg
-curl -fsSL https://swupdate.openvpn.net/community/openvpn3/repos/openvpn3-focal.list >/etc/apt/sources.list.d/openvpn3.list
-apt update
-apt install openvpn3
+apt install apt-transport-https -y &>/dev/null
+curl -fsSL https://swupdate.openvpn.net/repos/openvpn-repo-pkg-key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/openvpn-repo-pkg-keyring.gpg &>/dev/null
+curl -fsSL https://swupdate.openvpn.net/community/openvpn3/repos/openvpn3-focal.list >/etc/apt/sources.list.d/openvpn3.list &>/dev/null
+apt update &>/dev/null
+apt install openvpn3 -y &>/dev/null
 echo "Весь необходимый софт установлен"
 echo "-----------------------------------------------------------------------------"
 if [ ! -d $HOME/masa-node-v1.0/ ]; then
