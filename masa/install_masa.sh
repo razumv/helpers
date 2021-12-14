@@ -28,11 +28,10 @@ fi
 echo "Репозиторий успешно склонирован, начинаем билд"
 echo "-----------------------------------------------------------------------------"
 cd $HOME/masa-node-v1.0/src
-go get github.com/ethereum/go-ethereum/accounts/keystore
-make all
+make all &>/dev/null
+go get github.com/ethereum/go-ethereum/accounts/keystore &>/dev/null
 cd $HOME/masa-node-v1.0/src/build/bin
 cp * /usr/local/bin
-echo "-----------------------------------------------------------------------------"
 echo "Ставим geth quorum"
 echo "-----------------------------------------------------------------------------"
 cd $HOME
