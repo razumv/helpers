@@ -12,7 +12,7 @@ echo "Устанавливаем софт"
 echo "-----------------------------------------------------------------------------"
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash &>/dev/null
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_go.sh | bash &>/dev/null
-sudo apt install nano mc wget -y &>/dev/null
+sudo apt install nano mc wget tmux -y &>/dev/null
 source .profile
 sleep 1
 apt install apt-transport-https -y &>/dev/null
