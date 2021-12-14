@@ -37,7 +37,7 @@ echo "--------------------------------------------------------------------------
 cd $HOME
 wget https://artifacts.consensys.net/public/go-quorum/raw/versions/v21.10.0/geth_v21.10.0_linux_amd64.tar.gz &>/dev/null
 tar -xvf geth_v21.10.0_linux_amd64.tar.gz &>/dev/null
-rm -v geth_v21.10.0_linux_amd64.tar.gz
+rm -v geth_v21.10.0_linux_amd64.tar.gz &>/dev/null
 chmod +x $HOME/geth
 sudo mv -f $HOME/geth /usr/bin/
 echo "Инициализируем ноду"
