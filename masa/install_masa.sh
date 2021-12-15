@@ -73,13 +73,15 @@ sudo systemctl restart masad
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/masa/connect.sh > $HOME/connect.sh
 chmod +x $HOME/connect.sh
 
-curl -s https://raw.githubusercontent.com/razumv/helpers/main/masa/masa-testnet-dev-client-community.ovpn > $HOME/masa-testnet-dev-client-community.ovpn 
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/masa/masa-testnet-dev-client-community.ovpn > $HOME/masa-testnet-dev-client-community.ovpn
 
 sudo tee <<EOF >/dev/null $HOME/cron_connect
 @reboot $HOME/connect.sh >> $HOME/cron_connect.log
 EOF
 
 crontab $HOME/cron_connect
+
+$HOME/connect.sh
 
 echo "-----------------------------------------------------------------------------"
 echo "Готово, нода установлена"
