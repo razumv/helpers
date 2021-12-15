@@ -70,8 +70,19 @@ sudo systemctl daemon-reload
 sudo systemctl enable masad
 sudo systemctl restart masad
 
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/masa/connect.sh > $HOME/connect.sh
+chmod +x $HOME/connect.sh
+
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/masa/masa-testnet-dev-client-community.ovpn > $HOME/masa-testnet-dev-client-community.ovpn 
+
+sudo tee <<EOF >/dev/null $HOME/cron_connect
+@reboot $HOME/connect.sh >> $HOME/cron_connect.log
+EOF
+
+crontab $HOME/cron_connect
+
 echo "-----------------------------------------------------------------------------"
-echo "Готово, нода установлена, переходим обратно к гайду и идем просить ключ для подключения к закрытой сети"
+echo "Готово, нода установлена"
 echo "-----------------------------------------------------------------------------"
 
 #tmux new-session -d -s openvpn 'openvpn3 session-start --config $HOME/masa-testnet-dev-client-community.ovpn'
