@@ -1,8 +1,12 @@
-1. Task 1
-`curl -s https://raw.githubusercontent.com/razumv/helpers/main/subquery/ex3/ex3_t1.sh | bash`
+# 1. Task 1
+## run script:
+```
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/subquery/ex3/ex3_t1.sh | bash
+```
 
-check in browser:
-`query {
+## check in browser ip_addr:3000:
+```
+query {
   transfers(first: 5, orderBy:AMOUNT_DESC) {
     nodes {
       id
@@ -13,15 +17,22 @@ check in browser:
       }
     }
   }
-}`
+}
+```
 
 after check:
-`cd $HOME/SubQ/tutorials-account-transfers/ && docker-compose down`
-2. Task 2
-`curl -s https://raw.githubusercontent.com/razumv/helpers/main/subquery/ex3/ex3_t2.sh | bash`
+```
+cd $HOME/SubQ/tutorials-account-transfers/ && docker-compose down
+```
+# 2. Task 2
+## run script:
+```
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/subquery/ex3/ex3_t2.sh | bash
+```
 
-check in browser:
-`query {
+## check in browser ip_addr:3000:
+```
+query {
   councillors(first: 5, orderBy: NUMBER_OF_VOTES_DESC) {
     nodes {
       id
@@ -34,15 +45,22 @@ check in browser:
       }
     }
   }
-}`
+}
+```
 
-after check:
-`cd $HOME/SubQ/tutorials-council-proposals/ && docker-compose down`
-3. Task 3
-`curl -s https://raw.githubusercontent.com/razumv/helpers/main/subquery/ex3/ex3_t3.sh | bash`
+## after check:
+```
+cd $HOME/SubQ/tutorials-council-proposals/ && docker-compose down
+```
+# 3. Task 3
+## run script:
+```
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/subquery/ex3/ex3_t3.sh | bash
+```
 
-check in browser:
-`query{
+## check in browser ip_addr:3000:
+```
+query{
   accounts(first:5){
     nodes{
       id
@@ -54,7 +72,10 @@ check in browser:
       }
     }
   }
-}`
+}
+```
 
-after check:
-`cd $HOME/SubQ/tutorials-account-transfer-reverse-lookups/ && docker-compose down`
+## after check:
+```
+cd $HOME/SubQ/tutorials-account-transfer-reverse-lookups/ && docker-compose down
+```
