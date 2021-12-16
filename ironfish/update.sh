@@ -4,8 +4,8 @@ curl -s https://raw.githubusercontent.com/razumv/helpers/main/doubletop.sh | bas
 echo "-----------------------------------------------------------------------------"
 sudo apt update &>/dev/null
 sudo apt install jq -y &>/dev/null
-blockGraffiti=`docker exec ironfish config:show | jq -r .blockGraffiti`
-nodeName=`docker exec ironfish config:show | jq -r .nodeName`
+blockGraffiti=`docker exec ironfish ./bin/run config:show | jq -r .blockGraffiti`
+nodeName=`docker exec ironfish ./bin/run config:show | jq -r .nodeName`
 
 cd $HOME
 var=`docker-compose logs --tail=1000 ironfish | grep "Added block to fork seq"`
@@ -33,8 +33,8 @@ else
   docker cp wallet ironfish:/usr/src/app/wallet
   docker exec ironfish ./bin/run accounts:import wallet
   docker exec ironfish ./bin/run accounts:use $wallet_name &>/dev/null
-  docker exec ironfish config:set nodeName $nodeName
-  docker exec ironfish config:set blockGraffiti $blockGraffiti
+  docker exec ironfish ./bin/run config:set nodeName $nodeName
+  docker exec ironfish ./bin/run config:set blockGraffiti $blockGraffiti
   docker-compose restart
 fi
 echo "Обновление завершено"
