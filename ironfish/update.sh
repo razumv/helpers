@@ -2,38 +2,40 @@
 echo "-----------------------------------------------------------------------------"
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/doubletop.sh | bash
 echo "-----------------------------------------------------------------------------"
-docker-compose down
+sudo apt update &>/dev/null
+sudo apt install jq -y &>/dev/null
+blockGraffiti=`ironfish config:show | jq -r .blockGraffiti`
+nodeName=`ironfish config:show | jq -r .nodeName`
 
-sudo tee <<EOF >/dev/null $HOME/docker-compose.yaml
-version: "3.3"
-services:
- ironfish:
-  container_name: ironfish
-  image: ghcr.io/iron-fish/ironfish:latest
-  restart: always
-  network_mode: "host"
-  entrypoint: sh -c "sed -i 's%REQUEST_BLOCKS_PER_MESSAGE.*%REQUEST_BLOCKS_PER_MESSAGE = 5%' /usr/src/app/node_modules/ironfish/src/syncer.ts && apt update > /dev/null && apt install curl -y > /dev/null; ./bin/run start"
-  healthcheck:
-   test: "curl -s -H 'Connection: Upgrade' -H 'Upgrade: websocket' http://127.0.0.1:9033 || killall5 -9"
-   interval: 180s
-   timeout: 180s
-   retries: 3
-  volumes:
-   - /root/.ironfish:/root/.ironfish
- ironfish-miner:
-  depends_on:
-   - ironfish
-  container_name: ironfish-miner
-  image: ghcr.io/iron-fish/ironfish:latest
-  command: miners:start --threads=-1
-  network_mode: "host"
-  restart: always
-  volumes:
-   - /root/.ironfish:/root/.ironfish
-EOF
+cd $HOME
+var=`docker-compose logs --tail=1000 ironfish | grep "Added block to fork seq"`
 
-docker-compose pull
-docker-compose up -d
-echo "-----------------------------------------------------------------------------"
+if [ -z "$var" ]
+then
+  echo "Ваш майнер не в форке, выполняем обновление"
+  echo "-----------------------------------------------------------------------------"
+  docker-compose down
+  docker-compose pull
+  docker-compose up -d
+else
+  echo "Ваш майнер в форке, выполняем сброс и обновление"
+  echo "-----------------------------------------------------------------------------"
+  wallet_name=`docker exec ironfish ./bin/run accounts:which` &>/dev/null
+  docker exec ironfish rm -f wallet &>/dev/null
+  docker exec ironfish ./bin/run accounts:export $wallet_name wallet &>/dev/null
+  docker cp ironfish:/usr/src/app/wallet .
+  docker-compose down
+  docker-compose pull
+  docker-compose up -d
+  rm -f $HOME/.ironfish/accounts.backup.json
+  docker exec ironfish-miner ./bin/run reset --confirm
+  docker-compose restart &>/dev/null
+  docker cp wallet ironfish:/usr/src/app/wallet
+  docker exec ironfish ./bin/run accounts:import wallet
+  docker exec ironfish ./bin/run accounts:use $wallet_name &>/dev/null
+  ironfish config:set nodeName $nodeName
+  ironfish config:set blockGraffiti $blockGraffiti
+  docker-compose restart
+fi
 echo "Обновление завершено"
 echo "-----------------------------------------------------------------------------"
