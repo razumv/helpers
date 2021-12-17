@@ -16,6 +16,7 @@ then
   echo "-----------------------------------------------------------------------------"
   docker-compose down
   sudo pkill -9 node
+  sudo systemctl restart node_exporter
   docker-compose pull
   docker-compose up -d
 else
@@ -27,6 +28,7 @@ else
   docker cp ironfish:/usr/src/app/wallet .
   docker-compose down
   sudo pkill -9 node
+  sudo systemctl restart node_exporter
   docker-compose pull
   docker-compose up -d
   rm -f $HOME/.ironfish/accounts.backup.json
