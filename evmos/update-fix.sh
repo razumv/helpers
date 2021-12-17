@@ -37,4 +37,27 @@ sed -i.bak -e  "s/^discovery_time *=.*/discovery_time = \"30s\"/" ~/.evmosd/conf
 
 curl -s http://65.21.193.112/addrbook.json > $HOME/.evmosd/config/addrbook.json
 
+udo tee /etc/systemd/system/evmos.service > /dev/null <<EOF
+[Unit]
+Description=Evmos Daemon
+After=network-online.target
+
+[Service]
+User=$USER
+ExecStart=$(which cosmovisor) start
+Restart=always
+RestartSec=3
+LimitNOFILE=infinity
+
+Environment="DAEMON_HOME=$HOME/.evmosd"
+Environment="DAEMON_NAME=evmosd"
+Environment="DAEMON_ALLOW_DOWNLOAD_BINARIES=true"
+Environment="DAEMON_RESTART_AFTER_UPGRADE=true"
+
+[Install]
+WantedBy=multi-user.target
+EOF
+sudo -S systemctl daemon-reload
+sudo -S systemctl restart evmos
+
 sudo systemctl restart evmos

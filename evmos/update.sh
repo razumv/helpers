@@ -53,7 +53,7 @@ LimitNOFILE=infinity
 
 Environment="DAEMON_HOME=$HOME/.evmosd"
 Environment="DAEMON_NAME=evmosd"
-Environment="DAEMON_ALLOW_DOWNLOAD_BINARIES=false"
+Environment="DAEMON_ALLOW_DOWNLOAD_BINARIES=true"
 Environment="DAEMON_RESTART_AFTER_UPGRADE=true"
 
 [Install]
@@ -61,7 +61,7 @@ WantedBy=multi-user.target
 EOF
 sudo -S systemctl daemon-reload
 sudo -S systemctl enable evmos
-sudo -S systemctl start evmos
+sudo -S systemctl restart evmos
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/evmos/update_peers.sh | bash
 
 
