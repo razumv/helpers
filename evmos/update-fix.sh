@@ -37,7 +37,7 @@ sed -i.bak -e  "s/^discovery_time *=.*/discovery_time = \"30s\"/" ~/.evmosd/conf
 
 curl -s http://65.21.193.112/addrbook.json > $HOME/.evmosd/config/addrbook.json
 
-udo tee /etc/systemd/system/evmos.service > /dev/null <<EOF
+sudo tee /etc/systemd/system/evmos.service > /dev/null <<EOF
 [Unit]
 Description=Evmos Daemon
 After=network-online.target
