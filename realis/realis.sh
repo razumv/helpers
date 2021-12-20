@@ -35,6 +35,7 @@ echo "--------------------------------------------------------------------------
 cd $HOME/Realis.Network
 $HOME/Realis.Network/scripts/build_separately.sh &>/dev/null
 cargo build --release &>/dev/null
+git checkout 9556bfe4efe81fb0a200d5144961db7f53ac053a
 echo "Билд завершен успешно"
 echo "-----------------------------------------------------------------------------"
 
