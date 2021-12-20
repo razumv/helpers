@@ -50,8 +50,7 @@ Description=Realis Node
 After=network-online.target
 [Service]
 User=$USER
-ExecStart=$HOME/Realis.Network/target/release/realis --chain=realis --validator --name "$REALIS_NODENAME" \
---bootnodes /ip4/144.76.42.115/tcp/30333/p2p/12D3KooWD3WMBnLwHatCbx7RQS7ZHAHT6RFv1qzgNayCW3Yu3CtF
+ExecStart=$HOME/Realis.Network/target/release/realis --chain=realis --validator --name "$REALIS_NODENAME"
 Restart=always
 RestartSec=10
 LimitNOFILE=10000
