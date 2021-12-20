@@ -8,9 +8,11 @@ rustup toolchain install nightly
 rustup default nightly
 
 cd $HOME
-mkdir -p $HOME/bk
-cp $HOME/massa/massa-node/config/node_privkey.key $HOME/bk/
-cp $HOME/massa/massa-client/wallet.dat $HOME/bk/
+if [ ! -d $HOME/bk/ ]; then
+	mkdir -p $HOME/bk
+	cp $HOME/massa/massa-node/config/node_privkey.key $HOME/bk/
+	cp $HOME/massa/massa-client/wallet.dat $HOME/bk/
+fi
 if [ ! -e $HOME/massa_bk.tar.gz ]; then
 	tar cvzf massa_bk.tar.gz bk
 fi
