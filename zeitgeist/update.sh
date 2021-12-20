@@ -36,7 +36,7 @@ Nice=0
 ExecStart=$HOME/zeitgeist/target/release/zeitgeist \
 --bootnodes=/dns/bsr.zeitgeist.pm/tcp/30337/p2p/12D3KooWSBj4SXAz1ETTurW5PRAF1abyxXb9APAVs4vqBVr2NjRt \
 --bootnodes=/dns/bsr.zeitgeist.pm/tcp/30337/ws/p2p/12D3KooWSBj4SXAz1ETTurW5PRAF1abyxXb9APAVs4vqBVr2NjRt \
-    --chain=battery_station \
+    --chain=$HOME/battery_station_relay_v2.json \
     --name="$NODENAME | DOUBLETOP" \
     --parachain-id=2050 \
     --port=30333 \
@@ -48,7 +48,7 @@ ExecStart=$HOME/zeitgeist/target/release/zeitgeist \
     -- \
     --bootnodes=/dns/bsr.zeitgeist.pm/tcp/30338/p2p/12D3KooWRuwKV1yt6fqPL6hsfPvJQ28pqmmTxNSDxEC4eLKagzjK \
     --bootnodes=/dns/bsr.zeitgeist.pm/tcp/30338/ws/p2p/12D3KooWRuwKV1yt6fqPL6hsfPvJQ28pqmmTxNSDxEC4eLKagzjK \
-    --chain=$HOME/battery_station_relay_v2.json \
+    --chain=$HOME/battery-station-relay.json \
     --port=30334 \
     --rpc-port=9934 \
     --ws-port=9945
