@@ -17,6 +17,10 @@ if [ ! -e $HOME/zeitgeist_bk/secret_ed25519 ]; then
   mkdir -p $HOME/zeitgeist_bk/
   cp $HOME/.local/share/zeitgeist/rococo/chains/rococo_battery_station_relay_testnet/network/secret_ed25519 $HOME/zeitgeist_bk/
 fi
+if [ ! -e $HOME/zeitgeist_bk/battery_station_mainnet_secret_ed25519 ]; then
+  cp $HOME/.local/share/zeitgeist/chains/battery_station_mainnet/network/secret_ed25519 $HOME/zeitgeist_bk/battery_station_mainnet_secret_ed25519
+fi
+
 
 rm -rf $HOME/.local/share/zeitgeist/chains/zeitgeist/db
 rm -rf $HOME/.local/share/zeitgeist/chains/battery_station_mainnet/db
