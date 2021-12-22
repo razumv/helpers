@@ -15,8 +15,6 @@ then
   echo "Ваш майнер не в форке, выполняем обновление"
   echo "-----------------------------------------------------------------------------"
   docker-compose down
-  sudo pkill -9 node
-  sudo systemctl restart node_exporter
   docker-compose pull
   docker-compose up -d
 else
@@ -27,13 +25,9 @@ else
   docker exec ironfish ./bin/run accounts:export $wallet_name wallet &>/dev/null
   docker cp ironfish:/usr/src/app/wallet .
   docker-compose down
-  sudo pkill -9 node
-  sudo systemctl restart node_exporter
   docker-compose pull
-  docker-compose up -d
-  rm -f $HOME/.ironfish/accounts.backup.json
-  docker exec ironfish-miner ./bin/run reset --confirm
-  docker-compose restart &>/dev/null
+  rm -rf $HOME/.ironfish
+  docker-compose up -d &>/dev/null
   docker cp wallet ironfish:/usr/src/app/wallet
   docker exec ironfish ./bin/run accounts:import wallet
   docker exec ironfish ./bin/run accounts:use $wallet_name &>/dev/null
