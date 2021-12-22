@@ -6,6 +6,7 @@ echo "--------------------------------------------------------------------------
 if [ -z "$wallet_addr" ]
 then
   echo "Вы не установили в переменную wallet_addr адрес кошелька"
+  echo "Выполните export wallet_addr=..... подставив свой адрес кошелька(см гайд)"
   echo "-----------------------------------------------------------------------------"
   exit 1
 else
@@ -18,7 +19,7 @@ else
 
   export NODENAME=`ls ~/.nym/mixnodes/`
   mv $HOME/.nym/mixnodes/* $HOME/nym_bk/milhon/
-  
+
   cd $HOME/nym
   git fetch &>/dev/null
   git checkout v0.12.0 &>/dev/null
