@@ -50,7 +50,14 @@ Description=Realis Node
 After=network-online.target
 [Service]
 User=$USER
-ExecStart=$HOME/Realis.Network/target/release/realis --chain=realis --validator --name "$REALIS_NODENAME"
+ExecStart=$HOME/Realis.Network/target/release/realis \
+--validator --name "$REALIS_NODENAME" \
+--chain=$HOME/realis.json --port 30334 --ws-port 9945 --rpc-port 9934 \
+--rpc-methods=Unsafe \
+--reserved-nodes /ip4/135.181.18.215/tcp/30333/p2p/12D3KooW9poizzemF6kb6iSbkoJynMhswa4oJe5W9v34eFuRcU47 \
+--unsafe-ws-external \
+--unsafe-rpc-external \
+--rpc-cors '*' -d $HOME/realis/node --telemetry-url 'wss://telemetry.polkadot.io/submit 0'
 Restart=always
 RestartSec=10
 LimitNOFILE=10000
