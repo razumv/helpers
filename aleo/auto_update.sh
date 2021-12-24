@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cd $HOME/snarkOS
+git checkout -- Cargo.lock
 # while :
 # do
   echo "Checking for updates..."
