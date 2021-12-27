@@ -21,7 +21,7 @@ peers="fb6cbe0069eaf39a963930b01d5f4de2c527978e@62.171.191.122:26656"
 
 sed -i.bak -e  "s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.evmosd/config/config.toml
 
-SNAP_RPC="http://62.171.191.122:26657"
+SNAP_RPC="http://194.163.164.129:26657"
 
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
 BLOCK_HEIGHT=$((LATEST_HEIGHT - 1000)); \
