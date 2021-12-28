@@ -2,17 +2,14 @@
 
 #add ufw rules
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash
-
-sudo apt update
-sudo apt install curl make clang pkg-config libssl-dev build-essential git mc jq unzip -y
-sudo curl https://sh.rustup.rs -sSf | sh -s -- -y
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_rust.sh | bash
 source $HOME/.cargo/env
 sleep 1
 
 git clone https://github.com/AleoHQ/snarkOS.git --depth 1
 cd snarkOS
 cargo build --release --verbose
-$HOME/snarkOS/target/release/snarkos experimental new_account >> $HOME/account_aleo.txt
+$HOME/snarkOS/target/release/snarkos experimental new_account > $HOME/account_aleo.txt
 sleep 2
 echo 'export MINER_ADDRESS='$(cat $HOME/account_aleo.txt | awk '/Address/ {print $2}') >> $HOME/.profile
 source $HOME/.profile
