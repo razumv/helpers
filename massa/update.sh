@@ -18,7 +18,7 @@ if [ ! -e $HOME/massa_bk.tar.gz ]; then
 fi
 
 rm -rf $HOME/massa
-git clone https://github.com/massalabs/massa
+git clone --branch testnet https://github.com/massalabs/massa.git
 cd $HOME/massa
 git checkout -- massa-node/config/config.toml
 git checkout -- massa-node/config/peers.json
