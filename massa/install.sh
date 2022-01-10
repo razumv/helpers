@@ -15,7 +15,7 @@ rustup default nightly
 cd $HOME
 if [ ! -d $HOME/massa/ ]; then
 	git clone https://github.com/massalabs/massa
-	cd $HOME/massa && git checkout TEST.5.0
+	cd $HOME/massa && git checkout TEST.6.5
 fi
 cd $HOME/massa/massa-node/
 cargo build --release
