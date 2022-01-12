@@ -22,7 +22,7 @@ else
 
   cd $HOME/nym
   git fetch &>/dev/null
-  git checkout v0.12.0 &>/dev/null
+  git checkout v0.12.1 &>/dev/null
   cargo build --release || exit 1
 
   $HOME/nym/target/release/nym-mixnode init --id $NODENAME --host $(curl -s ifconfig.me) --wallet-address $wallet_addr > $HOME/nym12.txt
