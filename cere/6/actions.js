@@ -107,7 +107,7 @@ export const mintNFT = async (quantity, metadata) => {
   // Create a new provider, which is an abstraction of a connection to the Ethereum network.
   const provider = importProvider();
   // Select 'dev', 'stage', or 'prod' environment to determine which smart contract to use. Default is 'prod'.
-  const env = "prod";
+  const env = "dev";
   // Get the appropriate Freeport contract address, based on environment selected above.
   const contractAddress = await getFreeportAddress(provider, env);
   // Create an instance of the Freeport contract using the provider and Freeport contract address
@@ -129,7 +129,7 @@ export const attachNftToCid = async (nftId, cid) => {
   // Create a new provider, which is an abstraction of a connection to the Ethereum network.
   const provider = importProvider();
   // Select 'dev', 'stage', or 'prod' environment to determine which smart contract to use. Default is 'prod'.
-  const env = "prod";
+  const env = "dev";
   // Get the appropriate Freeport contract address, based on environment selected above.
   const contractAddress = await getNFTAttachmentAddress(provider, env);
   // Create an instance of the Freeport contract using the provider and Freeport contract address
