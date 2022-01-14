@@ -37,7 +37,7 @@ sudo tee /etc/systemd/system/celestia-full.service > /dev/null <<EOF
   WantedBy=multi-user.target
 EOF
 
-sudo systemctl enable celestia-full
+sudo systemctl enable celestia-full &>/dev/null
 sudo systemctl daemon-reload
 sudo systemctl restart celestia-full && sleep 10 && journalctl -u celestia-full -o cat -n 10000 --no-pager | grep -m 1 "*  /ip4/" > $HOME/multiaddress.txt
 
@@ -69,7 +69,7 @@ sudo tee /etc/systemd/system/celestia-light.service > /dev/null <<EOF
   WantedBy=multi-user.target
 EOF
 
-sudo systemctl enable celestia-light
+sudo systemctl enable celestia-light &>/dev/null
 sudo systemctl daemon-reload
 sudo systemctl restart celestia-light
 

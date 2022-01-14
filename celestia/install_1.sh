@@ -33,7 +33,7 @@ cd $HOME/celestia-app/
 make install &>/dev/null
 echo "Билд закончен, переходим к инициализации ноды"
 echo "-----------------------------------------------------------------------------"
-celestia-appd init $CELESTIA_NODENAME --chain-id $CELESTIA_CHAIN
+celestia-appd init $CELESTIA_NODENAME --chain-id $CELESTIA_CHAIN &>/dev/null
 cp $HOME/networks/devnet-2/genesis.json $HOME/.celestia-app/config/
 SEEDS="74c0c793db07edd9b9ec17b076cea1a02dca511f@46.101.28.34:26656"
 PEERS="34d4bfec8998a8fac6393a14c5ae151cf6a5762f@194.163.191.41:26656"
@@ -44,8 +44,8 @@ sed -i 's#"tcp://127.0.0.1:26657"#"tcp://0.0.0.0:26657"#g' $HOME/.celestia-app/c
 sed -i 's/timeout_commit = "5s"/timeout_commit = "15s"/g' $HOME/.celestia-app/config/config.toml
 sed -i 's/index_all_keys = false/index_all_keys = true/g' $HOME/.celestia-app/config/config.toml
 sed -i '/\[api\]/{:a;n;/enabled/s/false/true/;Ta};/\[api\]/{:a;n;/enable/s/false/true/;Ta;}' $HOME/.celestia-app/config/app.toml
-celestia-appd unsafe-reset-all
-wget -O $HOME/.celestia-app/config/addrbook.json "http://62.171.191.122:8000/celestia/addrbook.json"
+celestia-appd unsafe-reset-all &>/dev/null
+wget -O $HOME/.celestia-app/config/addrbook.json "http://62.171.191.122:8000/celestia/addrbook.json" &>/dev/null
 
 celestia-appd config chain-id $CELESTIA_CHAIN
 celestia-appd config keyring-backend test
@@ -64,6 +64,9 @@ sudo tee <<EOF >/dev/null /etc/systemd/system/celestia-appd.service
   WantedBy=multi-user.target
 EOF
 
-sudo systemctl enable celestia-appd
+sudo systemctl enable celestia-appd &>/dev/null
 sudo systemctl daemon-reload
 sudo systemctl restart celestia-appd
+
+echo "Validator Node $CELESTIA_NODENAME успешно установлена"
+echo "-----------------------------------------------------------------------------"
