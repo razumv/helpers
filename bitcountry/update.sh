@@ -26,6 +26,7 @@ if [ ! -d $HOME/Metaverse-Network/ ]; then
 fi
 cd $HOME/Metaverse-Network
 git fetch
+git stash
 git checkout release-0.0.3 &>/dev/null
 echo "Репозиторий успешно склонирован, начинаем билд"
 echo "-----------------------------------------------------------------------------"
