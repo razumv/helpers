@@ -18,8 +18,8 @@ sleep 1
 echo "Весь необходимый софт установлен"
 echo "-----------------------------------------------------------------------------"
 mkdir -p $HOME/bitcountry_bk/
-cp $HOME/.local/share/metaverse-node/chains/tewai_testnet/network/secret_ed25519 $HOME/bitcountry_bk/
-cp $HOME/.local/share/bitcountry-node/chains/tewai_testnet/network/secret_ed25519 $HOME/bitcountry_bk/
+cp $HOME/.local/share/metaverse-node/chains/tewai_testnet/network/secret_ed25519 $HOME/bitcountry_bk/secret_ed25519_metaverse
+cp $HOME/.local/share/bitcountry-node/chains/tewai_testnet/network/secret_ed25519 $HOME/bitcountry_bk/secret_ed25519_bitcountry
 
 if [ ! -d $HOME/Metaverse-Network/ ]; then
   git clone https://github.com/bit-country/Metaverse-Network.git &>/dev/null
