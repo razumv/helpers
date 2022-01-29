@@ -27,7 +27,7 @@ if [ ! -d $HOME/Metaverse-Network/ ]; then
   git clone https://github.com/bit-country/Metaverse-Network.git &>/dev/null
 fi
 cd $HOME/Metaverse-Network
-git checkout tewai-v0.0.1 &>/dev/null
+git checkout 372678324f5543e527591f68b128ff6919267558 &>/dev/null
 echo "Репозиторий успешно склонирован, начинаем билд"
 echo "-----------------------------------------------------------------------------"
 

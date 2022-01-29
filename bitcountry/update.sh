@@ -27,7 +27,7 @@ fi
 cd $HOME/Metaverse-Network
 git fetch
 git stash
-git checkout release-0.0.3 &>/dev/null
+git checkout 372678324f5543e527591f68b128ff6919267558 &>/dev/null
 git pull
 echo "Репозиторий успешно склонирован, начинаем билд"
 echo "-----------------------------------------------------------------------------"
