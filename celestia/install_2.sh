@@ -56,8 +56,8 @@ sed -i.bak -e 's/PeerExchange = false/PeerExchange = true/g' $HOME/.celestia-lig
 sed -i.bak -e 's/Bootstrapper = false/Bootstrapper = true/g' $HOME/.celestia-light/config.toml
 sed -i.bak -e 's/ListenAddresses = .*/ListenAddresses = ["\/ip4\/0.0.0.0\/tcp\/2122", "\/ip6\/::\/tcp\/2122"]/g' $HOME/.celestia-light/config.toml
 sed -i.bak -e 's/NoAnnounceAddresses = .*/NoAnnounceAddresses = ["\/ip4\/0.0.0.0\/tcp\/2122", "\/ip4\/127.0.0.1\/tcp\/2122", "\/ip6\/::\/tcp\/2122"]/g' $HOME/.celestia-light/config.toml
-sed -i.bak -e 's/.*BootstrapPeers/# \0/' $HOME/.celestia-light/config.toml
-sed -i.bak -e 's/.*MutualPeers/# \0/' $HOME/.celestia-light/config.toml
+sed -i.bak -e 's/BootstrapPeers = .*/BootstrapPeers = []/g' $HOME/.celestia-light/config.toml
+sed -i.bak -e 's/MutualPeers = .*/MutualPeers = []/g' $HOME/.celestia-light/config.toml
 
 sudo tee /etc/systemd/system/celestia-light.service > /dev/null <<EOF
 [Unit]
