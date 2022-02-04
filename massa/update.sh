@@ -23,7 +23,7 @@ cd $HOME/massa
 git checkout -- massa-node/config/config.toml
 git checkout -- massa-node/config/peers.json
 git fetch
-git checkout TEST.6.5
+git checkout TEST.7.0
 
 cd $HOME/massa/massa-node/
 cargo build --release
