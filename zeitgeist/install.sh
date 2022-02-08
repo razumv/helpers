@@ -17,7 +17,7 @@ sleep 1
 
 git clone https://github.com/zeitgeistpm/zeitgeist.git
 cd zeitgeist
-git checkout v0.2.1
+git checkout v0.2.4
 ./scripts/init.sh
 #cargo build --release
 mkdir -p $HOME/zeitgeist/target/release/

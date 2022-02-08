@@ -6,7 +6,7 @@ sudo systemctl stop zeitgeist
 
 rm -f $HOME/zeitgeist/target/release/zeitgeist
 
-wget https://github.com/zeitgeistpm/zeitgeist/releases/download/v0.2.3/zeitgeist_parachain -O $HOME/zeitgeist/target/release/zeitgeist
+wget https://github.com/zeitgeistpm/zeitgeist/releases/download/v0.2.4/zeitgeist_parachain -O $HOME/zeitgeist/target/release/zeitgeist
 # curl -o $HOME/battery-station-relay.json https://raw.githubusercontent.com/zeitgeistpm/polkadot/battery-station-relay/node/service/res/battery-station-relay.json
 # curl -o $HOME/bs_parachain.json https://raw.githubusercontent.com/zeitgeistpm/zeitgeist/f43d0bb1a84cc157fc27b4388e0838db9020dd41/node/res/bs_parachain.json
 chmod +x $HOME/zeitgeist/target/release/zeitgeist
