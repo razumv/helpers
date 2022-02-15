@@ -5,7 +5,7 @@ echo "--------------------------------------------------------------------------
 echo "Устанавливаем софт"
 echo "-----------------------------------------------------------------------------"
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash &>/dev/null
-curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_rust.sh | bash
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_rust.sh | bash &>/dev/null
 source ~/.cargo/env
 sleep 1
 echo "-----------------------------------------------------------------------------"
