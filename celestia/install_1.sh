@@ -23,7 +23,6 @@ echo "Весь необходимый софт установлен"
 echo "-----------------------------------------------------------------------------"
 if [ ! -d $HOME/celestia-app ]; then
   git clone https://github.com/celestiaorg/celestia-app.git &>/dev/null
-	git checkout v0.0.1
 fi
 if [ ! -d $HOME/networks ]; then
   git clone https://github.com/celestiaorg/networks.git &>/dev/null
@@ -31,6 +30,7 @@ fi
 echo "Репозиторий успешно склонирован, начинаем билд"
 echo "-----------------------------------------------------------------------------"
 cd $HOME/celestia-app/
+git checkout v0.0.1
 make install &>/dev/null
 echo "Билд закончен, переходим к инициализации ноды"
 echo "-----------------------------------------------------------------------------"
