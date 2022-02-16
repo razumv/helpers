@@ -15,6 +15,7 @@ then
   echo "Ваш майнер не в форке, выполняем обновление"
   echo "-----------------------------------------------------------------------------"
   docker-compose run --rm --entrypoint "./bin/run config:set minerBatchSize 60000" ironfish
+  docker-compose run --rm --entrypoint "./bin/run config:set enableTelemetry true" ironfish
   docker-compose down
   docker-compose pull
   docker-compose up -d
@@ -34,6 +35,7 @@ else
   docker-compose run --rm --entrypoint "./bin/run config:set nodeName $nodeName" ironfish
   docker-compose run --rm --entrypoint "./bin/run config:set blockGraffiti $blockGraffiti" ironfish
   docker-compose run --rm --entrypoint "./bin/run config:set minerBatchSize 60000" ironfish
+  docker-compose run --rm --entrypoint "./bin/run config:set enableTelemetry true" ironfish
   docker-compose up -d
 fi
 echo "Обновление завершено"
