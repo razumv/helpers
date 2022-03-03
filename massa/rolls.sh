@@ -6,7 +6,7 @@ if [ ! -e $HOME/massa/massa-client/massa-client ]; then
   wget https://raw.githubusercontent.com/razumv/helpers/main/massa/massa-client -O $HOME/massa/massa-client/massa-client
   chmod +x $HOME/massa/massa-client/massa-client
 fi
-
+#
 cd $HOME/massa/massa-client
 massa_wallet_address=$(./massa-client wallet_info | grep Address | awk '{ print $2 }')
 while true

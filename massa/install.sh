@@ -8,6 +8,7 @@ sudo apt update
 #curl https://getsubstrate.io -sSf | bash -s -- --fast
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_rust.sh | bash
 
+#
 source $HOME/.cargo/env
 sleep 1
 rustup toolchain install nightly-2022-01-09
