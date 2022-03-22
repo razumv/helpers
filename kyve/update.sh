@@ -5,8 +5,8 @@ echo "--------------------------------------------------------------------------
 docker pull kyve/evm:latest &>/dev/null
 
 
-docker stop kyve kyve-avalanche kyve-moonriver kyve-cosmos kyve-solana kyve-celo &>/dev/null
-docker container rm kyve kyve-avalanche kyve-moonriver kyve-cosmos kyve-solana kyve-celo &>/dev/null
+docker stop kyve kyve-moonbeam kyve-avalanche kyve-moonriver kyve-cosmos kyve-solana kyve-celo &>/dev/null
+docker container rm kyve kyve-moonbeam kyve-avalanche kyve-moonriver kyve-cosmos kyve-solana kyve-celo &>/dev/null
 
 
 docker run -d -it --restart=always \
