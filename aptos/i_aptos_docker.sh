@@ -87,7 +87,7 @@ fi
 
 echo -e "\e[1m\e[32m5. Starting Aptos FullNode ... \e[0m" && sleep 1
 
-docker compose up -d
+docker-compose up -d
 
 echo "-----------------------------------------------------------------------------"
 
