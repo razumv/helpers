@@ -48,7 +48,7 @@ echo -e "\e[1m\e[32m4. Downloading Aptos FullNode config files ... \e[0m" && sle
 
 sudo mkdir -p $HOME/aptos/identity
 cd $HOME/aptos
-docker compose stop
+docker compose stop -f $HOME/aptos/docker-compose.yml
 rm *
 wget -P $HOME/aptos https://raw.githubusercontent.com/aptos-labs/aptos-core/main/docker/compose/public_full_node/docker-compose.yaml
 wget -P $HOME/aptos https://raw.githubusercontent.com/aptos-labs/aptos-core/main/docker/compose/public_full_node/public_full_node.yaml
