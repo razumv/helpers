@@ -4,7 +4,7 @@
 echo "-----------------------------------------------------------------------------"
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/doubletop.sh | bash
 echo "-----------------------------------------------------------------------------"
-echo "Install tools"
+echo -e "\e[1m\e[32m1. Updating list of dependencies... \e[0m" && sleep 1
 echo "-----------------------------------------------------------------------------"
 # curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_docker.sh | bash &>/dev/null
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash &>/dev/null
