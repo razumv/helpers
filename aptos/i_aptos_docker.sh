@@ -24,7 +24,7 @@ then
     sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 fi
 
-echo "=================================================="
+echo "-----------------------------------------------------------------------------"
 
 echo -e "\e[1m\e[32m3. Checking if Docker Compose is installed ... \e[0m" && sleep 1
 
