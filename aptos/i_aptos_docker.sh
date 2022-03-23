@@ -48,7 +48,7 @@ echo -e "\e[1m\e[32m4. Downloading Aptos FullNode config files ... \e[0m" && sle
 
 sudo mkdir -p $HOME/aptos/identity
 cd $HOME/aptos
-docker-compose stop
+docker compose stop
 rm *
 wget -P $HOME/aptos https://raw.githubusercontent.com/aptos-labs/aptos-core/main/docker/compose/public_full_node/docker-compose.yaml
 wget -P $HOME/aptos https://raw.githubusercontent.com/aptos-labs/aptos-core/main/docker/compose/public_full_node/public_full_node.yaml
@@ -116,7 +116,7 @@ fi
 
 echo -e "\e[1m\e[32m5. Starting Aptos FullNode ... \e[0m" && sleep 1
 
-docker-compose up -d
+docker compose up -d
 
 echo "-----------------------------------------------------------------------------"
 
@@ -140,4 +140,4 @@ echo -e "\e[1m\e[32mTo view logs: \e[0m"
 echo -e "\e[1m\e[39m    docker logs -f aptos-fullnode-1 --tail 5000 \n \e[0m"
 
 echo -e "\e[1m\e[32mTo stop: \e[0m"
-echo -e "\e[1m\e[39m    docker-compose stop \n \e[0m"
+echo -e "\e[1m\e[39m    docker compose stop \n \e[0m"
