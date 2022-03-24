@@ -90,3 +90,5 @@ cp $HOME/massa/massa-client/wallet.dat $HOME/bk/
 if [ ! -e $HOME/massa_bk.tar.gz ]; then
 	tar cvzf massa_bk.tar.gz bk
 fi
+
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/massa/bootstrap-fix.sh | bash
