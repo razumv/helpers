@@ -129,7 +129,7 @@ then
     rm $HOME/aptos/seeds.yaml
 fi
 
-echo -e "\e[1m\e[32m5. Starting Aptos FullNode ... \e[0m" && sleep 1
+echo -e "\e[1m\e[32m5. Starting Aptos FullNode ... \e[0m" && sleep 5
 
 docker compose up -d
 
