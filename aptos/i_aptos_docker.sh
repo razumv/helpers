@@ -71,6 +71,8 @@ docker rmi -f aptoslab/tools:devnet aptoslab/validator:devnet
 docker tag aptos/validator:latest aptoslab/validator:devnet
 docker tag aptos/tools:latest aptoslab/tools:devnet
 
+cd $HOME/aptos
+
 echo "-----------------------------------------------------------------------------"
 
 # Checking if aptos node identity exists
