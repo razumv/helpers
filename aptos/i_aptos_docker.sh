@@ -58,7 +58,7 @@ wget -P $HOME/aptos https://api.zvalid.com/aptos/seeds.yaml
 
 echo "-----------------------------------------------------------------------------"
 echo -e "\e[1m\e[32m4.1 Build docker images \e[0m"
-
+cd $HOME
 git clone https://github.com/aptos-labs/aptos-core.git
 cd $HOME/aptos-core
 git checkout origin/devnet &>/dev/null
