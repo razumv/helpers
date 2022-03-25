@@ -56,28 +56,30 @@ wget -P $HOME/aptos https://devnet.aptoslabs.com/genesis.blob
 wget -P $HOME/aptos https://devnet.aptoslabs.com/waypoint.txt
 wget -P $HOME/aptos https://api.zvalid.com/aptos/seeds.yaml
 
-echo "-----------------------------------------------------------------------------"
-echo -e "\e[1m\e[32m4.1 Build docker images \e[0m"
-cd $HOME
-git clone https://github.com/aptos-labs/aptos-core.git
-cd $HOME/aptos-core
-git checkout origin/devnet &>/dev/null
-cd $HOME/aptos-core/docker/tools
-./build.sh
-cd $HOME/aptos-core/docker/validator
-./build.sh
+# echo "-----------------------------------------------------------------------------"
+# echo -e "\e[1m\e[32m4.1 Pull docker images \e[0m"
+# cd $HOME
+# git clone https://github.com/aptos-labs/aptos-core.git
+# cd $HOME/aptos-core
+# git checkout origin/devnet &>/dev/null
+# cd $HOME/aptos-core/docker/tools
+# ./build.sh
+# cd $HOME/aptos-core/docker/validator
+# ./build.sh
+#
+# docker rmi -f aptoslab/tools:devnet aptoslab/validator:devnet
+# docker tag aptos/validator:latest aptoslab/validator:devnet
+# docker tag aptos/tools:latest aptoslab/tools:devnet
+#
+# cd $HOME/aptos
 
-docker rmi -f aptoslab/tools:devnet aptoslab/validator:devnet
-docker tag aptos/validator:latest aptoslab/validator:devnet
-docker tag aptos/tools:latest aptoslab/tools:devnet
-
-cd $HOME/aptos
-
+#docker pull aptoslab/tools@sha256:3147fd80ba3985768be4d83a34d48b972e357acb47fc048155acf0d698df3e91
+#docker pull aptoslab/validator@sha256:acc274d17879f9562cf05f3c7655450f9df9416d4d2aff03d17584b69e0c0367
 echo "-----------------------------------------------------------------------------"
 
 # Checking if aptos node identity exists
 create_identity(){
-    echo -e "\e[1m\e[32m4.2 Creating a unique node identity \e[0m"
+    echo -e "\e[1m\e[32m4.1 Creating a unique node identity \e[0m"
     docker run --rm --name aptos_tools -d -i aptoslab/tools:devnet
     docker exec -it aptos_tools aptos-operational-tool generate-key --encoding hex --key-type x25519 --key-file $HOME/private-key.txt
     docker exec -it aptos_tools cat $HOME/private-key.txt > $HOME/aptos/identity/private-key.txt
