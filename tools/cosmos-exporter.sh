@@ -13,7 +13,7 @@ Description=Cosmos Exporter
 After=network-online.target
 
 [Service]
-User=<username>
+User=$USER
 TimeoutStartSec=0
 CPUWeight=95
 IOWeight=95
