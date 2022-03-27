@@ -14,9 +14,10 @@ function setup {
   cosmos_denom "${2}"
   cosmos_denom_coef "${3}"
   node_port "${4}"
-  exporter_port "${5}"
-  valoper "${6}"
-  wallet "${7}"
+  rpc_port "${5}"
+  exporter_port "${6}"
+  valoper "${7}"
+  wallet "${8}"
 }
 
 function cosmos_prefix {
@@ -33,6 +34,10 @@ function cosmos_denom_coef {
 
 function node_port {
   NODE_PORT=${1}
+}
+
+function rpc_port {
+  RPC_PORT=${1}
 }
 
 function exporter_port {
@@ -133,7 +138,8 @@ ExecStart=/usr/bin/cosmos-exporter \
 --denom-coefficient=${COSMOS_DENOM_COEF} \
 --listen-address=localhost:${EXPORTER_PORT} \
 --log-level=info \
---node=localhost:${NODE_PORT}
+--node=localhost:${NODE_PORT} \
+--tendermint-rpc=http://localhost:${RPC_PORT}
 Restart=always
 RestartSec=2
 LimitNOFILE=800000
@@ -165,7 +171,7 @@ function vmagentConf {
       - source_labels: [__param_address]
         target_label: instance
       - target_label: __address__
-        replacement: localhost:${NODE_PORT}
+        replacement: localhost:${EXPORTER_PORT}
   # specific wallet(s)
   - job_name:       'wallet'
     scrape_interval: 30s
@@ -180,7 +186,7 @@ function vmagentConf {
       - source_labels: [__param_address]
         target_label: instance
       - target_label: __address__
-        replacement: localhost:${NODE_PORT}
+        replacement: localhost:${EXPORTER_PORT}
 
   # all validators
   - job_name:       'validators'
@@ -189,13 +195,13 @@ function vmagentConf {
     metrics_path: /metrics/validators
     static_configs:
       - targets:
-        - localhost:${NODE_PORT}
+        - localhost:${EXPORTER_PORT}
 EOF
 sudo systemctl restart vmagent
 }
 
 function launch {
-    setup "${1}" "${2}" "${3}" "${4}" "${5}" "${6}" "${7}"
+    setup "${1}" "${2}" "${3}" "${4}" "${5}" "${6}" "${7}" "${8}"
     install_tools
     install_go
     installSource
@@ -214,7 +220,7 @@ function launch {
     line
 }
 
-while getopts ":g:f:b:c:v:s:z:" o; do
+while getopts ":g:f:b:c:v:s:z:j:" o; do
   case "${o}" in
     g)
       g=${OPTARG}
@@ -237,8 +243,11 @@ while getopts ":g:f:b:c:v:s:z:" o; do
     z)
       z=${OPTARG}
       ;;
+    j)
+      j=${OPTARG}
+      ;;
   esac
 done
 shift $((OPTIND-1))
 
-launch "${g}" "${f}" "${b}" "${c}" "${v}" "${s}" "${z}"
+launch "${g}" "${f}" "${b}" "${c}" "${v}" "${s}" "${z}" "${j}"
