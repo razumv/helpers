@@ -1,9 +1,9 @@
 #/bin/bash
 
 export release=0.3.0
-wget https://github.com/solarlabsteam/cosmos-exporter/releases/download/v$release/cosmos-exporter_$release_Linux_arm64.tar.gz
-tar xvfz cosmos-exporter_$release_Linux_arm64.tar.gz
-rm -f cosmos-exporter_$release_Linux_arm64.tar.gz
+wget https://github.com/solarlabsteam/cosmos-exporter/releases/download/v"$release"/cosmos-exporter_"$release"_Linux_arm64.tar.gz
+tar xvfz cosmos-exporter_"$release"_Linux_arm64.tar.gz
+rm -f cosmos-exporter_"$release"_Linux_arm64.tar.gz
 
 sudo mv ./cosmos-exporter /usr/bin
 
