@@ -1,11 +1,18 @@
 #/bin/bash
 
-export release=0.3.0
-wget https://github.com/solarlabsteam/cosmos-exporter/releases/download/v"$release"/cosmos-exporter_"$release"_Linux_arm64.tar.gz
-tar xvfz cosmos-exporter_"$release"_Linux_arm64.tar.gz
-rm -f cosmos-exporter_"$release"_Linux_arm64.tar.gz
+curl -s https://github.com/razumv/helpers/blob/main/tools/install_go.sh | bash
 
-sudo mv ./cosmos-exporter /usr/bin
+export release=0.3.0
+# wget https://github.com/solarlabsteam/cosmos-exporter/releases/download/v"$release"/cosmos-exporter_"$release"_Linux_arm64.tar.gz
+# tar xvfz cosmos-exporter_"$release"_Linux_arm64.tar.gz
+# rm -f cosmos-exporter_"$release"_Linux_arm64.tar.gz
+cd $HOME
+git clone https://github.com/solarlabsteam/cosmos-exporter
+cd $HOME/cosmos-exporter
+git checkout v0.3.0
+go build
+
+sudo cp ./cosmos-exporter /usr/bin
 
 sudo tee <<EOF >/dev/null /etc/systemd/system/cosmos-exporter.service
 [Unit]
