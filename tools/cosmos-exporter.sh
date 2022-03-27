@@ -12,7 +12,7 @@ cd $HOME/cosmos-exporter
 git checkout v0.3.0
 go build
 
-sudo cp ./cosmos-exporter /usr/bin
+cp main /usr/bin/cosmos-exporter
 
 sudo tee <<EOF >/dev/null /etc/systemd/system/cosmos-exporter.service
 [Unit]
