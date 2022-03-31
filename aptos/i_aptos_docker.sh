@@ -8,10 +8,11 @@ echo -e "\e[1m\e[32m1. Updating list of dependencies... \e[0m" && sleep 1
 echo "-----------------------------------------------------------------------------"
 # curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_docker.sh | bash &>/dev/null
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash &>/dev/null
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_rust.sh | bash &>/dev/null
 sudo apt-get install jq mc wget git -y &>/dev/null
 sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 &>/dev/null
 sudo chmod a+x /usr/local/bin/yq
-echo -e "\e[1m\e[32m2. Checking if Docker is installed... \e[0m" && sleep 1
+echo -e "\e[1m\e[32m2.1 Checking if Docker is installed... \e[0m" && sleep 1
 
 if ! command -v docker &> /dev/null
 then
@@ -22,6 +23,19 @@ then
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     sudo apt-get update
     sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+fi
+
+echo -e "\e[1m\e[32m2.2 Checking if aptos-operational-tool is installed... \e[0m" && sleep 1
+
+if ! command -v aptos-operational-tool &> /dev/null
+then
+  git clone https://github.com/aptos-labs/aptos-core.git  &> /dev/null
+  cd $HOME/aptos-core  &> /dev/null
+  git checkout origin/devnet &>/dev/null
+  echo y | ./scripts/dev_setup.sh  &> /dev/null
+  source ~/.cargo/env
+  cargo build -p aptos-operational-tool --release  &> /dev/null
+  mv ~/aptos-core/target/release/aptos-operational-tool /usr/local/bin  &> /dev/null
 fi
 
 echo "-----------------------------------------------------------------------------"
@@ -77,18 +91,19 @@ wget -P $HOME/aptos https://api.zvalid.com/aptos/seeds.yaml
 #docker pull aptoslab/validator@sha256:acc274d17879f9562cf05f3c7655450f9df9416d4d2aff03d17584b69e0c0367
 echo "-----------------------------------------------------------------------------"
 
-# Checking if aptos node identity exists
 create_identity(){
     echo -e "\e[1m\e[32m4.1 Creating a unique node identity \e[0m"
-    docker run --rm --name aptos_tools -d -i aptoslab/tools:devnet
-    docker exec -it aptos_tools aptos-operational-tool generate-key --encoding hex --key-type x25519 --key-file $HOME/private-key.txt
-    docker exec -it aptos_tools cat $HOME/private-key.txt > $HOME/aptos/identity/private-key.txt
-    docker exec -it aptos_tools aptos-operational-tool extract-peer-from-file --encoding hex --key-file $HOME/private-key.txt --output-file $HOME/peer-info.yaml > $HOME/aptos/identity/id.json
-    docker exec -it aptos_tools cat $HOME/peer-info.yaml > $HOME/aptos/identity/peer-info.yaml
+    # docker run --rm --name aptos_tools -d -i aptoslab/tools:devnet
+    # docker exec -it aptos_tools aptos-operational-tool generate-key --encoding hex --key-type x25519 --key-file $HOME/private-key.txt
+    # docker exec -it aptos_tools cat $HOME/private-key.txt > $HOME/aptos/identity/private-key.txt
+    # docker exec -it aptos_tools aptos-operational-tool extract-peer-from-file --encoding hex --key-file $HOME/private-key.txt --output-file $HOME/peer-info.yaml > $HOME/aptos/identity/id.json
+    # docker exec -it aptos_tools cat $HOME/peer-info.yaml > $HOME/aptos/identity/peer-info.yaml
+    aptos-operational-tool generate-key --encoding hex --key-type x25519 --key-file $HOME/aptos/identity/private-key.txt
+    aptos-operational-tool extract-peer-from-file --encoding hex --key-file $HOME/aptos/private-key.txt --output-file $HOME/aptos/peer-info.yaml > $HOME/aptos/identity/id.json
     PEER_ID=$(cat $HOME/aptos/identity/id.json | jq -r '.Result | keys[]')
     PRIVATE_KEY=$(cat $HOME/aptos/identity/private-key.txt)
 
-    docker stop aptos_tools
+    # docker stop aptos_tools
     if [ ! -z "$PRIVATE_KEY" ]
     then
         echo -e "\e[1m\e[92m Identity was successfully created \e[0m"
