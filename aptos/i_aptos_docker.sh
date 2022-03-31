@@ -12,20 +12,20 @@ curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_rust
 sudo apt-get install jq mc wget git -y &>/dev/null
 sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 &>/dev/null
 sudo chmod a+x /usr/local/bin/yq
-echo -e "\e[1m\e[32m2.1 Checking if Docker is installed... \e[0m" && sleep 1
+# echo -e "\e[1m\e[32m2.1 Checking if Docker is installed... \e[0m" && sleep 1
+#
+# if ! command -v docker &> /dev/null
+# then
+#
+#     echo -e "\e[1m\e[32m2.1 Installing Docker... \e[0m" && sleep 1
+#     sudo apt-get install ca-certificates curl gnupg lsb-release wget -y
+#     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+#     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+#     sudo apt-get update
+#     sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+# fi
 
-if ! command -v docker &> /dev/null
-then
-
-    echo -e "\e[1m\e[32m2.1 Installing Docker... \e[0m" && sleep 1
-    sudo apt-get install ca-certificates curl gnupg lsb-release wget -y
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    sudo apt-get update
-    sudo apt-get install docker-ce docker-ce-cli containerd.io -y
-fi
-
-echo -e "\e[1m\e[32m2.2 Checking if aptos-operational-tool is installed... \e[0m" && sleep 1
+echo -e "\e[1m\e[32m2 Checking if aptos-operational-tool aptos-node is installed... \e[0m" && sleep 1
 
 if ! command -v aptos-operational-tool &> /dev/null
 then
@@ -35,30 +35,39 @@ then
   echo y | ./scripts/dev_setup.sh  &> /dev/null
   source ~/.cargo/env
   cargo build -p aptos-operational-tool --release  &> /dev/null
-  mv ~/aptos-core/target/release/aptos-operational-tool /usr/local/bin  &> /dev/null
+  mv $HOME/aptos-core/target/release/aptos-operational-tool /usr/local/bin  &> /dev/null
 fi
 
-echo "-----------------------------------------------------------------------------"
-
-echo -e "\e[1m\e[32m3. Checking if Docker Compose is installed ... \e[0m" && sleep 1
-
-docker compose version &> /dev/null
-if [ $? -ne 0 ]
+if ! command -v aptos-node &> /dev/null
 then
-
-    echo -e "\e[1m\e[32m3.1 Installing Docker Compose v2.3.3 ... \e[0m" && sleep 1
-    mkdir -p ~/.docker/cli-plugins/
-    curl -SL https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
-    chmod +x ~/.docker/cli-plugins/docker-compose
-    sudo chown $USER /var/run/docker.sock
+  cd $HOME/aptos-core
+  cargo build -p aptos-node --release
+  mv $HOME/aptos-core/target/release/aptos-node /usr/local/bin  &> /dev/null
 fi
+
+
+
+# echo "-----------------------------------------------------------------------------"
+#
+# echo -e "\e[1m\e[32m3. Checking if Docker Compose is installed ... \e[0m" && sleep 1
+#
+# docker compose version &> /dev/null
+# if [ $? -ne 0 ]
+# then
+#
+#     echo -e "\e[1m\e[32m3.1 Installing Docker Compose v2.3.3 ... \e[0m" && sleep 1
+#     mkdir -p ~/.docker/cli-plugins/
+#     curl -SL https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+#     chmod +x ~/.docker/cli-plugins/docker-compose
+#     sudo chown $USER /var/run/docker.sock
+# fi
 
 cd $HOME
 
 
 echo "-----------------------------------------------------------------------------"
 
-echo -e "\e[1m\e[32m4. Downloading Aptos FullNode config files ... \e[0m" && sleep 1
+echo -e "\e[1m\e[32m3. Downloading Aptos FullNode config files ... \e[0m" && sleep 1
 
 sudo mkdir -p $HOME/aptos/identity
 cd $HOME/aptos
