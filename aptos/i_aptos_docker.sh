@@ -62,7 +62,7 @@ echo -e "\e[1m\e[32m4. Downloading Aptos FullNode config files ... \e[0m" && sle
 
 sudo mkdir -p $HOME/aptos/identity
 cd $HOME/aptos
-docker compose -f $HOME/aptos/docker-compose.yaml stop
+# docker compose -f $HOME/aptos/docker-compose.yaml stop
 rm *
 wget -P $HOME/aptos https://raw.githubusercontent.com/aptos-labs/aptos-core/main/docker/compose/public_full_node/docker-compose.yaml
 wget -P $HOME/aptos https://raw.githubusercontent.com/aptos-labs/aptos-core/main/docker/compose/public_full_node/public_full_node.yaml
@@ -148,9 +148,35 @@ then
     rm $HOME/aptos/seeds.yaml
 fi
 
+sed -i -e "s|genesis_file_location: .*|genesis_file_location: \"$HOME\/aptos\/genesis.blob\"|" $HOME/aptos/public_full_node.yaml
+sed -i -e "s|data_dir: .*|data_dir: \"$HOME\/aptos\/data\"|" $HOME/aptos/public_full_node.yaml
+sed -i -e "s|from_file: .*|from_file: \"$HOME\/aptos\/waypoint.txt\"|" $HOME/aptos/public_full_node.yaml
+
 echo -e "\e[1m\e[32m5. Starting Aptos FullNode ... \e[0m" && sleep 5
 
-docker compose up -d
+# docker compose up -d
+sudo tee <<EOF >/dev/null /etc/systemd/journald.conf
+Storage=persistent
+EOF
+sudo systemctl restart systemd-journald
+
+sudo tee <<EOF >/dev/null /etc/systemd/system/aptos.service
+[Unit]
+  Description=Aptos daemon
+  After=network-online.target
+[Service]
+  User=$USER
+  ExecStart=/usr/local/bin/aptos-node -f $HOME/aptos/public_full_node.yaml
+  Restart=on-failure
+  RestartSec=3
+  LimitNOFILE=4096
+[Install]
+  WantedBy=multi-user.target
+EOF
+
+sudo systemctl enable aptos &>/dev/null
+sudo systemctl daemon-reload
+sudo systemctl restart aptos
 
 echo "-----------------------------------------------------------------------------"
 
@@ -171,7 +197,7 @@ echo -e "\e[1m\e[32mTo check sync status: \e[0m"
 echo -e "\e[1m\e[39m    curl 127.0.0.1:9101/metrics 2> /dev/null | grep aptos_state_sync_version | grep type \n \e[0m"
 
 echo -e "\e[1m\e[32mTo view logs: \e[0m"
-echo -e "\e[1m\e[39m    docker logs -f aptos-fullnode-1 --tail 5000 \n \e[0m"
+echo -e "\e[1m\e[39m    journalctl -n 100 -f -u aptos \n \e[0m"
 
 echo -e "\e[1m\e[32mTo stop: \e[0m"
-echo -e "\e[1m\e[39m    docker compose stop \n \e[0m"
+echo -e "\e[1m\e[39m    sudo systemctl stop aptos \n \e[0m"
