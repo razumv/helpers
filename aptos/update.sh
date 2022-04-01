@@ -47,7 +47,7 @@ line
 echo -e "${GREEN}Обновление завершено... ${NORMAL}" && sleep 1
 line
 
-check_stop_old_docker {
+function check_stop_old_docker {
   ps=$(docker ps -a | grep "aptos-fullnode-1")
   if [ -z "$ps" ];
   then
@@ -61,7 +61,7 @@ check_stop_old_docker {
   fi
 }
 
-source_code {
+function source_code {
   if [ ! -d $HOME/aptos-core ]; then
     git clone https://github.com/aptos-labs/aptos-core.git
   fi
@@ -72,35 +72,35 @@ source_code {
   source ~/.cargo/env
 }
 
-fetch_code {
+function fetch_code {
   cd $HOME/aptos-core
   git fetch && git pull
 }
 
-update_genesis_files {
+function update_genesis_files {
   cd $HOME/aptos/
   rm -f $HOME/aptos/waypoint.txt $HOME/aptos/genesis.blob
   wget https://devnet.aptoslabs.com/genesis.blob
   wget https://devnet.aptoslabs.com/waypoint.txt
 }
 
-build_tools {
+function build_tools {
   cargo build -p aptos-operational-tool --release
   mv $HOME/aptos-core/target/release/aptos-operational-tool /usr/local/bin
 }
 
-build_node {
+function build_node {
   cargo build -p aptos-node --release
   mv $HOME/aptos-core/target/release/aptos-node /usr/local/bin
 }
 
-get_vars {
+function get_vars {
   PEER_ID=$(sed -n 2p $HOME/aptos/identity/peer-info.yaml | sed 's/.$//')
   PRIVATE_KEY=$(cat $HOME/aptos/identity/private-key.txt)
   WAYPOINT=$(cat $HOME/aptos/waypoint.txt)
 }
 
-fix_config {
+function fix_config {
   cp $HOME/aptos-core/config/src/config/test_data/public_full_node.yaml $HOME/aptos/public_full_node.yaml
   /usr/local/bin/yq e -i '.full_node_networks[] +=  { "identity": {"type": "from_config", "key": "'$PRIVATE_KEY'", "peer_id": "'$PEER_ID'"} }' $HOME/aptos/public_full_node.yaml
   sed -i 's|127.0.0.1|0.0.0.0|' $HOME/aptos/public_full_node.yaml
@@ -109,18 +109,18 @@ fix_config {
   sed -i -e "s|0:01234567890ABCDEFFEDCA098765421001234567890ABCDEFFEDCA0987654210|$WAYPOINT|" $HOME/aptos/public_full_node.yaml
 }
 
-delete_old_database {
+function delete_old_database {
   rm -rf $HOME/aptos/data/
 }
 
-fix_journal {
+function fix_journal {
   sudo tee <<EOF >/dev/null /etc/systemd/journald.conf
   Storage=persistent
 EOF
   sudo systemctl restart systemd-journald
 }
 
-bin_service {
+function bin_service {
   sudo tee <<EOF >/dev/null /etc/systemd/system/aptos.service
   [Unit]
     Description=Aptos daemon
@@ -141,15 +141,15 @@ EOF
   echo "Сервис обновлен, демон перезагружен"
 }
 
-logo {
+function logo {
   curl -s https://raw.githubusercontent.com/razumv/helpers/main/doubletop.sh | bash
 }
 
-line {
+function line {
   echo "-----------------------------------------------------------------------------"
 }
 
-colors {
+function colors {
   GREEN="\e[1m\e[32m"
   RED="\e[1m\e[39m"
   NORMAL="\e[0m"
