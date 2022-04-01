@@ -156,6 +156,9 @@ fi
 #     # /usr/local/bin/yq ea -i 'select(fileIndex==0).full_node_networks[0].seeds = select(fileIndex==1).seeds | select(fileIndex==0)' $HOME/aptos/public_full_node.yaml $HOME/aptos/seeds.yaml
 #     # rm $HOME/aptos/seeds.yaml
 # fi
+PEER_ID=$(sed -n 2p $HOME/aptos/identity/peer-info.yaml | sed 's/.$//')
+PRIVATE_KEY=$(cat $HOME/aptos/identity/private-key.txt)
+WAYPOINT=$(cat $HOME/aptos/waypoint.txt)
 cp $HOME/aptos-core/config/src/config/test_data/public_full_node.yaml $HOME/aptos/public_full_node.yaml
 /usr/local/bin/yq e -i '.full_node_networks[] +=  { "identity": {"type": "from_config", "key": "'$PRIVATE_KEY'", "peer_id": "'$PEER_ID'"} }' $HOME/aptos/public_full_node.yaml
 sed -i 's|127.0.0.1|0.0.0.0|' $HOME/aptos/public_full_node.yaml
