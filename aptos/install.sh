@@ -112,24 +112,11 @@ echo -e "${GREEN}1. Ставим зависимости... ${NORMAL}" && sleep 1
 line
 install_deps
 
-echo -e "${GREEN}2 Проверяем наличие бинарников aptos-operational-tool aptos-node... ${NORMAL}" && sleep 1
+echo -e "${GREEN}2 Билдим бинарники aptos-operational-tool aptos-node... ${NORMAL}" && sleep 1
 line
-if ! command -v aptos-operational-tool &> /dev/null
-then
-  source_code
-  build_tools
-else
-  fetch_code
-  build_tools
-fi
-if ! command -v aptos-node &> /dev/null
-then
-  source_code
-  build_node
-else
-  fetch_code
-  build_node
-fi
+source_code
+build_tools
+build_node
 line
 echo -e "${GREEN}3. Скачиваем Aptos FullNode конфиги ... ${NORMAL}" && sleep 1
 update_genesis_files
