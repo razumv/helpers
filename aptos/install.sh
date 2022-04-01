@@ -10,6 +10,7 @@ function install_deps {
 
 function source_code {
   if [ ! -d $HOME/aptos-core ]; then
+    cd $HOME
     git clone https://github.com/aptos-labs/aptos-core.git
   fi
   cd $HOME/aptos-core

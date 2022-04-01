@@ -1,4 +1,12 @@
 #!/bin/bash
+function install_deps {
+  curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash &>/dev/null
+  curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_rust.sh | bash &>/dev/null
+  sudo apt-get install jq mc wget git -y &>/dev/null
+  sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 &>/dev/null
+  sudo chmod a+x /usr/local/bin/yq
+}
+
 function check_stop_old_docker {
   ps=$(docker ps -a | grep "aptos-fullnode-1")
   if [ -z "$ps" ];
@@ -15,6 +23,7 @@ function check_stop_old_docker {
 
 function source_code {
   if [ ! -d $HOME/aptos-core ]; then
+    cd $HOME
     git clone https://github.com/aptos-labs/aptos-core.git
   fi
   cd $HOME/aptos-core
