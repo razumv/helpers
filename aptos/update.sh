@@ -54,7 +54,7 @@ check_stop_old_docker {
   echo "Старая версия на докере не обнаружена"
   else
     docker compose -f $HOME/aptos/docker-compose.yaml down
-    rm -rf /var/lib/docker/volumes/aptos_db/
+    docker volume rm aptos_db
     docker rmi -f $(docker images | grep aptos | awk '{print $3}')
   fi
 }
