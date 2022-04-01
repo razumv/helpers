@@ -56,7 +56,7 @@ function build_node {
 }
 
 function get_vars {
-  PEER_ID=$(sed -n 2p $HOME/aptos/identity/peer-info.yaml | sed 's/.$//')
+  PEER_ID=$(sed -n 2p $HOME/aptos/identity/peer-info.yaml | sed 's/.$//' | sed 's/://g')
   PRIVATE_KEY=$(cat $HOME/aptos/identity/private-key.txt)
   WAYPOINT=$(cat $HOME/aptos/waypoint.txt)
 }
