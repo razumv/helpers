@@ -29,8 +29,8 @@ function fetch_code {
 function update_genesis_files {
   cd $HOME/aptos/
   rm -f $HOME/aptos/waypoint.txt $HOME/aptos/genesis.blob
-  wget https://devnet.aptoslabs.com/genesis.blob
-  wget https://devnet.aptoslabs.com/waypoint.txt
+  wget -O $HOME/aptos/genesis.blob https://devnet.aptoslabs.com/genesis.blob
+  wget -O $HOME/aptos/waypoint.txt https://devnet.aptoslabs.com/waypoint.txt
 }
 
 function build_tools {
