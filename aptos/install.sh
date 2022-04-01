@@ -109,7 +109,7 @@ colors
 line
 logo
 line
-echo -e "${GREEN}1. Updating list of dependencies... ${NORMAL}" && sleep 1
+echo -e "${GREEN}1. Ставим зависимости... ${NORMAL}" && sleep 1
 line
 install_deps
 
@@ -132,15 +132,15 @@ else
   build_node
 fi
 line
-echo -e "${GREEN}3. Downloading Aptos FullNode config files ... ${NORMAL}" && sleep 1
+echo -e "${GREEN}3. Скачиваем Aptos FullNode конфиги ... ${NORMAL}" && sleep 1
 update_genesis_files
 line
-echo -e "${GREEN}4.1 Создание идентити ${NORMAL}"
+echo -e "${GREEN}4.1 Создаем идентити ${NORMAL}"
 create_identity
 get_vars
 if [ ! -z "$PRIVATE_KEY" ]
 then
-    echo -e "\e[1m\e[92m Identity was successfully created ${NORMAL}"
+    echo -e "\e[1m\e[92m Identity успешно созданы ${NORMAL}"
     echo -e "\e[1m\e[92m Peer Id: ${NORMAL}" $PEER_ID
     echo -e "\e[1m\e[92m Private Key:  ${NORMAL}" $PRIVATE_KEY
 else
