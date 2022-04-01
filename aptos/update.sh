@@ -22,10 +22,8 @@ function check_stop_old_docker {
 }
 
 function source_code {
-  if [ ! -d $HOME/aptos-core ]; then
-    cd $HOME
-    git clone https://github.com/aptos-labs/aptos-core.git
-  fi
+  cd $HOME
+  git clone https://github.com/aptos-labs/aptos-core.git
   cd $HOME/aptos-core
   git fetch
   git checkout origin/devnet

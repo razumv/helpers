@@ -10,10 +10,8 @@ function install_deps {
 }
 
 function source_code {
-  if [ ! -d $HOME/aptos-core ]; then
-    cd $HOME
-    git clone https://github.com/aptos-labs/aptos-core.git
-  fi
+  cd $HOME
+  git clone https://github.com/aptos-labs/aptos-core.git
   cd $HOME/aptos-core
   git fetch
   git checkout origin/devnet
@@ -27,8 +25,7 @@ function fetch_code {
 }
 
 function update_genesis_files {
-  cd $HOME/aptos/
-  rm -f $HOME/aptos/waypoint.txt $HOME/aptos/genesis.blob
+  mkdir -p $HOME/aptos/
   wget -O $HOME/aptos/genesis.blob https://devnet.aptoslabs.com/genesis.blob
   wget -O $HOME/aptos/waypoint.txt https://devnet.aptoslabs.com/waypoint.txt
 }
