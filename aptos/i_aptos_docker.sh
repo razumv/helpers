@@ -108,7 +108,8 @@ create_identity(){
     # docker exec -it aptos_tools cat $HOME/peer-info.yaml > $HOME/aptos/identity/peer-info.yaml
     aptos-operational-tool generate-key --encoding hex --key-type x25519 --key-file $HOME/aptos/identity/private-key.txt
     aptos-operational-tool extract-peer-from-file --encoding hex --key-file $HOME/aptos/identity/private-key.txt --output-file $HOME/aptos/identity/peer-info.yaml
-    PEER_ID=$(sed -n 2p $HOME/aptos/identity/config/peer-info.yaml | sed 's/.$//')
+    sleep 1
+    PEER_ID=$(sed -n 2p $HOME/aptos/identity/peer-info.yaml | sed 's/.$//')
     PRIVATE_KEY=$(cat $HOME/aptos/identity/private-key.txt)
 
     # docker stop aptos_tools
