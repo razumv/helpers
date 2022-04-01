@@ -165,7 +165,6 @@ else
     create_identity
     line
 fi
-
 get_vars
 fix_config
 line
