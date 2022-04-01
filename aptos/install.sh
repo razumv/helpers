@@ -22,7 +22,7 @@ function source_code {
 
 function fetch_code {
   cd $HOME/aptos-core
-  git fetch && git pull
+  git fetch && git pull origin devnet
 }
 
 function update_genesis_files {
