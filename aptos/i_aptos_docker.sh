@@ -72,12 +72,11 @@ echo -e "\e[1m\e[32m3. Downloading Aptos FullNode config files ... \e[0m" && sle
 sudo mkdir -p $HOME/aptos/identity
 cd $HOME/aptos
 # docker compose -f $HOME/aptos/docker-compose.yaml stop
-rm *
-wget -P $HOME/aptos https://raw.githubusercontent.com/aptos-labs/aptos-core/main/docker/compose/public_full_node/docker-compose.yaml
+# wget -P $HOME/aptos https://raw.githubusercontent.com/aptos-labs/aptos-core/main/docker/compose/public_full_node/docker-compose.yaml
 wget -P $HOME/aptos https://raw.githubusercontent.com/aptos-labs/aptos-core/main/docker/compose/public_full_node/public_full_node.yaml
 wget -P $HOME/aptos https://devnet.aptoslabs.com/genesis.blob
 wget -P $HOME/aptos https://devnet.aptoslabs.com/waypoint.txt
-wget -P $HOME/aptos https://api.zvalid.com/aptos/seeds.yaml
+# wget -P $HOME/aptos https://api.zvalid.com/aptos/seeds.yaml
 
 # echo "-----------------------------------------------------------------------------"
 # echo -e "\e[1m\e[32m4.1 Pull docker images \e[0m"
@@ -108,7 +107,7 @@ create_identity(){
     # docker exec -it aptos_tools aptos-operational-tool extract-peer-from-file --encoding hex --key-file $HOME/private-key.txt --output-file $HOME/peer-info.yaml > $HOME/aptos/identity/id.json
     # docker exec -it aptos_tools cat $HOME/peer-info.yaml > $HOME/aptos/identity/peer-info.yaml
     aptos-operational-tool generate-key --encoding hex --key-type x25519 --key-file $HOME/aptos/identity/private-key.txt
-    aptos-operational-tool extract-peer-from-file --encoding hex --key-file $HOME/aptos/identity/private-key.txt --output-file $HOME/aptos/identity/peer-info.yaml > $HOME/aptos/identity/id.json
+    aptos-operational-tool extract-peer-from-file --encoding hex --key-file $HOME/aptos/identity/private-key.txt --output-file $HOME/aptos/identity/peer-info.yaml
     PEER_ID=$(cat $HOME/aptos/identity/id.json | jq -r '.Result | keys[]')
     PRIVATE_KEY=$(cat $HOME/aptos/identity/private-key.txt)
 
@@ -128,15 +127,16 @@ create_identity(){
 if [[ -f $HOME/aptos/identity/id.json && -f $HOME/aptos/identity/private-key.txt ]]
 then
 
-    PEER_ID=$(cat $HOME/aptos/identity/id.json | jq -r '.Result | keys[]')
+    PEER_ID=$(sed -n 2p $HOME/aptos/identity/peer-info.yaml | sed 's/.$//')
     PRIVATE_KEY=$(cat $HOME/aptos/identity/private-key.txt)
+    WAYPOINT=$(cat $HOME/aptos/waypoint.txt)
 
     if [ ! -z "$PRIVATE_KEY" ]
     then
         echo -e "\e[1m\e[92m Peer Id: \e[0m" $PEER_ID
         echo -e "\e[1m\e[92m Private Key:  \e[0m" $PRIVATE_KEY
     else
-        rm $HOME/aptos/identity/id.json
+        # rm $HOME/aptos/identity/id.json
         rm $HOME/aptos/identity/private-key.txt
         create_identity
     fi
@@ -150,17 +150,23 @@ fi
 if [ ! -z "$PRIVATE_KEY" ]
 then
     # Setting node identity
-    /usr/local/bin/yq e -i '.full_node_networks[] +=  { "identity": {"type": "from_config", "key": "'$PRIVATE_KEY'", "peer_id": "'$PEER_ID'"} }' $HOME/aptos/public_full_node.yaml
+    # /usr/local/bin/yq e -i '.full_node_networks[] +=  { "identity": {"type": "from_config", "key": "'$PRIVATE_KEY'", "peer_id": "'$PEER_ID'"} }' $HOME/aptos/public_full_node.yaml
+    #
+    # # Setting peer list
+    # /usr/local/bin/yq ea -i 'select(fileIndex==0).full_node_networks[0].seeds = select(fileIndex==1).seeds | select(fileIndex==0)' $HOME/aptos/public_full_node.yaml $HOME/aptos/seeds.yaml
+    # rm $HOME/aptos/seeds.yaml
+    cp $HOME/aptos-core/config/src/config/test_data/public_full_node.yaml $HOME/aptos/public_full_node.yaml
+    sed -i 's|127.0.0.1|0.0.0.0|' $HOME/aptos/public_full_node.yaml
+    sed -i '/network_id: "public"$/a\
+          identity:\
+            type: "from_config"\
+            key: "'$PRIVATE_KEY'"\
+            peer_id: "'$PEER_ID'"' $HOME/aptos/public_full_node.yaml
 
-    # Setting peer list
-    /usr/local/bin/yq ea -i 'select(fileIndex==0).full_node_networks[0].seeds = select(fileIndex==1).seeds | select(fileIndex==0)' $HOME/aptos/public_full_node.yaml $HOME/aptos/seeds.yaml
-    rm $HOME/aptos/seeds.yaml
+    sed -i -e "s|genesis_file_location: .*|genesis_file_location: \"$HOME\/aptos\/genesis.blob\"|" $HOME/aptos/public_full_node.yaml
+    sed -i -e "s|data_dir: .*|data_dir: \"$HOME\/aptos\/data\"|" $HOME/aptos/public_full_node.yaml
+    sed -i -e "s|0:01234567890ABCDEFFEDCA098765421001234567890ABCDEFFEDCA0987654210|$WAYPOINT|" $HOME/aptos/public_full_node.yaml
 fi
-
-sed -i -e "s|genesis_file_location: .*|genesis_file_location: \"$HOME\/aptos\/genesis.blob\"|" $HOME/aptos/public_full_node.yaml
-sed -i -e "s|data_dir: .*|data_dir: \"$HOME\/aptos\/data\"|" $HOME/aptos/public_full_node.yaml
-sed -i -e "s|from_file: .*|from_file: \"$HOME\/aptos\/waypoint.txt\"|" $HOME/aptos/public_full_node.yaml
-
 echo -e "\e[1m\e[32m5. Starting Aptos FullNode ... \e[0m" && sleep 5
 
 # docker compose up -d
