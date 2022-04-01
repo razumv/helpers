@@ -7,7 +7,8 @@ echo -e "${GREEN}Начинаем обновление... ${NORMAL}" && sleep 1
 line
 echo -e "${GREEN}1. Стопаем Aptos... ${NORMAL}" && sleep 1
 line
-sudo systemctl stop aptos
+check_stop_old_docker
+sudo systemctl stop aptos  &> /dev/null
 line
 echo -e "${GREEN}2. Скачиваем конфиги... ${NORMAL}" && sleep 1
 line
@@ -45,6 +46,18 @@ bin_service
 line
 echo -e "${GREEN}Обновление завершено... ${NORMAL}" && sleep 1
 line
+
+check_stop_old_docker {
+  ps=$(docker ps -a | grep "aptos-fullnode-1")
+  if [ -z "$ps" ];
+  then
+  echo "Старая версия на докере не обнаружена"
+  else
+    docker compose -f $HOME/aptos/docker-compose.yaml down
+    rm -rf /var/lib/docker/volumes/aptos_db/
+    docker rmi -f $(docker images | grep aptos | awk '{print $3}')
+  fi
+}
 
 source_code {
   if [ ! -d $HOME/aptos-core ]; then
