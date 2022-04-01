@@ -1,52 +1,4 @@
 #!/bin/bash
-colors
-line
-logo
-line
-echo -e "${GREEN}Начинаем обновление... ${NORMAL}" && sleep 1
-line
-echo -e "${GREEN}1. Стопаем Aptos... ${NORMAL}" && sleep 1
-line
-check_stop_old_docker
-sudo systemctl stop aptos  &> /dev/null
-line
-echo -e "${GREEN}2. Скачиваем конфиги... ${NORMAL}" && sleep 1
-line
-update_genesis_files
-line
-echo -e "${GREEN}3. Обновляем код... ${NORMAL}" && sleep 1
-line
-if ! command -v aptos-operational-tool &> /dev/null
-then
-  source_code
-  build_tools
-else
-  fetch_code
-  build_tools
-fi
-if ! command -v aptos-node &> /dev/null
-then
-  source_code
-  build_node
-else
-  fetch_code
-  build_node
-fi
-line
-echo -e "${GREEN}4. Фиксим конфиг... ${NORMAL}" && sleep 1
-line
-get_vars
-fix_config
-delete_old_database
-line
-echo -e "${GREEN}5. Запускаем Full-node... ${NORMAL}" && sleep 1
-line
-fix_journal
-bin_service
-line
-echo -e "${GREEN}Обновление завершено... ${NORMAL}" && sleep 1
-line
-
 function check_stop_old_docker {
   ps=$(docker ps -a | grep "aptos-fullnode-1")
   if [ -z "$ps" ];
@@ -154,3 +106,51 @@ function colors {
   RED="\e[1m\e[39m"
   NORMAL="\e[0m"
 }
+
+colors
+line
+logo
+line
+echo -e "${GREEN}Начинаем обновление... ${NORMAL}" && sleep 1
+line
+echo -e "${GREEN}1. Стопаем Aptos... ${NORMAL}" && sleep 1
+line
+check_stop_old_docker
+sudo systemctl stop aptos  &> /dev/null
+line
+echo -e "${GREEN}2. Скачиваем конфиги... ${NORMAL}" && sleep 1
+line
+update_genesis_files
+line
+echo -e "${GREEN}3. Обновляем код... ${NORMAL}" && sleep 1
+line
+if ! command -v aptos-operational-tool &> /dev/null
+then
+  source_code
+  build_tools
+else
+  fetch_code
+  build_tools
+fi
+if ! command -v aptos-node &> /dev/null
+then
+  source_code
+  build_node
+else
+  fetch_code
+  build_node
+fi
+line
+echo -e "${GREEN}4. Фиксим конфиг... ${NORMAL}" && sleep 1
+line
+get_vars
+fix_config
+delete_old_database
+line
+echo -e "${GREEN}5. Запускаем Full-node... ${NORMAL}" && sleep 1
+line
+fix_journal
+bin_service
+line
+echo -e "${GREEN}Обновление завершено... ${NORMAL}" && sleep 1
+line

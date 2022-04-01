@@ -1,92 +1,4 @@
 #!/bin/bash
-colors
-line
-logo
-line
-echo -e "${GREEN}1. Updating list of dependencies... ${NORMAL}" && sleep 1
-line
-install_deps
-
-echo -e "${GREEN}2 Проверяем наличие бинарников aptos-operational-tool aptos-node... ${NORMAL}" && sleep 1
-line
-if ! command -v aptos-operational-tool &> /dev/null
-then
-  source_code
-  build_tools
-else
-  fetch_code
-  build_tools
-fi
-if ! command -v aptos-node &> /dev/null
-then
-  source_code
-  build_node
-else
-  fetch_code
-  build_node
-fi
-line
-echo -e "${GREEN}3. Downloading Aptos FullNode config files ... ${NORMAL}" && sleep 1
-update_genesis_files
-line
-echo -e "${GREEN}4.1 Создание идентити ${NORMAL}"
-create_identity
-get_vars
-if [ ! -z "$PRIVATE_KEY" ]
-then
-    echo -e "\e[1m\e[92m Identity was successfully created ${NORMAL}"
-    echo -e "\e[1m\e[92m Peer Id: ${NORMAL}" $PEER_ID
-    echo -e "\e[1m\e[92m Private Key:  ${NORMAL}" $PRIVATE_KEY
-else
-    rm $HOME/aptos/identity/id.json
-    rm $HOME/aptos/identity/private-key.txt
-    echo -e "\e[1m\e[91m Wasn't able to create the Identity. FullNode will be started without the identity, identity can be added manually ${NORMAL}"
-fi
-
-if [[ -f $HOME/aptos/identity/private-key.txt ]]
-then
-    get_vars
-    if [ ! -z "$PRIVATE_KEY" ]
-    then
-        echo -e "\e[1m\e[92m Peer Id: ${NORMAL}" $PEER_ID
-        echo -e "\e[1m\e[92m Private Key:  ${NORMAL}" $PRIVATE_KEY
-    else
-        rm $HOME/aptos/identity/private-key.txt
-        create_identity
-    fi
-    line
-else
-    create_identity
-    line
-fi
-
-get_vars
-fix_config
-line
-echo -e "${GREEN}5. Запуск Aptos FullNode ... ${NORMAL}" && sleep 5
-line
-fix_journal
-bin_service
-line
-echo -e "${GREEN}Aptos FullNode запущена ${NORMAL}"
-line
-
-if [ ! -z "$PRIVATE_KEY" ]
-then
-    echo -e "${GREEN}Путь к приватнику, рекомендуется забекапить: ${NORMAL}"
-    echo -e "${RED}"    $HOME/aptos/identity/private-key.txt" \n ${NORMAL}"
-    echo -e "${GREEN}Путь к файлу пира, рекомендуется забекапить: ${NORMAL}"
-    echo -e "${RED}"    $HOME/aptos/identity/peer-info.yaml" \n ${NORMAL}"
-fi
-
-echo -e "${GREEN}Для проверки синка: ${NORMAL}"
-echo -e "${RED}    curl 127.0.0.1:9101/metrics 2> /dev/null | grep aptos_state_sync_version | grep type \n ${NORMAL}"
-
-echo -e "${GREEN}Для проверки логов: ${NORMAL}"
-echo -e "${RED}    journalctl -n 100 -f -u aptos \n ${NORMAL}"
-
-echo -e "${GREEN}Для остановки: ${NORMAL}"
-echo -e "${RED}    sudo systemctl stop aptos \n ${NORMAL}"
 
 function install_deps {
   curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash &>/dev/null
@@ -192,3 +104,92 @@ function colors {
   RED="\e[1m\e[39m"
   NORMAL="\e[0m"
 }
+
+colors
+line
+logo
+line
+echo -e "${GREEN}1. Updating list of dependencies... ${NORMAL}" && sleep 1
+line
+install_deps
+
+echo -e "${GREEN}2 Проверяем наличие бинарников aptos-operational-tool aptos-node... ${NORMAL}" && sleep 1
+line
+if ! command -v aptos-operational-tool &> /dev/null
+then
+  source_code
+  build_tools
+else
+  fetch_code
+  build_tools
+fi
+if ! command -v aptos-node &> /dev/null
+then
+  source_code
+  build_node
+else
+  fetch_code
+  build_node
+fi
+line
+echo -e "${GREEN}3. Downloading Aptos FullNode config files ... ${NORMAL}" && sleep 1
+update_genesis_files
+line
+echo -e "${GREEN}4.1 Создание идентити ${NORMAL}"
+create_identity
+get_vars
+if [ ! -z "$PRIVATE_KEY" ]
+then
+    echo -e "\e[1m\e[92m Identity was successfully created ${NORMAL}"
+    echo -e "\e[1m\e[92m Peer Id: ${NORMAL}" $PEER_ID
+    echo -e "\e[1m\e[92m Private Key:  ${NORMAL}" $PRIVATE_KEY
+else
+    rm $HOME/aptos/identity/id.json
+    rm $HOME/aptos/identity/private-key.txt
+    echo -e "\e[1m\e[91m Wasn't able to create the Identity. FullNode will be started without the identity, identity can be added manually ${NORMAL}"
+fi
+
+if [[ -f $HOME/aptos/identity/private-key.txt ]]
+then
+    get_vars
+    if [ ! -z "$PRIVATE_KEY" ]
+    then
+        echo -e "\e[1m\e[92m Peer Id: ${NORMAL}" $PEER_ID
+        echo -e "\e[1m\e[92m Private Key:  ${NORMAL}" $PRIVATE_KEY
+    else
+        rm $HOME/aptos/identity/private-key.txt
+        create_identity
+    fi
+    line
+else
+    create_identity
+    line
+fi
+
+get_vars
+fix_config
+line
+echo -e "${GREEN}5. Запуск Aptos FullNode ... ${NORMAL}" && sleep 5
+line
+fix_journal
+bin_service
+line
+echo -e "${GREEN}Aptos FullNode запущена ${NORMAL}"
+line
+
+if [ ! -z "$PRIVATE_KEY" ]
+then
+    echo -e "${GREEN}Путь к приватнику, рекомендуется забекапить: ${NORMAL}"
+    echo -e "${RED}"    $HOME/aptos/identity/private-key.txt" \n ${NORMAL}"
+    echo -e "${GREEN}Путь к файлу пира, рекомендуется забекапить: ${NORMAL}"
+    echo -e "${RED}"    $HOME/aptos/identity/peer-info.yaml" \n ${NORMAL}"
+fi
+
+echo -e "${GREEN}Для проверки синка: ${NORMAL}"
+echo -e "${RED}    curl 127.0.0.1:9101/metrics 2> /dev/null | grep aptos_state_sync_version | grep type \n ${NORMAL}"
+
+echo -e "${GREEN}Для проверки логов: ${NORMAL}"
+echo -e "${RED}    journalctl -n 100 -f -u aptos \n ${NORMAL}"
+
+echo -e "${GREEN}Для остановки: ${NORMAL}"
+echo -e "${RED}    sudo systemctl stop aptos \n ${NORMAL}"
