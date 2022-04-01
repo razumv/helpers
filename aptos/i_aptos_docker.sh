@@ -41,7 +41,7 @@ fi
 if ! command -v aptos-node &> /dev/null
 then
   cd $HOME/aptos-core
-  cargo build -p aptos-node --release
+  cargo build -p aptos-node --release &> /dev/null
   mv $HOME/aptos-core/target/release/aptos-node /usr/local/bin  &> /dev/null
 fi
 
