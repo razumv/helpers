@@ -4,13 +4,9 @@ curl -s https://raw.githubusercontent.com/razumv/helpers/main/doubletop.sh | bas
 echo "-----------------------------------------------------------------------------"
 echo -e "\e[1m\e[32mНачинаем обновление... \e[0m" && sleep 1
 echo "-----------------------------------------------------------------------------"
-cd $HOME/aptos
-echo -e "\e[1m\e[32m1. Обновляем докер образы... \e[0m" && sleep 1
+echo -e "\e[1m\e[32m1. Стопаем Aptos... \e[0m" && sleep 1
 echo "-----------------------------------------------------------------------------"
-docker compose down
-docker rmi -f aptoslab/tools:devnet aptoslab/validator:devnet
-docker pull aptoslab/tools:devnet
-docker pull aptoslab/validator:devnet
+sudo systemctl stop aptos
 echo "-----------------------------------------------------------------------------"
 echo -e "\e[1m\e[32m2. Скачиваем конфиги... \e[0m" && sleep 1
 echo "-----------------------------------------------------------------------------"
@@ -18,14 +14,21 @@ rm -f $HOME/aptos/waypoint.txt $HOME/aptos/genesis.blob
 wget https://devnet.aptoslabs.com/genesis.blob
 wget https://devnet.aptoslabs.com/waypoint.txt
 echo "-----------------------------------------------------------------------------"
-echo -e "\e[1m\e[32m3. Очищаем бд... \e[0m" && sleep 1
+echo -e "\e[1m\e[32m3. Обновляем код... \e[0m" && sleep 1
 echo "-----------------------------------------------------------------------------"
-rm -rf /var/lib/docker/volumes/aptos_db/_data/*
-echo "бд удалена"
+cd $HOME/aptos-core
+git fetch && git pull
+cargo build -p aptos-node --release &> /dev/null
+mv $HOME/aptos-core/target/release/aptos-node /usr/local/bin  &> /dev/null
+# echo "-----------------------------------------------------------------------------"
+# echo -e "\e[1m\e[32m3. Очищаем бд... \e[0m" && sleep 1
+# echo "-----------------------------------------------------------------------------"
+# rm -rf $HOME/aptos/data
+# echo "бд удалена"
 echo "-----------------------------------------------------------------------------"
 echo -e "\e[1m\e[32m4. Запускаем Full-node... \e[0m" && sleep 1
 echo "-----------------------------------------------------------------------------"
-docker compose up -d
+sudo systemctl start aptos
 echo "-----------------------------------------------------------------------------"
 echo -e "\e[1m\e[32mОбновление завершено... \e[0m" && sleep 1
 echo "-----------------------------------------------------------------------------"
