@@ -16,10 +16,38 @@ wget https://devnet.aptoslabs.com/waypoint.txt
 echo "-----------------------------------------------------------------------------"
 echo -e "\e[1m\e[32m3. Обновляем код... \e[0m" && sleep 1
 echo "-----------------------------------------------------------------------------"
-cd $HOME/aptos-core
-git fetch && git pull
-cargo build -p aptos-node --release &> /dev/null
-mv $HOME/aptos-core/target/release/aptos-node /usr/local/bin  &> /dev/null
+if ! command -v aptos-operational-tool &> /dev/null
+then
+  git clone https://github.com/aptos-labs/aptos-core.git  &> /dev/null
+  cd $HOME/aptos-core  &> /dev/null
+  git fetch &>/dev/null
+  git checkout origin/devnet &>/dev/null
+  echo y | ./scripts/dev_setup.sh  &> /dev/null
+  source ~/.cargo/env
+  cargo build -p aptos-operational-tool --release  &> /dev/null
+  mv $HOME/aptos-core/target/release/aptos-operational-tool /usr/local/bin  &> /dev/null
+else
+  cd $HOME/aptos-core
+  git fetch && git pull
+  cargo build -p aptos-operational-tool --release  &> /dev/null
+  mv $HOME/aptos-core/target/release/aptos-operational-tool /usr/local/bin  &> /dev/null
+fi
+if ! command -v aptos-node &> /dev/null
+then
+  git clone https://github.com/aptos-labs/aptos-core.git  &> /dev/null
+  cd $HOME/aptos-core  &> /dev/null
+  git fetch &>/dev/null
+  git checkout origin/devnet &>/dev/null
+  echo y | ./scripts/dev_setup.sh  &> /dev/null
+  source ~/.cargo/env
+  cargo build -p aptos-node --release &> /dev/null
+  mv $HOME/aptos-core/target/release/aptos-node /usr/local/bin  &> /dev/null
+else
+  cd $HOME/aptos-core
+  git fetch && git pull
+  cargo build -p aptos-node --release &> /dev/null
+  mv $HOME/aptos-core/target/release/aptos-node /usr/local/bin  &> /dev/null
+fi
 # echo "-----------------------------------------------------------------------------"
 # echo -e "\e[1m\e[32m3. Очищаем бд... \e[0m" && sleep 1
 # echo "-----------------------------------------------------------------------------"
