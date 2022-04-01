@@ -73,7 +73,7 @@ sudo mkdir -p $HOME/aptos/identity
 cd $HOME/aptos
 # docker compose -f $HOME/aptos/docker-compose.yaml stop
 # wget -P $HOME/aptos https://raw.githubusercontent.com/aptos-labs/aptos-core/main/docker/compose/public_full_node/docker-compose.yaml
-wget -P $HOME/aptos https://raw.githubusercontent.com/aptos-labs/aptos-core/main/docker/compose/public_full_node/public_full_node.yaml
+# wget -P $HOME/aptos https://raw.githubusercontent.com/aptos-labs/aptos-core/main/docker/compose/public_full_node/public_full_node.yaml
 wget -P $HOME/aptos https://devnet.aptoslabs.com/genesis.blob
 wget -P $HOME/aptos https://devnet.aptoslabs.com/waypoint.txt
 # wget -P $HOME/aptos https://api.zvalid.com/aptos/seeds.yaml
