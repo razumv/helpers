@@ -155,8 +155,7 @@ then
     get_vars
     if [ ! -z "$PRIVATE_KEY" ]
     then
-        echo -e "\e[1m\e[92m Peer Id: ${NORMAL}" $PEER_ID
-        echo -e "\e[1m\e[92m Private Key:  ${NORMAL}" $PRIVATE_KEY
+        sleep 1
     else
         rm $HOME/aptos/identity/private-key.txt
         create_identity
