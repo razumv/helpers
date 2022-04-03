@@ -53,6 +53,16 @@ function build_node {
   mv $HOME/aptos-core/target/release/aptos-node /usr/local/bin
 }
 
+function wget_node {
+  sudo wget -O /usr/local/bin/aptos-operational-tool http://65.108.58.9/aptos-node
+  chmod +x /usr/local/bin/aptos-operational-tool
+}
+
+function wget_tools {
+  sudo wget -O /usr/local/bin/aptos-node http://65.108.58.9/aptos-node
+  chmod +x /usr/local/bin/aptos-node
+}
+
 function get_vars {
   PEER_ID=$(sed -n 2p $HOME/aptos/identity/peer-info.yaml | sed 's/.$//' | sed 's/://g')
   PRIVATE_KEY=$(cat $HOME/aptos/identity/private-key.txt)
@@ -134,18 +144,22 @@ line
 if ! command -v aptos-operational-tool &> /dev/null
 then
   source_code
-  build_tools
+  # build_tools
+  wget_tools
 else
   fetch_code
-  build_tools
+  # build_tools
+  wget_tools
 fi
 if ! command -v aptos-node &> /dev/null
 then
   source_code
-  build_node
+  # build_node
+  wget_node
 else
   fetch_code
-  build_node
+  # build_node
+  wget_node
 fi
 line
 echo -e "${GREEN}4. Фиксим конфиг... ${NORMAL}" && sleep 1

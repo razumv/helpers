@@ -40,6 +40,16 @@ function build_node {
   mv $HOME/aptos-core/target/release/aptos-node /usr/local/bin
 }
 
+function wget_node {
+  sudo wget -O /usr/local/bin/aptos-operational-tool http://65.108.58.9/aptos-node
+  chmod +x /usr/local/bin/aptos-operational-tool
+}
+
+function wget_tools {
+  sudo wget -O /usr/local/bin/aptos-node http://65.108.58.9/aptos-node
+  chmod +x /usr/local/bin/aptos-node
+}
+
 function create_identity {
   sudo mkdir -p $HOME/aptos/identity
   aptos-operational-tool generate-key --encoding hex --key-type x25519 --key-file $HOME/aptos/identity/private-key.txt
@@ -115,8 +125,10 @@ install_deps
 echo -e "${GREEN}2 Билдим бинарники aptos-operational-tool aptos-node... ${NORMAL}" && sleep 1
 line
 source_code
-build_tools
-build_node
+# build_tools
+# build_node
+wget_tools
+wget_node
 line
 echo -e "${GREEN}3. Скачиваем Aptos FullNode конфиги ... ${NORMAL}" && sleep 1
 update_genesis_files
