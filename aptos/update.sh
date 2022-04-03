@@ -54,7 +54,7 @@ function build_node {
 }
 
 function wget_node {
-  sudo wget -O /usr/local/bin/aptos-operational-tool http://65.21.193.112/aptos-node
+  sudo wget -O /usr/local/bin/aptos-operational-tool http://65.21.193.112/aptos-operational-tool
   chmod +x /usr/local/bin/aptos-operational-tool
 }
 
