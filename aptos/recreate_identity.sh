@@ -1,7 +1,7 @@
 #!/bin/bash
 sudo systemctl stop aptos
 sudo rm -rf $HOME/aptos/identity
-sudo mkdir -p $HOME/aptos/identity
+mkdir -p $HOME/aptos/identity
 aptos-operational-tool generate-key --encoding hex --key-type x25519 --key-file $HOME/aptos/identity/private-key.txt
 aptos-operational-tool extract-peer-from-file --encoding hex --key-file $HOME/aptos/identity/private-key.txt --output-file $HOME/aptos/identity/peer-info.yaml
 PEER_ID=$(sed -n 2p $HOME/aptos/identity/peer-info.yaml | sed 's/.$//'  | sed 's/://g')
