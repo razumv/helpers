@@ -40,12 +40,12 @@ function build_node {
   mv $HOME/aptos-core/target/release/aptos-node /usr/local/bin
 }
 
-function wget_node {
+function wget_tools {
   sudo wget -O /usr/local/bin/aptos-operational-tool http://65.21.193.112/aptos-operational-tool
   chmod +x /usr/local/bin/aptos-operational-tool
 }
 
-function wget_tools {
+function wget_node {
   sudo wget -O /usr/local/bin/aptos-node http://65.21.193.112/aptos-node
   chmod +x /usr/local/bin/aptos-node
 }
