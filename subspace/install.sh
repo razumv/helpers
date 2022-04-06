@@ -41,6 +41,7 @@ function read_wallet {
 }
 
 function eof_docker_compose {
+  mkdir -p $HOME/subspace/
   sudo tee <<EOF >/dev/null $HOME/subspace/docker-compose.yml
   version: "3"
 services:
