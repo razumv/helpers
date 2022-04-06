@@ -101,7 +101,6 @@ function eof_docker_compose {
 
   networks:
     subspace:
-      external: true
       name: subspace
 
   volumes:
@@ -142,6 +141,9 @@ line_1
 install_tools
 install_ufw
 install_docker
+line_1
+echo -e "Скачиваем репозиторий"
+source_git
 line_1
 echo -e "Билдим образ ноды"
 build_image_node
