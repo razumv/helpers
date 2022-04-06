@@ -21,9 +21,7 @@ function backup_keys {
 }
 
 function remove_old_db {
-  cd $HOME/masa-node-v1.0/
-  geth removedb --datadir data
-  rm -rf data
+  rm -rf $HOME/masa-node-v1.0/data
 }
 
 function init_db_recover_keys {
