@@ -45,54 +45,55 @@ function read_wallet {
 function eof_docker_compose {
   mkdir -p $HOME/subspace/
   sudo tee <<EOF >/dev/null $HOME/subspace/docker-compose.yml
-  version: "3"
-services:
-  node:
-    image: subspacelabs/subspace-node
-    networks:
-      - default
-      - subspace
-    volumes:
-      - source: subspace-node
-        target: /var/subspace
-        type: volume
-    command: [
-      "--validator",
-      "--force-authoring",
-      "--chain", "testnet",
-      "--base-path", "/var/subspace",
-      "--ws-external",
-      "--bootnodes", "/dns/farm-rpc.subspace.network/tcp/30333/p2p/12D3KooWPjMZuSYj35ehced2MTJFf95upwpHKgKUrFRfHwohzJXr",
-      "--name", "$SUBSPACE_NODENAME",
-      "--telemetry-url", "wss://telemetry.polkadot.io/submit/ 1"
-    ]
-  farmer:
-    image: subspacelabs/subspace-farmer
-    networks:
-      - default
-    volumes:
-      - source: subspace-farmer
-        target: /var/subspace
-        type: volume
-    restart: always
-    command: [
-      "farm",
-      "--node-rpc-url", "ws://node:9944",
-      "--reward-address", "$WALLETADDRESS"
-    ]
+  version: "3.7"
+  services:
+    node:
+      image: subspacelabs/subspace-node
+      networks:
+        - default
+        - subspace
+      volumes:
+        - source: subspace-node
+          target: /var/subspace
+          type: volume
+      command: [
+        "--validator",
+        "--force-authoring",
+        "--chain", "testnet",
+        "--base-path", "/var/subspace",
+        "--ws-external",
+        "--bootnodes", "/dns/farm-rpc.subspace.network/tcp/30333/p2p/12D3KooWPjMZuSYj35ehced2MTJFf95upwpHKgKUrFRfHwohzJXr",
+        "--name", "$SUBSPACE_NODENAME",
+        "--telemetry-url", "wss://telemetry.polkadot.io/submit/ 1"
+      ]
+    farmer:
+      image: subspacelabs/subspace-farmer
+      networks:
+        - default
+      volumes:
+        - source: subspace-farmer
+          target: /var/subspace
+          type: volume
+      restart: always
+      command: [
+        "farm",
+        "--node-rpc-url", "ws://node:9944",
+        "--reward-address", "$WALLET_ADDRESS"
+      ]
 
-networks:
-  subspace:
-    external: true
-    name: subspace
+  networks:
+    subspace:
+      external: true
+      name: subspace
 
-volumes:
-  subspace-node:
-  subspace-farmer:
+  volumes:
+    subspace-node:
+    subspace-farmer:
 EOF
 }
 
 function docker_compose_pull {
+  docker network create subspace
   docker-compose -f $HOME/subspace/docker-compose.yml pull
 }
 
