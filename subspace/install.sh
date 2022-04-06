@@ -31,17 +31,13 @@ function install_ufw {
 }
 
 function read_nodename {
-  line_2
   echo -e "Enter your node name(random name for telemetry)"
   read SUBSPACE_NODENAME
-  line_2
 }
 
 function read_wallet {
-  line_2
   echo -e "Enter your polkadot.js extension address"
   read WALLET_ADDRESS
-  line_2
 }
 
 function eof_docker_compose {
