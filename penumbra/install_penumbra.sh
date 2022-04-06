@@ -1,28 +1,29 @@
 #!/bin/bash
-echo "-----------------------------------------------------------------------------"
-curl -s https://raw.githubusercontent.com/razumv/helpers/main/doubletop.sh | bash
-echo "-----------------------------------------------------------------------------"
-echo "Устанавливаем софт"
-echo "-----------------------------------------------------------------------------"
-curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash &>/dev/null
-curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_rust.sh | bash &>/dev/null
-source ~/.cargo/env
-sleep 1
-echo "-----------------------------------------------------------------------------"
-echo "Весь необходимый софт установлен"
-echo "-----------------------------------------------------------------------------"
-git clone https://github.com/penumbra-zone/penumbra
-cd $HOME/penumbra && git checkout 005-mneme
-echo "-----------------------------------------------------------------------------"
-echo "Репозиторий успешно склонирован, начинаем билд"
-echo "-----------------------------------------------------------------------------"
-cd $HOME/penumbra/
-cargo build --release --bin pcli
-echo "-----------------------------------------------------------------------------"
-echo "Билд закончен, создаем кошелек"
-echo "-----------------------------------------------------------------------------"
-cd $HOME/penumbra/
-cargo run --quiet --release --bin pcli wallet generate
-echo "-----------------------------------------------------------------------------"
-echo "Кошелек успешно создан, следуйте по гайду дальше"
-echo "-----------------------------------------------------------------------------"
+
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/penumbra/functions.sh | bash
+colors
+
+line
+logo
+line
+echo_start_install
+line
+echo "${GREEN}1/5 Устанавливаем софт ${NORMAL}"
+line
+install_tools
+line
+echo "${GREEN}2/5 Клонируем репозиторий ${NORMAL}"
+line
+source_git
+line
+echo "${GREEN}3/5 Начинаем билд ${NORMAL}"
+line
+build_penumbra
+line
+echo "${GREEN}4/5 Создаем кошелек ${NORMAL}"
+line
+generate_wallet
+line
+echo "${GREEN}5/5 Кошелек успешно создан, следуйте по гайду дальше ${NORMAL}"
+line
+echo_finish
