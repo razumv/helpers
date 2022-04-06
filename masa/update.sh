@@ -45,7 +45,7 @@ colors
 line
 logo
 line
-echo -e "${RED}Начинаем обновление${NORMAL}"
+echo -e "${RED}Update starting${NORMAL}"
 line
 backup_keys
 sudo systemctl stop masad
@@ -54,5 +54,5 @@ bin_update
 init_db_recover_keys
 sudo systemctl restart masad
 line
-echo -e "${RED}Обновление завершено${NORMAL}"
+echo -e "${RED}Update finished${NORMAL}"
 line
