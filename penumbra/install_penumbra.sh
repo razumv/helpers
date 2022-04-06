@@ -52,7 +52,7 @@ colors
 line
 logo
 line
-echo -e "${RED} Начинаем установку ${NORMAL}"
+echo -e "${RED}Начинаем установку ${NORMAL}"
 line
 echo -e "${GREEN}1/5 Устанавливаем софт ${NORMAL}"
 line
@@ -72,4 +72,4 @@ generate_wallet
 line
 echo -e "${GREEN}5/5 Кошелек успешно создан, следуйте по гайду дальше ${NORMAL}"
 line
-echo -e "${RED} Скрипт завершил свою работу ${NORMAL}"
+echo -e "${RED}Скрипт завершил свою работу ${NORMAL}"
