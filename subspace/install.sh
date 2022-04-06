@@ -1,8 +1,8 @@
 #!/bin/bash
 
 function colors {
-  GREEN="\e[1m\e[32m"
-  RED="\e[1m\e[39m"
+  GREEN="\e[32m"
+  RED="\e[39m"
   NORMAL="\e[0m"
 }
 
@@ -77,8 +77,7 @@ function eof_docker_compose {
       restart: always
       command: [
         "farm",
-        "--node-rpc-url", "ws://node:9944",
-        "--reward-address", "$WALLET_ADDRESS"
+        "--node-rpc-url", "ws://node:9944"
       ]
 
   networks:
