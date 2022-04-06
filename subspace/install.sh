@@ -32,11 +32,13 @@ function install_ufw {
 
 function read_nodename {
   echo -e "Enter your node name(random name for telemetry)"
+  line
   read SUBSPACE_NODENAME
 }
 
 function read_wallet {
   echo -e "Enter your polkadot.js extension address"
+  line
   read WALLET_ADDRESS
 }
 
