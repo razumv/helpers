@@ -19,7 +19,7 @@ function line_2 {
 }
 
 function install_tools {
-  sudo apt update && sudo apt install mc wget htop jq -y
+  sudo apt update && sudo apt install mc wget htop jq git -y
 }
 
 function install_docker {
@@ -32,23 +32,40 @@ function install_ufw {
 
 function read_nodename {
   echo -e "Enter your node name(random name for telemetry)"
-  line
+  line_1
   read SUBSPACE_NODENAME
 }
 
 function read_wallet {
   echo -e "Enter your polkadot.js extension address"
-  line
+  line_1
   read WALLET_ADDRESS
 }
 
+function source_git {
+  git clone https://github.com/subspace/subspace
+  cd $HOME/subspace
+  git fetch
+  git checkout snapshot-2022-mar-09
+}
+
+function build_image_node {
+  cd $HOME/subspace
+  docker build -t subspacelabs/subspace-node:snapshot-2022-mar-09 -f $HOME/subspace/Dockerfile-node .
+}
+
+function build_image_farmer {
+  cd $HOME/subspace
+  docker build -t subspacelabs/subspace-farmer:snapshot-2022-mar-09 -f $HOME/subspace/Dockerfile-farmer .
+}
+
 function eof_docker_compose {
-  mkdir -p $HOME/subspace/
-  sudo tee <<EOF >/dev/null $HOME/subspace/docker-compose.yml
+  mkdir -p $HOME/subspace_docker/
+  sudo tee <<EOF >/dev/null $HOME/subspace_docker/docker-compose.yml
   version: "3.7"
   services:
     node:
-      image: subspacelabs/subspace-node
+      image: subspacelabs/subspace-node:snapshot-2022-mar-09
       networks:
         - default
         - subspace
@@ -62,12 +79,13 @@ function eof_docker_compose {
         "--chain", "testnet",
         "--base-path", "/var/subspace",
         "--ws-external",
+        "--unsafe-rpc-external",
         "--bootnodes", "/dns/farm-rpc.subspace.network/tcp/30333/p2p/12D3KooWPjMZuSYj35ehced2MTJFf95upwpHKgKUrFRfHwohzJXr",
         "--name", "$SUBSPACE_NODENAME",
         "--telemetry-url", "wss://telemetry.polkadot.io/submit/ 1"
       ]
     farmer:
-      image: subspacelabs/subspace-farmer
+      image: subspacelabs/subspace-farmer:snapshot-2022-mar-09
       networks:
         - default
       volumes:
@@ -77,7 +95,8 @@ function eof_docker_compose {
       restart: always
       command: [
         "farm",
-        "--node-rpc-url", "ws://node:9944"
+        "--node-rpc-url", "ws://node:9944",
+        "--reward-address", "$WALLET_ADDRESS"
       ]
 
   networks:
@@ -91,28 +110,23 @@ function eof_docker_compose {
 EOF
 }
 
-function docker_compose_pull {
-  docker network create subspace
-  docker-compose -f $HOME/subspace/docker-compose.yml pull
-}
-
 function docker_compose_up {
-  docker-compose -f $HOME/subspace/docker-compose.yml up -d
+  docker-compose -f $HOME/subspace_docker/docker-compose.yml up -d
 }
 
 function echo_info {
   echo -e "${GREEN}Для остановки ноды и фармера subspace: ${NORMAL}"
-  echo -e "${RED}   docker-compose -f $HOME/subspace/docker-compose.yml down \n ${NORMAL}"
+  echo -e "${RED}   docker-compose -f $HOME/subspace_docker/docker-compose.yml down \n ${NORMAL}"
   echo -e "${GREEN}Для запуска ноды и фармера subspace: ${NORMAL}"
-  echo -e "${RED}   docker-compose -f $HOME/subspace/docker-compose.yml up -d \n ${NORMAL}"
+  echo -e "${RED}   docker-compose -f $HOME/subspace_docker/docker-compose.yml up -d \n ${NORMAL}"
   echo -e "${GREEN}Для перезагрузки ноды subspace: ${NORMAL}"
-  echo -e "${RED}   docker-compose -f $HOME/subspace/docker-compose.yml restart node \n ${NORMAL}"
+  echo -e "${RED}   docker-compose -f $HOME/subspace_docker/docker-compose.yml restart node \n ${NORMAL}"
   echo -e "${GREEN}Для перезагрузки фармера subspace: ${NORMAL}"
-  echo -e "${RED}   docker-compose -f $HOME/subspace/docker-compose.yml restart farmer \n ${NORMAL}"
+  echo -e "${RED}   docker-compose -f $HOME/subspace_docker/docker-compose.yml restart farmer \n ${NORMAL}"
   echo -e "${GREEN}Для проверки логов ноды выполняем команду: ${NORMAL}"
-  echo -e "${RED}   docker-compose -f $HOME/subspace/docker-compose.yml logs -f --tail=100 node \n ${NORMAL}"
+  echo -e "${RED}   docker-compose -f $HOME/subspace_docker/docker-compose.yml logs -f --tail=100 node \n ${NORMAL}"
   echo -e "${GREEN}Для проверки логов фармера выполняем команду: ${NORMAL}"
-  echo -e "${RED}   docker-compose -f $HOME/subspace/docker-compose.yml logs -f --tail=100 farmer \n ${NORMAL}"
+  echo -e "${RED}   docker-compose -f $HOME/subspace_docker/docker-compose.yml logs -f --tail=100 farmer \n ${NORMAL}"
 }
 
 colors
@@ -129,10 +143,15 @@ install_tools
 install_ufw
 install_docker
 line_1
-echo -e "Скачиваем docker образы"
-line
+echo -e "Билдим образ ноды"
+build_image_node
+line_1
+echo -e "Билдим образ фармера"
+build_image_farmer
+line_1
+echo -e "Создаем docker-compose файл"
+line_1
 eof_docker_compose
-docker_compose_pull
 line_1
 echo -e "Запускаем docker контейнеры для node and farmer Subspace"
 line_1
