@@ -53,13 +53,13 @@ colors
 line
 logo
 line
-echo "${RED} Начинаем обновление ${NORMAL}"
+echo -e "${RED} Начинаем обновление ${NORMAL}"
 line
-echo "${GREEN} 1/2 Обновляем репозиторий ${NORMAL}"
+echo -e "${GREEN} 1/2 Обновляем репозиторий ${NORMAL}"
 source_git
 line
-echo "${GREEN} 2/2 Начинаем билд ${NORMAL}"
+echo -e "${GREEN} 2/2 Начинаем билд ${NORMAL}"
 line
 build_penumbra
 line
-echo "${RED} Скрипт завершил свою работу ${NORMAL}"
+echo -e "${RED} Скрипт завершил свою работу ${NORMAL}"
