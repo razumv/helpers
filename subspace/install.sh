@@ -74,13 +74,15 @@ function eof_docker_compose {
           target: /var/subspace
           type: volume
       command: [
-        "--validator",
-        "--force-authoring",
         "--chain", "testnet",
+        "--wasm-execution", "compiled",
+        "--execution", "wasm",
         "--base-path", "/var/subspace",
         "--ws-external",
-        "--unsafe-rpc-external",
+        "--rpc-methods", "unsafe",
+        "--rpc-cors", "all",
         "--bootnodes", "/dns/farm-rpc.subspace.network/tcp/30333/p2p/12D3KooWPjMZuSYj35ehced2MTJFf95upwpHKgKUrFRfHwohzJXr",
+        "--validator",
         "--name", "$SUBSPACE_NODENAME",
         "--telemetry-url", "wss://telemetry.polkadot.io/submit/ 1"
       ]
@@ -126,6 +128,12 @@ function echo_info {
   echo -e "${RED}   docker-compose -f $HOME/subspace_docker/docker-compose.yml logs -f --tail=100 node \n ${NORMAL}"
   echo -e "${GREEN}Для проверки логов фармера выполняем команду: ${NORMAL}"
   echo -e "${RED}   docker-compose -f $HOME/subspace_docker/docker-compose.yml logs -f --tail=100 farmer \n ${NORMAL}"
+}
+
+function delete_old {
+  docker-compose -f $HOME/subspace_docker/docker-compose.yml down
+  docker volume rm subspace_docker_subspace-farmer
+  docker volume rm subspace_docker_subspace-node
 }
 
 colors
