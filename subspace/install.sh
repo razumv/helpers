@@ -42,22 +42,22 @@ function read_wallet {
   read WALLET_ADDRESS
 }
 
-function source_git {
-  git clone https://github.com/subspace/subspace
-  cd $HOME/subspace
-  git fetch
-  git checkout snapshot-2022-mar-09
-}
-
-function build_image_node {
-  cd $HOME/subspace
-  docker build -t subspacelabs/subspace-node:snapshot-2022-mar-09 -f $HOME/subspace/Dockerfile-node .
-}
-
-function build_image_farmer {
-  cd $HOME/subspace
-  docker build -t subspacelabs/subspace-farmer:snapshot-2022-mar-09 -f $HOME/subspace/Dockerfile-farmer .
-}
+# function source_git {
+#   git clone https://github.com/subspace/subspace
+#   cd $HOME/subspace
+#   git fetch
+#   git checkout snapshot-2022-mar-09
+# }
+#
+# function build_image_node {
+#   cd $HOME/subspace
+#   docker build -t subspacelabs/subspace-node:snapshot-2022-mar-09 -f $HOME/subspace/Dockerfile-node .
+# }
+#
+# function build_image_farmer {
+#   cd $HOME/subspace
+#   docker build -t subspacelabs/subspace-farmer:snapshot-2022-mar-09 -f $HOME/subspace/Dockerfile-farmer .
+# }
 
 function eof_docker_compose {
   mkdir -p $HOME/subspace_docker/
@@ -65,7 +65,7 @@ function eof_docker_compose {
   version: "3.7"
   services:
     node:
-      image: subspacelabs/subspace-node:snapshot-2022-mar-09
+      image: ghcr.io/subspace/node:snapshot-2022-mar-09
       networks:
         - default
         - subspace
@@ -87,7 +87,7 @@ function eof_docker_compose {
         "--telemetry-url", "wss://telemetry.polkadot.io/submit/ 1"
       ]
     farmer:
-      image: subspacelabs/subspace-farmer:snapshot-2022-mar-09
+      image: ghcr.io/subspace/farmer:snapshot-2022-mar-09
       networks:
         - default
       volumes:
@@ -150,15 +150,15 @@ install_tools
 install_ufw
 install_docker
 line_1
-echo -e "Скачиваем репозиторий"
-source_git
-line_1
-echo -e "Билдим образ ноды"
-build_image_node
-line_1
-echo -e "Билдим образ фармера"
-build_image_farmer
-line_1
+# echo -e "Скачиваем репозиторий"
+# source_git
+# line_1
+# echo -e "Билдим образ ноды"
+# build_image_node
+# line_1
+# echo -e "Билдим образ фармера"
+# build_image_farmer
+# line_1
 echo -e "Создаем docker-compose файл"
 line_1
 eof_docker_compose
