@@ -132,9 +132,8 @@ function echo_info {
 }
 
 function delete_old {
-  docker-compose -f $HOME/subspace_docker/docker-compose.yml down
-  docker volume rm subspace_docker_subspace-farmer
-  docker volume rm subspace_docker_subspace-node
+  docker-compose -f $HOME/subspace_docker/docker-compose.yml down &>/dev/null
+  docker volume rm subspace_docker_subspace-farmer subspace_docker_subspace-node &>/dev/null
 }
 
 colors
@@ -150,6 +149,7 @@ line_1
 install_tools
 install_ufw
 install_docker
+delete_old
 line_1
 # echo -e "Скачиваем репозиторий"
 # source_git
