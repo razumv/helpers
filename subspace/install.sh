@@ -84,7 +84,8 @@ function eof_docker_compose {
         "--bootnodes", "/dns/farm-rpc.subspace.network/tcp/30333/p2p/12D3KooWPjMZuSYj35ehced2MTJFf95upwpHKgKUrFRfHwohzJXr",
         "--validator",
         "--name", "$SUBSPACE_NODENAME",
-        "--telemetry-url", "wss://telemetry.polkadot.io/submit/ 1"
+        "--telemetry-url", "wss://telemetry.polkadot.io/submit/ 1",
+        "--telemetry-url", "wss://telemetry.postcapitalist.io/submit 0"
       ]
     farmer:
       image: ghcr.io/subspace/farmer:snapshot-2022-mar-09
