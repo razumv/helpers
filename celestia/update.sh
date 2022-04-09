@@ -19,11 +19,11 @@ git clone https://github.com/celestiaorg/celestia-node.git &>/dev/null
 echo "Репозиторий успешно обновлен, начинаем билд"
 echo "-----------------------------------------------------------------------------"
 cd celestia-node
-git checkout v0.2.0
+git checkout v0.2.0 &>/dev/null
 make install &>/dev/null
 echo "Билд завершен успешно"
 echo "-----------------------------------------------------------------------------"
-mv $HOME/.celestia-full $HOME/.celestia-bridge
+mv $HOME/.celestia-full $HOME/.celestia-bridge &>/dev/null
 source $HOME/.profile
 
 sudo tee /etc/systemd/system/celestia-bridge.service > /dev/null <<EOF
