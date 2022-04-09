@@ -24,6 +24,8 @@ make install &>/dev/null
 echo "Билд завершен успешно"
 echo "-----------------------------------------------------------------------------"
 mv $HOME/.celestia-full $HOME/.celestia-bridge
+source $HOME/.profile
+
 sudo tee /etc/systemd/system/celestia-bridge.service > /dev/null <<EOF
 [Unit]
   Description=celestia-bridge
@@ -40,7 +42,7 @@ EOF
 
 sudo systemctl enable celestia-bridge &>/dev/null
 sudo systemctl daemon-reload
-sudo systemctl restart celestia-bridge celestia-appd celestia-light 
+sudo systemctl restart celestia-bridge celestia-appd celestia-light
 
 echo "Нода обновилена и запущена"
 echo "-----------------------------------------------------------------------------"
