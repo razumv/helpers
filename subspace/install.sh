@@ -84,7 +84,7 @@ function eof_docker_compose {
         "--bootnodes", "/dns/farm-rpc.subspace.network/tcp/30333/p2p/12D3KooWPjMZuSYj35ehced2MTJFf95upwpHKgKUrFRfHwohzJXr",
         "--validator",
         "--name", "$SUBSPACE_NODENAME",
-        "--telemetry-url", "wss://telemetry.polkadot.io/submit/ 1",
+        "--telemetry-url", "wss://telemetry.subspace.network/submit 0",
         "--telemetry-url", "wss://telemetry.postcapitalist.io/submit 0"
       ]
     farmer:
@@ -132,9 +132,8 @@ function echo_info {
 }
 
 function delete_old {
-  docker-compose -f $HOME/subspace_docker/docker-compose.yml down
-  docker volume rm subspace_docker_subspace-farmer
-  docker volume rm subspace_docker_subspace-node
+  docker-compose -f $HOME/subspace_docker/docker-compose.yml down &>/dev/null
+  docker volume rm subspace_docker_subspace-farmer subspace_docker_subspace-node &>/dev/null
 }
 
 colors
@@ -150,6 +149,7 @@ line_1
 install_tools
 install_ufw
 install_docker
+delete_old
 line_1
 # echo -e "Скачиваем репозиторий"
 # source_git
