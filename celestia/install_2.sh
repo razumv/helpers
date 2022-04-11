@@ -49,7 +49,7 @@ echo "Инициализация фулл ноды закончена, пере�
 echo "-----------------------------------------------------------------------------"
 
 rm -rf $HOME/.celestia-light
-celestia light init --headers.trusted-peer $FULL_NODE_IP --headers.trusted-hash $TRUSTED_HASH &>/dev/null
+celestia light init --headers.trusted-peers $FULL_NODE_IP --headers.trusted-hash $TRUSTED_HASH &>/dev/null
 #sed -i.bak -e "s|BootstrapPeers = \[\]|BootstrapPeers = \[\"$FULL_NODE_IP\"\]|g" $HOME/.celestia-light/config.toml
 #sed -i.bak -e "s|MutualPeers = \[\]|MutualPeers = \[\"$FULL_NODE_IP\"\]|g" $HOME/.celestia-light/config.toml
 sed -i.bak -e 's/PeerExchange = false/PeerExchange = true/g' $HOME/.celestia-light/config.toml
