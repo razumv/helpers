@@ -29,7 +29,7 @@ if [ ! -d $HOME/networks ]; then
 fi
 echo "Репозиторий успешно склонирован, начинаем билд"
 echo "-----------------------------------------------------------------------------"
-cd $HOME/celestia-node/
+cd $HOME/celestia-app/
 git checkout v0.2.0
 make install &>/dev/null
 echo "Билд закончен, переходим к инициализации ноды"
