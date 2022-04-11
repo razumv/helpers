@@ -21,11 +21,11 @@ echo 'export TRUSTED_HASH='${TRUSTED_HASH} >> $HOME/.profile
 source $HOME/.profile
 
 celestia full init --core.remote tcp://127.0.0.1:26657 --headers.trusted-hash $TRUSTED_HASH  &>/dev/null
-sed -i.bak -e 's/PeerExchange = false/PeerExchange = true/g' $HOME/.celestia-full/config.toml
+sed -i.bak -e 's/PeerExchange = false/PeerExchange = true/g' $HOME/.celestia-bridge/config.toml
 
 sudo tee /etc/systemd/system/celestia-bridge.service > /dev/null <<EOF
 [Unit]
-  Description=celestia-full node
+  Description=celestia-bridge node
   After=network-online.target
 [Service]
   User=$USER
@@ -39,7 +39,7 @@ EOF
 
 sudo systemctl enable celestia-bridge &>/dev/null
 sudo systemctl daemon-reload
-sudo systemctl restart celestia-bridge && sleep 10 && journalctl -u celestia-full -o cat -n 10000 --no-pager | grep -m 1 "*  /ip4/" > $HOME/multiaddress.txt
+sudo systemctl restart celestia-bridge && sleep 10 && journalctl -u celestia-bridge -o cat -n 10000 --no-pager | grep -m 1 "*  /ip4/" > $HOME/multiaddress.txt
 
 FULL_NODE_IP=$(cat $HOME/multiaddress.txt | sed -r 's/^.{3}//')
 echo 'export FULL_NODE_IP='${FULL_NODE_IP} >> $HOME/.profile
