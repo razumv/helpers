@@ -39,3 +39,7 @@
               addresses:
               - "/ip4/167.99.210.123/tcp/6180/ln-noise-ik/9dcf386c08c5701d292d40575c6286935b4839103e715fc4056ba0b9e4959d32/ln-handshake/0"
               role: "Upstream"
+        68c48b30df11f8f1ea34e7bb4b802d7eb184084f7f9143807d7a5dee9457ec35:
+              addresses:
+              - "/ip4/188.40.89.173/tcp/6180/ln-noise-ik/68c48b30df11f8f1ea34e7bb4b802d7eb184084f7f9143807d7a5dee9457ec35/ln-handshake/0"
+              role: "Upstream"
