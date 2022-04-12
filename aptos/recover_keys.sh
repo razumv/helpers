@@ -9,8 +9,8 @@ cp $HOME/aptos-core/config/src/config/test_data/public_full_node.yaml $HOME/apto
 sed -i '/network_id: "public"$/a\
       identity:\
         type: "from_config"\
-        key: "'$PRIVKEY'"\
-        peer_id: "'$PEER'"' $HOME/.aptos/config/public_full_node.yaml
+        key: "'$PRIVATE_KEY'"\
+        peer_id: "'$PEER_ID'"' $HOME/aptos/public_full_node.yaml
 
 /usr/local/bin/yq ea -i 'select(fileIndex==0).full_node_networks[0].seeds = select(fileIndex==1).seeds | select(fileIndex==0)' $HOME/aptos/public_full_node.yaml $HOME/aptos/seeds.yaml
 
