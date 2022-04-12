@@ -10,4 +10,12 @@
         f6b135a59591677afc98168791551a0a476222516fdc55869d2b649c614d965b:
             addresses:
             - "/dns4/pfn2.node.devnet.aptoslabs.com/tcp/6182/ln-noise-ik/f6b135a59591677afc98168791551a0a476222516fdc55869d2b649c614d965b/ln-handshake/0"
-            role: "Upstream"  
+            role: "Upstream"
+        66bf30b3d36aa987ef8149d08b05f350585ca9676ad2c12bc607b855e61df525:
+              addresses:
+              - "/ip4/65.108.58.9/tcp/6180/ln-noise-ik/66bf30b3d36aa987ef8149d08b05f350585ca9676ad2c12bc607b855e61df525/ln-handshake/0"
+              role: "Upstream"
+        e94b4a32e319d50f063a140e6c59c8acf65cbe104d1e5caea87c372d6ece6f63:
+              addresses:
+              - "/ip4/65.21.193.112/tcp/6180/ln-noise-ik/e94b4a32e319d50f063a140e6c59c8acf65cbe104d1e5caea87c372d6ece6f63/ln-handshake/0"
+              role: "Upstream"
