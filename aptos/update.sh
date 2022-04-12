@@ -48,7 +48,7 @@ function build_tools {
   mv $HOME/aptos-core/target/release/aptos-operational-tool /usr/local/bin
 }
 
-function #build_node {
+function build_node {
   cargo build -p aptos-node --release
   mv $HOME/aptos-core/target/release/aptos-node /usr/local/bin
 }
