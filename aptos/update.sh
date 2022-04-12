@@ -48,7 +48,7 @@ function build_tools {
   mv $HOME/aptos-core/target/release/aptos-operational-tool /usr/local/bin
 }
 
-function build_node {
+function #build_node {
   cargo build -p aptos-node --release
   mv $HOME/aptos-core/target/release/aptos-node /usr/local/bin
 }
@@ -73,10 +73,10 @@ function fix_config {
   wget -O $HOME/aptos/seeds.yaml https://raw.githubusercontent.com/razumv/helpers/main/aptos/seeds.yaml
   cp $HOME/aptos-core/config/src/config/test_data/public_full_node.yaml $HOME/aptos/public_full_node.yaml
   sed -i '/network_id: "public"$/a\
-        identity:\
-          type: "from_config"\
-          key: "'$PRIVATE_KEY'"\
-          peer_id: "'$PEER_ID'"' $HOME/aptos/public_full_node.yaml
+      identity:\
+        type: "from_config"\
+        key: "'$PRIVATE_KEY'"\
+        peer_id: "'$PEER_ID'"' $HOME/aptos/public_full_node.yaml
 
   /usr/local/bin/yq ea -i 'select(fileIndex==0).full_node_networks[0].seeds = select(fileIndex==1).seeds | select(fileIndex==0)' $HOME/aptos/public_full_node.yaml $HOME/aptos/seeds.yaml
 
@@ -152,22 +152,22 @@ line
 if ! command -v aptos-operational-tool &> /dev/null
 then
   source_code
-  build_tools
-  # wget_tools
+  # build_tools
+  wget_tools
 else
   fetch_code
-  build_tools
-  # wget_tools
+  # build_tools
+  wget_tools
 fi
 if ! command -v aptos-node &> /dev/null
 then
   source_code
-  build_node
-  # wget_node
+  #build_node
+  wget_node
 else
   fetch_code
-  build_node
-  # wget_node
+  #build_node
+  wget_node
 fi
 line
 echo -e "${GREEN}4. Фиксим конфиг... ${NORMAL}" && sleep 1
