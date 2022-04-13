@@ -15,7 +15,7 @@ function recreate_keys {
 
 function fix_config {
   wget -O $HOME/aptos/seeds.yaml https://raw.githubusercontent.com/razumv/helpers/main/aptos/seeds.yaml
-  cp $HOME/aptos-core/config/src/config/test_data/public_full_node.yaml $HOME/aptos/public_full_node.yaml
+  wget -O $HOME/aptos/public_full_node.yaml https://raw.githubusercontent.com/aptos-labs/aptos-core/main/config/src/config/test_data/public_full_node.yaml
   sed -i '/network_id: "public"$/a\
       identity:\
         type: "from_config"\
