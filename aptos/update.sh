@@ -11,13 +11,13 @@ function check_stop_old_docker {
   ps=$(docker ps -a | grep "aptos-fullnode-1")
   if [ -z "$ps" ];
   then
-  echo "Старая версия на docker не обнаружена"
+  echo "Старая версия на docker не обнаружена $RED[OK]$NORMAL"
   else
-    echo "Старая версия на docker обнаружена,удаляем и переходим на systemd"
+    echo "Старая версия на docker обнаружена,удаляем и переходим на systemd $RED[OK]$NORMAL"
     docker compose -f $HOME/aptos/docker-compose.yaml down
     docker volume rm aptos_db
     docker rmi -f $(docker images | grep aptos | awk '{print $3}')
-    echo "Удалено, продолжаем обновление"
+    echo "Удалено, продолжаем обновление $RED[OK]$NORMAL"
   fi
 }
 
