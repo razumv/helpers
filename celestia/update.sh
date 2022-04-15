@@ -44,5 +44,5 @@ sudo systemctl enable celestia-bridge &>/dev/null
 sudo systemctl daemon-reload
 sudo systemctl restart celestia-bridge celestia-appd celestia-light
 
-echo "Нода обновилена и запущена"
+echo "Нода обновлена и запущена"
 echo "-----------------------------------------------------------------------------"
