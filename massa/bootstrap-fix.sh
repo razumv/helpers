@@ -2,6 +2,16 @@
 echo "applying massa bootstrap fix"
 echo '[bootstrap]
 max_ping = 10000
+bind = "[::]:31245"
+connect_timeout = 15000
+retry_delay = 5000
+read_timeout = 10000
+write_timeout = 10000
+enable_clock_synchronization = false
+cache_duration = 15000
+max_simultaneous_bootstraps = 2
+ip_list_max_size = 10000
+per_ip_min_interval = 3600000
 bootstrap_list = [
 ["149.202.86.103:31245", "5GcSNukkKePWpNSjx9STyoEZniJAN4U4EUzdsQyqhuP3WYf6nj"],
 ["149.202.89.125:31245", "5wDwi2GYPniGLzpDfKjXJrmHV3p1rLRmm4bQ9TUWNVkpYmd4Zm"],
