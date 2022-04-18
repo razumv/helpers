@@ -20,7 +20,7 @@ echo 'export TRUSTED_SERVER='${TRUSTED_SERVER} >> $HOME/.profile
 echo 'export TRUSTED_HASH='${TRUSTED_HASH} >> $HOME/.profile
 source $HOME/.profile
 
-celestia full init --core.remote tcp://127.0.0.1:26657 --headers.trusted-hash $TRUSTED_HASH  &>/dev/null
+celestia bridge init --core.remote tcp://127.0.0.1:26657 --headers.trusted-hash $TRUSTED_HASH  &>/dev/null
 sed -i.bak -e 's/PeerExchange = false/PeerExchange = true/g' $HOME/.celestia-bridge/config.toml
 
 sudo tee /etc/systemd/system/celestia-bridge.service > /dev/null <<EOF
@@ -45,7 +45,7 @@ FULL_NODE_IP=$(cat $HOME/multiaddress.txt | sed -r 's/^.{3}//')
 echo 'export FULL_NODE_IP='${FULL_NODE_IP} >> $HOME/.profile
 source $HOME/.profile
 
-echo "Инициализация фулл ноды закончена, переходим к инициализации лайт клиента"
+echo "Инициализация бридж ноды закончена, переходим к инициализации лайт клиента"
 echo "-----------------------------------------------------------------------------"
 
 rm -rf $HOME/.celestia-light
