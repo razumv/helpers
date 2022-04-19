@@ -13,6 +13,11 @@ max_simultaneous_bootstraps = 2
 ip_list_max_size = 10000
 per_ip_min_interval = 3600000
 bootstrap_list = [
+["65.108.59.25:31245", "8FYpHvFb6x4Z7jUhpUbEmMgDLXULCQVXnE6MkZV23YrhVikWZV"],
+["144.76.42.115:31245", "5MmKxMz8p9YVnyXK5JQs6x8589HzEV9T6tv7HtEvzLtGFJGdXr"],
+["167.99.209.179:31245", "7sVgP8eoJ4pCzVEE9Hb1NHt6yqdKR3t5aujc3r2nkJSUkQtLwi"],
+["167.99.217.85:31245", "8iHqyQwCLkL4zdsHQA6H4A74HqSm1Xyv1ZXvQWxJUrt8DmiF1K"],
+["167.99.210.123:31245", "5gYW5G1X7PjY6LFwSwWityv9LKvfupL9NJxiZgbsq9TzS1Uwbp"],
 ["149.202.86.103:31245", "5GcSNukkKePWpNSjx9STyoEZniJAN4U4EUzdsQyqhuP3WYf6nj"],
 ["149.202.89.125:31245", "5wDwi2GYPniGLzpDfKjXJrmHV3p1rLRmm4bQ9TUWNVkpYmd4Zm"],
 ["158.69.120.215:31245", "5QbsTjSoKzYc8uBbwPCap392CoMQfZ2jviyq492LZPpijctb9c"],
