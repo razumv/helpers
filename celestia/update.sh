@@ -14,7 +14,7 @@ echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> $HOME/.bash_profile &
 source $HOME/.bash_profile
 echo "Софт успешно обновлен, начинаем обновление репрозитория"
 echo "-----------------------------------------------------------------------------"
-sudo systemctl stop celestia-appd celestia-full celestia-light
+sudo systemctl stop celestia-full celestia-light  &>/dev/null
 cd $HOME
 rm -rf celestia-node &>/dev/null
 git clone https://github.com/celestiaorg/celestia-node.git &>/dev/null
