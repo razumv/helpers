@@ -27,9 +27,9 @@ echo "Билд завершен успешно"
 echo "-----------------------------------------------------------------------------"
 echo "Чиним бридж"
 echo "-----------------------------------------------------------------------------"
-mv $HOME/.celestia-full $HOME/.celestia-bridge &>/dev/null
 source $HOME/.profile
 
+rm -rf $HOME/.celestia-full $HOME/.celestia-bridge
 if [ ! -d $HOME/.celestia-bridge ]; then
   celestia bridge init --core.remote tcp://127.0.0.1:26657 --headers.trusted-hash $TRUSTED_HASH  &>/dev/null
   sed -i.bak -e 's/PeerExchange = false/PeerExchange = true/g' $HOME/.celestia-bridge/config.toml
