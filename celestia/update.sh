@@ -53,6 +53,8 @@ sudo systemctl enable celestia-bridge &>/dev/null
 sudo systemctl daemon-reload
 sudo systemctl restart celestia-bridge
 
+sleep 10
+
 echo "Чиним лайт"
 echo "-----------------------------------------------------------------------------"
 TRUSTED_SERVER="localhost:26657"
