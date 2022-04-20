@@ -29,6 +29,9 @@ echo "Чиним бридж"
 echo "-----------------------------------------------------------------------------"
 source $HOME/.profile
 
+TRUSTED_SERVER="localhost:26657"
+TRUSTED_HASH=$(curl -s $TRUSTED_SERVER/status | jq -r .result.sync_info.latest_block_hash)
+
 rm -rf $HOME/.celestia-full $HOME/.celestia-bridge
 if [ ! -d $HOME/.celestia-bridge ]; then
   celestia bridge init --core.remote tcp://127.0.0.1:26657 --headers.trusted-hash $TRUSTED_HASH  &>/dev/null
