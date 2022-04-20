@@ -23,8 +23,15 @@ git checkout v0.2.0 &>/dev/null
 make install &>/dev/null
 echo "Билд завершен успешно"
 echo "-----------------------------------------------------------------------------"
+echo "Чиним бридж"
+echo "-----------------------------------------------------------------------------"
 mv $HOME/.celestia-full $HOME/.celestia-bridge &>/dev/null
 source $HOME/.profile
+
+if [ ! -d $HOME/.celestia-bridge ]; then
+  celestia bridge init --core.remote tcp://127.0.0.1:26657 --headers.trusted-hash $TRUSTED_HASH  &>/dev/null
+  sed -i.bak -e 's/PeerExchange = false/PeerExchange = true/g' $HOME/.celestia-bridge/config.toml
+fi
 
 sudo tee /etc/systemd/system/celestia-bridge.service > /dev/null <<EOF
 [Unit]
@@ -42,7 +49,26 @@ EOF
 
 sudo systemctl enable celestia-bridge &>/dev/null
 sudo systemctl daemon-reload
-sudo systemctl restart celestia-bridge celestia-appd celestia-light
+sudo systemctl restart celestia-bridge
+
+echo "Чиним лайт"
+echo "-----------------------------------------------------------------------------"
+TRUSTED_SERVER="localhost:26657"
+TRUSTED_HASH=$(curl -s $TRUSTED_SERVER/status | jq -r .result.sync_info.latest_block_hash)
+journalctl -u celestia-bridge -o cat -n 10000 --no-pager | grep -m 1 "*  /ip4/" > $HOME/multiaddress.txt
+FULL_NODE_IP=$(cat $HOME/multiaddress.txt | sed -r 's/^.{3}//')
+rm -rf $HOME/.celestia-light/
+celestia light init --headers.trusted-peers $FULL_NODE_IP --headers.trusted-hash $TRUSTED_HASH &>/dev/null
+sed -i.bak -e 's/PeerExchange = false/PeerExchange = true/g' $HOME/.celestia-light/config.toml
+sed -i.bak -e 's/Bootstrapper = false/Bootstrapper = true/g' $HOME/.celestia-light/config.toml
+sed -i.bak -e 's/ListenAddresses = .*/ListenAddresses = ["\/ip4\/0.0.0.0\/tcp\/2122", "\/ip6\/::\/tcp\/2122"]/g' $HOME/.celestia-light/config.toml
+sed -i.bak -e 's/NoAnnounceAddresses = .*/NoAnnounceAddresses = ["\/ip4\/0.0.0.0\/tcp\/2122", "\/ip4\/127.0.0.1\/tcp\/2122", "\/ip6\/::\/tcp\/2122"]/g' $HOME/.celestia-light/config.toml
+sed -i.bak -e 's/BootstrapPeers = .*/BootstrapPeers = []/g' $HOME/.celestia-light/config.toml
+sed -i.bak -e 's/MutualPeers = .*/MutualPeers = []/g' $HOME/.celestia-light/config.toml
+
+sudo systemctl restart celestia-appd celestia-light
+
+echo "-----------------------------------------------------------------------------"
 
 echo "Нода обновлена и запущена"
 echo "-----------------------------------------------------------------------------"
