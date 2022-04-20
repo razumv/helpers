@@ -3,6 +3,8 @@ echo "--------------------------------------------------------------------------
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/doubletop.sh | bash
 echo "-----------------------------------------------------------------------------"
 cd $HOME
+source .profile
+sleep 1
 ver="1.17.2"
 wget "https://golang.org/dl/go$ver.linux-amd64.tar.gz" &>/dev/null
 sudo rm -rf /usr/local/go
