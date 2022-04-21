@@ -106,7 +106,7 @@ seeds:
   68c48b30df11f8f1ea34e7bb4b802d7eb184084f7f9143807d7a5dee9457ec35:
     addresses:
     - "/ip4/188.40.89.173/tcp/6180/ln-noise-ik/68c48b30df11f8f1ea34e7bb4b802d7eb184084f7f9143807d7a5dee9457ec35/ln-handshake/0"
-    role: "Upstream"    
+    role: "Upstream"
   e1f93e980f8d3e33265eecd7b0829ca8621f6160ca58fc2d3d1a14d883428c38:
     addresses:
     - "/ip4/135.181.75.219/tcp/6180/ln-noise-ik/e1f93e980f8d3e33265eecd7b0829ca8621f6160ca58fc2d3d1a14d883428c38/ln-handshake/0"
@@ -118,4 +118,28 @@ seeds:
   14fb62068aaa1bebc78c8aa88d7e291a46ed23509e0239ffcaf48f570c95f03f:
     addresses:
     - "/ip4/88.99.105.36/tcp/6180/ln-noise-ik/14fb62068aaa1bebc78c8aa88d7e291a46ed23509e0239ffcaf48f570c95f03f/ln-handshake/0"
+    role: "Upstream"
+  b1cda367b2f7171df5c591101098184ca856f1c7a95750ddcf7cf38ca1651405:
+    addresses:
+    - "/ip4/65.108.127.58/tcp/6180/ln-noise-ik/b1cda367b2f7171df5c591101098184ca856f1c7a95750ddcf7cf38ca1651405/ln-handshake/0"
+    role: "Upstream"
+  d0a1519998fb0388ea579d69711048ecf533a0383ee7f0902398052163345e72:
+    addresses:
+    - "/ip4/65.108.47.108/tcp/6180/ln-noise-ik/d0a1519998fb0388ea579d69711048ecf533a0383ee7f0902398052163345e72/ln-handshake/0"
+    role: "Upstream"
+  0e6ebe05be210e8e1464259e89936926271136f82dc19a4e440c62c9df5a9b2a:
+    addresses:
+    - "/ip4/38.242.243.54/tcp/6180/ln-noise-ik/0e6ebe05be210e8e1464259e89936926271136f82dc19a4e440c62c9df5a9b2a/ln-handshake/0"
+    role: "Upstream"
+  755656d2f2638efeb2aaf0d3fb9658ffc5160c1ead7f11afd5507d00593b1a37:
+    addresses:
+    - "/ip4/38.242.245.193/tcp/6180/ln-noise-ik/755656d2f2638efeb2aaf0d3fb9658ffc5160c1ead7f11afd5507d00593b1a37/ln-handshake/0"
+    role: "Upstream"
+  aabc49b19a5a58de1589333655ac370dd5ebe207979dc7d74a2df66ac5ab231a:
+    addresses:
+    - "/ip4/38.242.246.20/tcp/6180/ln-noise-ik/aabc49b19a5a58de1589333655ac370dd5ebe207979dc7d74a2df66ac5ab231a/ln-handshake/0"
+    role: "Upstream"
+  cbe530765dbf06d27f5019e1d130bb0550798516adc9a4516c48e6cb3b293129:
+    addresses:
+    - "/ip4/185.217.126.68/tcp/6180/ln-noise-ik/cbe530765dbf06d27f5019e1d130bb0550798516adc9a4516c48e6cb3b293129/ln-handshake/0"
     role: "Upstream"
