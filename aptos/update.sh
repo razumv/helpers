@@ -149,6 +149,7 @@ update_genesis_files
 line
 echo -e "${GREEN}3. Обновляем код... ${NORMAL}" && sleep 1
 line
+rm -rf $HOME/aptos-core
 if ! command -v aptos-operational-tool &> /dev/null
 then
   source_code
