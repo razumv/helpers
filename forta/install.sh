@@ -28,7 +28,7 @@ function forta_init {
 }
 
 function forta_env {
-  mkdir -p /lib/systemd/system/forta.service.d/
+  sudo mkdir -p /lib/systemd/system/forta.service.d/
   sudo tee <<EOF >/dev/null /lib/systemd/system/forta.service.d/env.conf
   [Service]
   Environment="FORTA_DIR=$HOME/.forta"
