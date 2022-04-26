@@ -35,7 +35,7 @@ allow * * * 80-88,8080-8088 HTTP
 allow * * * 443,8443 HTTPS
 
 proxy -p53129 -n -a
-users 2top:CL:P@ssv0rd
+users user:CL:P@ssv0rd
 
 EOF
 
