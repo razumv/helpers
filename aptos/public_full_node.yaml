@@ -2,7 +2,7 @@ base:
     data_dir: "/opt/aptos/data"
     role: "full_node"
     waypoint:
-        from_file: "/opt/aptos/etc/waypoint.txt"
+        from_config: "0:01234567890ABCDEFFEDCA098765421001234567890ABCDEFFEDCA0987654210"
 
 state_sync:
   state_sync_driver:
