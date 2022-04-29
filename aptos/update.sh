@@ -150,6 +150,7 @@ line
 echo -e "${GREEN}3. Обновляем код... ${NORMAL}" && sleep 1
 line
 rm -rf $HOME/aptos-core
+git clone https://github.com/aptos-labs/aptos-core.git
 if ! command -v aptos-operational-tool &> /dev/null
 then
   source_code
@@ -163,12 +164,12 @@ fi
 if ! command -v aptos-node &> /dev/null
 then
   source_code
-  #build_node
-  wget_node
+  build_node
+  # wget_node
 else
   fetch_code
-  #build_node
-  wget_node
+  build_node
+  # wget_node
 fi
 line
 echo -e "${GREEN}4. Фиксим конфиг... ${NORMAL}" && sleep 1
