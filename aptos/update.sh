@@ -44,12 +44,12 @@ function update_genesis_files {
 }
 
 function build_tools {
-  cargo build -p aptos-operational-tool --release
+  cargo build -p aptos-operational-tool --release && exit 1
   mv $HOME/aptos-core/target/release/aptos-operational-tool /usr/local/bin
 }
 
 function build_node {
-  cargo build -p aptos-node --release
+  cargo build -p aptos-node --release && exit 1
   mv $HOME/aptos-core/target/release/aptos-node /usr/local/bin
 }
 
