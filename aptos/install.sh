@@ -134,9 +134,9 @@ echo -e "${GREEN}2 Билдим бинарники aptos-operational-tool aptos-
 line
 source_code
 # build_tools
-build_node
+# build_node
 wget_tools
-# wget_node
+wget_node
 line
 echo -e "${GREEN}3. Скачиваем Aptos FullNode конфиги ... ${NORMAL}" && sleep 1
 update_genesis_files
