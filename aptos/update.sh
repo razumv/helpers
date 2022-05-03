@@ -83,7 +83,7 @@ function fix_config {
   sed -i 's|127.0.0.1|0.0.0.0|' $HOME/aptos/public_full_node.yaml
   sed -i -e "s|genesis_file_location: .*|genesis_file_location: \"$HOME\/aptos\/genesis.blob\"|" $HOME/aptos/public_full_node.yaml
   sed -i -e "s|data_dir: .*|data_dir: \"$HOME\/aptos\/data\"|" $HOME/aptos/public_full_node.yaml
-  sed -i -e "s|0:01234567890ABCDEFFEDCA098765421001234567890ABCDEFFEDCA0987654210|$WAYPOINT|" $HOME/aptos/public_full_node.yaml
+  sed -i -e "s|0:683990e3bdc1bbf0204fc4a564e07e628229c913c8cc6ad96d8b30f9446233cb|$WAYPOINT|" $HOME/aptos/public_full_node.yaml
 }
 
 function delete_old_database {
