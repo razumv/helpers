@@ -152,7 +152,6 @@ line
 cd $HOME
 wget_tools
 wget_node
-fi
 line
 echo -e "${GREEN}4. Фиксим конфиг... ${NORMAL}" && sleep 1
 line
