@@ -149,7 +149,6 @@ update_genesis_files
 line
 echo -e "${GREEN}3. Обновляем код... ${NORMAL}" && sleep 1
 line
-rm -rf $HOME/aptos-core
 cd $HOME
 git clone https://github.com/aptos-labs/aptos-core.git
 if ! command -v aptos-operational-tool &> /dev/null

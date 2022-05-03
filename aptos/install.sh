@@ -31,12 +31,12 @@ function update_genesis_files {
 }
 
 function build_tools {
-  cargo build -p aptos-operational-tool --release
+  $HOME/.cargo/bin/cargo  build -p aptos-operational-tool --release
   mv $HOME/aptos-core/target/release/aptos-operational-tool /usr/local/bin
 }
 
 function build_node {
-  cargo build -p aptos-node --release
+  $HOME/.cargo/bin/cargo  build -p aptos-node --release
   mv $HOME/aptos-core/target/release/aptos-node /usr/local/bin
 }
 
