@@ -1,5 +1,7 @@
 #!/bin/bash
 
+rustup update
+
 function logo {
   curl -s https://raw.githubusercontent.com/razumv/helpers/main/doubletop.sh | bash
 }
