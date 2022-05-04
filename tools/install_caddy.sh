@@ -7,7 +7,7 @@ function app_name {
 }
 
 function api_port {
-  if [ ! $app ]; then
+  if [ ! $api_port ]; then
   echo -e "Enter your api port"
   line
   read api_port
@@ -15,7 +15,7 @@ function api_port {
 }
 
 function grpc_port {
-  if [ ! $app ]; then
+  if [ ! $grpc_port ]; then
   echo -e "Enter your grpc port"
   line
   read grpc_port
