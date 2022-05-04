@@ -38,7 +38,7 @@ api_port
 line
 grpc_port
 
-sudo tee <<EOF >/dev/null $HOME/Caddyfile
+sudo tee -a <<EOF >/dev/null $HOME/Caddyfile
 wss://ws-$app.postcapitalist.io {
  reverse_proxy localhost:$grpc_port
 }
