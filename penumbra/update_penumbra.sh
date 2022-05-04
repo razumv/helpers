@@ -1,7 +1,5 @@
 #!/bin/bash
 
-rustup update
-
 function logo {
   curl -s https://raw.githubusercontent.com/razumv/helpers/main/doubletop.sh | bash
 }
@@ -61,6 +59,7 @@ echo -e "${GREEN}1/2 Обновляем репозиторий ${NORMAL}"
 source_git
 line
 echo -e "${GREEN}2/2 Начинаем билд ${NORMAL}"
+rustup update
 line
 build_penumbra
 line
