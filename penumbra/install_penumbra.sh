@@ -28,7 +28,7 @@ function source_git {
   fi
   cd $HOME/penumbra
   git fetch
-  git checkout 006-orthosie
+  git checkout 011-sponde
 }
 
 function build_penumbra {
