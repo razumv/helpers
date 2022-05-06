@@ -1,4 +1,6 @@
 #!/bin/bash
+source $HOME/.profile
+source $HOME/.cargo/env
 
 #add ufw rules
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash
