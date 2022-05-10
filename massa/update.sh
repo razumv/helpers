@@ -19,10 +19,9 @@ rustup default nightly-2022-01-09
 # 	tar cvzf massa_bk.tar.gz bk
 # fi
 #
-# rm -rf $HOME/massa
-# git clone https://github.com/massalabs/massa.git
+rm -rf $HOME/massa
+git clone https://github.com/massalabs/massa.git
 cd $HOME/massa
-git stash
 git checkout -- massa-node/config/config.toml
 git checkout -- massa-node/config/peers.json
 git fetch
@@ -37,7 +36,7 @@ sed -i "s/^bind_public *=.*/bind_public = \"0\.0\.0\.0\:33035\"/" "$HOME/massa/m
 sed -i 's/.*routable_ip/# \0/' "$HOME/massa/massa-node/base_config/config.toml"
 sed -i "/\[network\]/a routable_ip=\"$(curl -s ifconfig.me)\"" "$HOME/massa/massa-node/base_config/config.toml"
 
-# cp $HOME/bk/node_privkey.key $HOME/massa/massa-node/config/node_privkey.key
+cp $HOME/bk/node_privkey.key $HOME/massa/massa-node/config/node_privkey.key
 
 cd $HOME/massa/massa-client/
 cargo build --release
