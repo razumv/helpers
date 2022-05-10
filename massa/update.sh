@@ -9,23 +9,23 @@ sudo systemctl stop massa
 rustup toolchain install nightly-2022-01-09
 rustup default nightly-2022-01-09
 #
-cd $HOME
-if [ ! -d $HOME/bk/ ]; then
-	mkdir -p $HOME/bk
-	cp $HOME/massa/massa-node/config/node_privkey.key $HOME/bk/
-	cp $HOME/massa/massa-client/wallet.dat $HOME/bk/
-fi
-if [ ! -e $HOME/massa_bk.tar.gz ]; then
-	tar cvzf massa_bk.tar.gz bk
-fi
-
-rm -rf $HOME/massa
+# cd $HOME
+# if [ ! -d $HOME/bk/ ]; then
+# 	mkdir -p $HOME/bk
+# 	cp $HOME/massa/massa-node/config/node_privkey.key $HOME/bk/
+# 	cp $HOME/massa/massa-client/wallet.dat $HOME/bk/
+# fi
+# if [ ! -e $HOME/massa_bk.tar.gz ]; then
+# 	tar cvzf massa_bk.tar.gz bk
+# fi
+#
+# rm -rf $HOME/massa
 git clone https://github.com/massalabs/massa.git
 cd $HOME/massa
 git checkout -- massa-node/config/config.toml
 git checkout -- massa-node/config/peers.json
 git fetch
-git checkout TEST.10.0
+git checkout TEST.10.1
 
 cd $HOME/massa/massa-node/
 cargo build --release
