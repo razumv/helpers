@@ -47,6 +47,16 @@ function generate_wallet {
   cargo run --quiet --release --bin pcli wallet generate
 }
 
+function reset_wallet {
+  cd $HOME/penumbra/
+  cargo run --quiet --release --bin pcli wallet generate
+}
+
+function rust_update {
+  rustup update
+  rustup default nightly
+}
+
 
 colors
 
@@ -59,8 +69,10 @@ echo -e "${GREEN}1/2 Обновляем репозиторий ${NORMAL}"
 source_git
 line
 echo -e "${GREEN}2/2 Начинаем билд ${NORMAL}"
-rustup update
+
+rust_update
 line
 build_penumbra
+reset_wallet
 line
 echo -e "${RED}Скрипт завершил свою работу ${NORMAL}"
