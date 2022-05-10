@@ -69,7 +69,6 @@ echo -e "${GREEN}1/2 Обновляем репозиторий ${NORMAL}"
 source_git
 line
 echo -e "${GREEN}2/2 Начинаем билд ${NORMAL}"
-
 rust_update
 line
 build_penumbra
