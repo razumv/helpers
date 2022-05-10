@@ -91,4 +91,6 @@ if [ ! -e $HOME/massa_bk.tar.gz ]; then
 	tar cvzf massa_bk.tar.gz bk
 fi
 
+sudo systemctl restart massa
+sleep 10
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/massa/bootstrap-fix.sh | bash

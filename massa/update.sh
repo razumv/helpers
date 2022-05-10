@@ -41,9 +41,9 @@ cp $HOME/bk/node_privkey.key $HOME/massa/massa-node/config/node_privkey.key
 cd $HOME/massa/massa-client/
 cargo build --release
 cp $HOME/bk/wallet.dat $HOME/massa/massa-client/wallet.dat
-
-curl -s https://raw.githubusercontent.com/razumv/helpers/main/massa/bootstrap-fix.sh | bash
+sudo systemctl restart massa
 sleep 10
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/massa/bootstrap-fix.sh | bash
 echo DONE
 #massa_wallet_address=$(cargo run --release wallet_info | grep Address  |awk '{print $2}')
 #cargo run --release -- buy_rolls $massa_wallet_address 1 0
