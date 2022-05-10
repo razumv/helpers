@@ -20,7 +20,7 @@ rustup default nightly-2022-01-09
 # fi
 #
 # rm -rf $HOME/massa
-git clone https://github.com/massalabs/massa.git
+# git clone https://github.com/massalabs/massa.git
 cd $HOME/massa
 git checkout -- massa-node/config/config.toml
 git checkout -- massa-node/config/peers.json
