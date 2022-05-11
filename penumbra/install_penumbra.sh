@@ -28,7 +28,7 @@ function source_git {
   fi
   cd $HOME/penumbra
   git fetch
-  git checkout 013-kallichore
+  git checkout 014-kore
 }
 
 function build_penumbra {
