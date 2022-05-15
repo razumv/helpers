@@ -24,7 +24,7 @@ function set_vars {
 }
 
 function update_deps {
-  sudo apt update && sudo apt upgrade -y
+  sudo apt update
   sudo apt install mc build-essential wget htop curl jq -y
   sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 &>/dev/null
   sudo chmod a+x /usr/local/bin/yq
