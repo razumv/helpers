@@ -49,7 +49,7 @@ function generate_wallet {
 
 function reset_wallet {
   cd $HOME/penumbra/
-  cargo run --quiet --release --bin pcli wallet generate
+  cargo run --quiet --release --bin pcli wallet reset
 }
 
 function rust_update {
