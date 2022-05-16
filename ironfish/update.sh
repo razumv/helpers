@@ -12,7 +12,7 @@ var=`docker-compose logs --tail=1000 ironfish | grep "Added block to fork seq"`
 
 if [ -z "$var" ]
 then
-  echo "Ваш майнер не в форке, выполняем обновление"
+  echo "выполняем обновление"
   echo "-----------------------------------------------------------------------------"
   docker-compose run --rm --entrypoint "./bin/run config:set minerBatchSize 60000" ironfish
   docker-compose run --rm --entrypoint "./bin/run config:set enableTelemetry true" ironfish
@@ -20,7 +20,7 @@ then
   docker-compose pull
   docker-compose up -d
 else
-  echo "Ваш майнер в форке, выполняем сброс и обновление"
+  echo "выполняем сброс и обновление"
   echo "-----------------------------------------------------------------------------"
   wallet_name=`docker exec ironfish ./bin/run accounts:which` &>/dev/null
   docker exec ironfish rm -f wallet &>/dev/null
