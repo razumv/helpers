@@ -53,6 +53,7 @@ function reset_wallet {
 }
 
 function rust_update {
+  source ~/.cargo/env
   rustup update
   rustup default nightly
 }
