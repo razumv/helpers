@@ -31,7 +31,7 @@ git checkout v0.5.2 &>/dev/null
 make install &>/dev/null
 echo "Билд закончен, переходим к инициализации ноды"
 echo "-----------------------------------------------------------------------------"
-celestia-appd init $CELESTIA_NODENAME --chain-id $CELESTIA_CHAIN
+celestia-appd init $CELESTIA_NODENAME --chain-id $CELESTIA_CHAIN &>/dev/null
 celestia-appd config chain-id $CELESTIA_CHAIN
 celestia-appd config keyring-backend test
 wget -O $HOME/.celestia-app/config/genesis.json "https://github.com/celestiaorg/networks/raw/master/mamaki/genesis.json" &>/dev/null
