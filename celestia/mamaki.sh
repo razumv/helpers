@@ -34,22 +34,22 @@ echo "--------------------------------------------------------------------------
 celestia-appd init $CELESTIA_NODENAME --chain-id $CELESTIA_CHAIN
 celestia-appd config chain-id $CELESTIA_CHAIN
 celestia-appd config keyring-backend test
-wget -O $HOME/.celestia-app/config/genesis.json "https://github.com/celestiaorg/networks/raw/master/mamaki/genesis.json"
+wget -O $HOME/.celestia-app/config/genesis.json "https://github.com/celestiaorg/networks/raw/master/mamaki/genesis.json" &>/dev/null
 
 peers=$(curl -sL https://raw.githubusercontent.com/celestiaorg/networks/master/mamaki/peers.txt | tr -d '\n' | head -c -1) && echo $peers
-sed -i.bak -e "s/^persistent-peers *=.*/persistent-peers = \"$peers\"/" $HOME/.celestia-app/config/config.toml
+sed -i.bak -e "s/^persistent-peers *=.*/persistent-peers = \"$peers\"/" $HOME/.celestia-app/config/config.toml &>/dev/null
 
 bpeers="f0c58d904dec824605ac36114db28f1bf84f6ea3@144.76.112.238:26656"
-sed -i.bak -e "s/^bootstrap-peers *=.*/bootstrap-peers = \"$bpeers\"/" $HOME/.celestia-app/config/config.toml
+sed -i.bak -e "s/^bootstrap-peers *=.*/bootstrap-peers = \"$bpeers\"/" $HOME/.celestia-app/config/config.toml >/dev/null
 
-sed -i.bak -e "s/^timeout-commit *=.*/timeout-commit = \"25s\"/" $HOME/.celestia-app/config/config.toml
-sed -i.bak -e "s/^skip-timeout-commit *=.*/skip-timeout-commit = false/" $HOME/.celestia-app/config/config.toml
-sed -i.bak -e "s/^mode *=.*/mode = \"validator\"/" $HOME/.celestia-app/config/config.toml
+sed -i.bak -e "s/^timeout-commit *=.*/timeout-commit = \"25s\"/" $HOME/.celestia-app/config/config.toml &>/dev/null
+sed -i.bak -e "s/^skip-timeout-commit *=.*/skip-timeout-commit = false/" $HOME/.celestia-app/config/config.toml &>/dev/null
+sed -i.bak -e "s/^mode *=.*/mode = \"validator\"/" $HOME/.celestia-app/config/config.toml &>/dev/null
 
-sed -i 's/pruning = "default"/pruning = "custom"/g' $HOME/.celestia-app/config/app.toml
-sed -i 's/pruning-keep-recent = "0"/pruning-keep-recent = "100"/g' $HOME/.celestia-app/config/app.toml
-sed -i 's/pruning-keep-every = "0"/pruning-keep-every = "0"/g' $HOME/.celestia-app/config/app.toml
-sed -i 's/pruning-interval = "0"/pruning-interval = "10"/g' $HOME/.celestia-app/config/app.toml
+sed -i 's/pruning = "default"/pruning = "custom"/g' $HOME/.celestia-app/config/app.toml &>/dev/null
+sed -i 's/pruning-keep-recent = "0"/pruning-keep-recent = "100"/g' $HOME/.celestia-app/config/app.toml &>/dev/null
+sed -i 's/pruning-keep-every = "0"/pruning-keep-every = "0"/g' $HOME/.celestia-app/config/app.toml &>/dev/null
+sed -i 's/pruning-interval = "0"/pruning-interval = "10"/g' $HOME/.celestia-app/config/app.toml &>/dev/null
 
 sudo tee <<EOF >/dev/null /etc/systemd/journald.conf
 Storage=persistent
@@ -58,7 +58,7 @@ sudo systemctl restart systemd-journald
 
 sudo tee <<EOF >/dev/null /etc/systemd/system/celestia-appd.service
 [Unit]
-  Description=Celestia-appd 
+  Description=Celestia-appd
   After=network-online.target
 [Service]
   User=$USER
