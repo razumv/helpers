@@ -30,4 +30,3 @@ logo
 line
 update_subspace
 echo -e "${GREEN}=== DONE ===${NORMAL}"
-gemini-1
