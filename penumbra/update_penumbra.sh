@@ -28,7 +28,7 @@ function source_git {
   fi
   cd $HOME/penumbra
   git fetch
-  git checkout 016-pandia
+  git checkout 017-carpo.1
 }
 
 function build_penumbra {
