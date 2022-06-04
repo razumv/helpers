@@ -15,10 +15,10 @@ function line {
 }
 
 function get_vars {
-  CHAIN="gemini-1"
-  RELEASE="gemini-1b-2022-june-03"
-  SUBSPACE_NODENAME=$(cat $HOME/subspace_docker/docker-compose.yml | grep "\-\-name" | awk -F\" '{print $4}')
-  WALLET_ADDRESS=$(cat $HOME/subspace_docker/docker-compose.yml | grep "\-\-reward-address" | awk -F\" '{print $4}')
+  export CHAIN="gemini-1"
+  export RELEASE="gemini-1b-2022-june-03"
+  export SUBSPACE_NODENAME=$(cat $HOME/subspace_docker/docker-compose.yml | grep "\-\-name" | awk -F\" '{print $4}')
+  export WALLET_ADDRESS=$(cat $HOME/subspace_docker/docker-compose.yml | grep "\-\-reward-address" | awk -F\" '{print $4}')
 }
 
 function eof_docker_compose {
