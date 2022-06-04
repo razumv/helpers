@@ -78,7 +78,7 @@ function eof_docker_compose {
           target: /var/subspace
           type: volume
       command: [
-        "--chain", "testnet",
+        "--chain", "gemini-1",
         "--wasm-execution", "compiled",
         "--execution", "wasm",
         "--base-path", "/var/subspace",
