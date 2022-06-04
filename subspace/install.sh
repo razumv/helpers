@@ -70,49 +70,49 @@ function eof_docker_compose {
   services:
     node:
       image: ghcr.io/subspace/node:gemini-1b-2022-june-03
-      networks:
-        - default
-        - subspace
       volumes:
-        - source: subspace-node
-          target: /var/subspace
-          type: volume
+        - node-data:/var/subspace:rw
+      ports:
+        - "0.0.0.0:30333:30333"
+      restart: unless-stopped
       command: [
         "--chain", "gemini-1",
-        "--wasm-execution", "compiled",
-        "--execution", "wasm",
         "--base-path", "/var/subspace",
-        "--ws-external",
-        "--rpc-methods", "unsafe",
+        "--execution", "wasm",
+        "--pruning", "1024",
+        "--keep-blocks", "1024",
+        "--port", "30333",
         "--rpc-cors", "all",
-        "--bootnodes", "/dns/farm-rpc.subspace.network/tcp/30333/p2p/12D3KooWPjMZuSYj35ehced2MTJFf95upwpHKgKUrFRfHwohzJXr",
+        "--rpc-methods", "safe",
+        "--unsafe-ws-external",
         "--validator",
         "--name", "$SUBSPACE_NODENAME",
         "--telemetry-url", "wss://telemetry.subspace.network/submit 0",
         "--telemetry-url", "wss://telemetry.postcapitalist.io/submit 0"
       ]
+      healthcheck:
+        timeout: 5s
+        interval: 30s
+        retries: 5
+
     farmer:
+      depends_on:
+        - node
       image: ghcr.io/subspace/farmer:gemini-1b-2022-june-03
-      networks:
-        - default
       volumes:
-        - source: subspace-farmer
-          target: /var/subspace
-          type: volume
-      restart: always
+        - farmer-data:/var/subspace:rw
+      restart: unless-stopped
       command: [
+        "--base-path", "/var/subspace",
         "farm",
         "--node-rpc-url", "ws://node:9944",
-        "--reward-address", "$WALLET_ADDRESS"
+        "--ws-server-listen-addr", "0.0.0.0:9955",
+        "--reward-address", "$WALLET_ADDRESS",
+        "--plot-size", "100G"
       ]
-
-  networks:
-    subspace:
-      name: subspace
-
   volumes:
-    subspace-node:
-    subspace-farmer:
+    node-data:
+    farmer-data:
 EOF
 }
 
