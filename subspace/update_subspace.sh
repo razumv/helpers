@@ -17,7 +17,7 @@ function line {
 function update_subspace {
   cd $HOME/subspace_docker/
   docker-compose down
-  sed -i 's/snapshot-2022-may-03/snapshot-2022-mar-09/g' $HOME/subspace_docker/docker-compose.yml
+  sed -i 's/snapshot-2022-may-03/gemini-1b-2022-june-03/g' $HOME/subspace_docker/docker-compose.yml
   docker-compose pull
 }
 
