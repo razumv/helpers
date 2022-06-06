@@ -86,6 +86,6 @@ colors
 line
 logo
 line
-get_vers
+get_vars
 update_subspace
 echo -e "${GREEN}=== DONE ===${NORMAL}"
