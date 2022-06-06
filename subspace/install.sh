@@ -50,17 +50,17 @@ function read_wallet {
 #   git clone https://github.com/subspace/subspace
 #   cd $HOME/subspace
 #   git fetch
-#   git checkout gemini-1b-2022-june-03
+#   git checkout gemini-1b-2022-june-05
 # }
 #
 # function build_image_node {
 #   cd $HOME/subspace
-#   docker build -t subspacelabs/subspace-node:gemini-1b-2022-june-03 -f $HOME/subspace/Dockerfile-node .
+#   docker build -t subspacelabs/subspace-node:gemini-1b-2022-june-05 -f $HOME/subspace/Dockerfile-node .
 # }
 #
 # function build_image_farmer {
 #   cd $HOME/subspace
-#   docker build -t subspacelabs/subspace-farmer:gemini-1b-2022-june-03 -f $HOME/subspace/Dockerfile-farmer .
+#   docker build -t subspacelabs/subspace-farmer:gemini-1b-2022-june-05 -f $HOME/subspace/Dockerfile-farmer .
 # }
 
 function eof_docker_compose {
@@ -69,7 +69,7 @@ function eof_docker_compose {
   version: "3.7"
   services:
     node:
-      image: ghcr.io/subspace/node:gemini-1b-2022-june-03
+      image: ghcr.io/subspace/node:gemini-1b-2022-june-05
       volumes:
         - node-data:/var/subspace:rw
       ports:
@@ -98,7 +98,7 @@ function eof_docker_compose {
     farmer:
       depends_on:
         - node
-      image: ghcr.io/subspace/farmer:gemini-1b-2022-june-03
+      image: ghcr.io/subspace/farmer:gemini-1b-2022-june-05
       volumes:
         - farmer-data:/var/subspace:rw
       restart: unless-stopped
