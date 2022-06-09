@@ -6,8 +6,8 @@ source $HOME/.cargo/env
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash
 
 sudo systemctl stop massa
-rustup toolchain install nightly-2022-01-09
-rustup default nightly-2022-01-09
+rustup toolchain install nightly
+rustup default nightly
 #
 # cd $HOME
 # if [ ! -d $HOME/bk/ ]; then

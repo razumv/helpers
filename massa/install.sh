@@ -11,8 +11,8 @@ curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_rust
 #
 source $HOME/.cargo/env
 sleep 1
-rustup toolchain install nightly-2022-01-09
-rustup default nightly-2022-01-09
+rustup toolchain install nightly
+rustup default nightly
 cd $HOME
 if [ ! -d $HOME/massa/ ]; then
 	git clone https://github.com/massalabs/massa
