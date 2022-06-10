@@ -30,7 +30,7 @@ function eof_docker_compose {
       volumes:
         - node-data:/var/subspace:rw
       ports:
-        - "0.0.0.0:30333:30333"
+        - "0.0.0.0:39333:30333"
       restart: unless-stopped
       command: [
         "--chain", "$CHAIN",
