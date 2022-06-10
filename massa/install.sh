@@ -93,4 +93,4 @@ fi
 
 sudo systemctl restart massa
 sleep 10
-curl -s https://raw.githubusercontent.com/razumv/helpers/main/massa/bootstrap-fix.sh | bash
+# curl -s https://raw.githubusercontent.com/razumv/helpers/main/massa/bootstrap-fix.sh | bash
