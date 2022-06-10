@@ -8,24 +8,24 @@ curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.
 sudo systemctl stop massa
 rustup toolchain install nightly
 rustup default nightly
-#
-# cd $HOME
-# if [ ! -d $HOME/bk/ ]; then
-# 	mkdir -p $HOME/bk
-# 	cp $HOME/massa/massa-node/config/node_privkey.key $HOME/bk/
-# 	cp $HOME/massa/massa-client/wallet.dat $HOME/bk/
-# fi
-# if [ ! -e $HOME/massa_bk.tar.gz ]; then
-# 	tar cvzf massa_bk.tar.gz bk
-# fi
-#
+
+cd $HOME
+if [ ! -d $HOME/massa_backup/ ]; then
+	mkdir -p $HOME/massa_backup
+	cp $HOME/massa/massa-node/config/node_privkey.key $HOME/massa_backup/
+	cp $HOME/massa/massa-client/wallet.dat $HOME/massa_backup/
+fi
+if [ ! -e $HOME/massa_backup.tar.gz ]; then
+	tar cvzf massa_backup.tar.gz massa_backup
+fi
+
 rm -rf $HOME/massa
 git clone https://github.com/massalabs/massa.git
 cd $HOME/massa
 git checkout -- massa-node/config/config.toml
 git checkout -- massa-node/config/peers.json
 git fetch
-git checkout TEST.11.0
+git checkout TEST.11.2
 
 cd $HOME/massa/massa-node/
 cargo build --release
@@ -36,11 +36,11 @@ sed -i "s/^bind_public *=.*/bind_public = \"0\.0\.0\.0\:33035\"/" "$HOME/massa/m
 sed -i 's/.*routable_ip/# \0/' "$HOME/massa/massa-node/base_config/config.toml"
 sed -i "/\[network\]/a routable_ip=\"$(curl -s ifconfig.me)\"" "$HOME/massa/massa-node/base_config/config.toml"
 
-cp $HOME/bk/node_privkey.key $HOME/massa/massa-node/config/node_privkey.key
+cp $HOME/massa_backup/node_privkey.key $HOME/massa/massa-node/config/node_privkey.key
 
 cd $HOME/massa/massa-client/
 cargo build --release
-cp $HOME/bk/wallet.dat $HOME/massa/massa-client/wallet.dat
+cp $HOME/massa_backup/wallet.dat $HOME/massa/massa-client/wallet.dat
 sudo systemctl restart massa
 sleep 10
 curl -s https://raw.githubusercontent.com/razumv/helpers/main/massa/bootstrap-fix.sh | bash
