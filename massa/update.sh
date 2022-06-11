@@ -43,7 +43,7 @@ cargo build --release
 cp $HOME/massa_backup/wallet.dat $HOME/massa/massa-client/wallet.dat
 sudo systemctl restart massa
 sleep 10
-# curl -s https://raw.githubusercontent.com/razumv/helpers/main/massa/bootstrap-fix.sh | bash
+curl -s https://raw.githubusercontent.com/razumv/helpers/main/massa/bootstrap-fix.sh | bash
 echo DONE
 #massa_wallet_address=$(cargo run --release wallet_info | grep Address  |awk '{print $2}')
 #cargo run --release -- buy_rolls $massa_wallet_address 1 0
