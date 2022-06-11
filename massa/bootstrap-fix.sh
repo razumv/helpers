@@ -31,6 +31,7 @@ ${bootstrap_list}
 	local third_part=`sed "1,${end}d" "$config_path"`
 	echo "${first_part}${second_part}${third_part}" > "$config_path"
 	sed -i -e "s%retry_delay *=.*%retry_delay = 10000%; " "$config_path"
+  sudo systemctl restart massa
 }
 #Thanks to Let's Node!
 
