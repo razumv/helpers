@@ -13,12 +13,12 @@ while true
 do
         balance=$(./massa-client wallet_info | grep "Active rolls" | awk '{ print $3 }')
         int_balance=${balance%%.*}
-        if [ $int_balance -gt "0" ]; then
-                echo "More than 0"
+        if [ $int_balance -lt "1" ]; then
+                echo "Less than 1"
                 resp=$(./massa-client buy_rolls $massa_wallet_address 1 0)
                 echo $resp
-        elif [ $int_balance -lt "1" ]; then
-                echo "Less than 1"
+        elif [ $int_balance -gt "1" ]; then
+                echo "More than 1"
         fi
         printf "sleep"
         for((sec=0; sec<60; sec++))
