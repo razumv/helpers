@@ -28,7 +28,7 @@ function source_git {
   fi
   cd $HOME/penumbra
   git fetch
-  git checkout 017-carpo.1
+  git checkout 019-erinome
 }
 
 function build_penumbra {
