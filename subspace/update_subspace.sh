@@ -137,6 +137,6 @@ update_subspace
 line
 check_fork
 line
-check_verif
-line
+# check_verif
+# line
 echo -e "${GREEN}=== Обновление завершено ===${NORMAL}"
