@@ -96,7 +96,7 @@ function check_fork {
     echo -e "Нода была в форке, выполняем сброс и перезапускаем"
     cd $HOME/subspace_docker/
     docker-compose down
-    docker volume rm subspace_docker_farmer-data subspace_docker_node-data
+    docker volume rm subspace_docker_farmer-data subspace_docker_node-data subspace_docker_subspace-farmer subspace_docker_subspace-node
     docker-compose up -d
   fi
 }
