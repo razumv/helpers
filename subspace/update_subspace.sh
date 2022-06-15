@@ -87,6 +87,20 @@ function eof_docker_compose {
 EOF
 }
 
+function check_fork {
+  check_fork=`docker logs --tail 100  subspace_docker_node_1 2>&1 | grep "Node is running on non-canonical fork"`
+  if [ -z "$check_fork" ]
+  then
+    echo -e "Нода не в форке - все ок"
+  else
+    echo -e "Нода была в форке, выполняем сброс и перезапускаем"
+    cd $HOME/subspace_docker/
+    docker-compose down
+    docker volume rm subspace_docker_farmer-data subspace_docker_node-data
+    docker-compose up -d
+  fi
+}
+
 function update_subspace {
   cd $HOME/subspace_docker/
   docker-compose down
@@ -104,4 +118,5 @@ logo
 line
 get_vars
 update_subspace
+check_fork
 echo -e "${GREEN}=== DONE ===${NORMAL}"
