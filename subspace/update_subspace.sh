@@ -79,7 +79,7 @@ function eof_docker_compose {
         "--node-rpc-url", "ws://node:9944",
         "--ws-server-listen-addr", "0.0.0.0:9955",
         "--reward-address", "$WALLET_ADDRESS",
-        "--plot-size", "100G"
+        "--plot-size", "50G"
       ]
   volumes:
     node-data:
@@ -92,6 +92,7 @@ function update_subspace {
   docker-compose down
   # docker volume rm subspace_docker_subspace-farmer subspace_docker_subspace-node
   # docker volume rm subspace_docker_farmer-data subspace_docker_node-data
+  docker volume rm subspace_docker_farmer-data
   eof_docker_compose
   docker-compose pull
   docker-compose up -d
