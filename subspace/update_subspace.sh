@@ -16,9 +16,10 @@ function line {
 
 function get_vars {
   export CHAIN="gemini-1"
-  export RELEASE="gemini-1b-2022-jun-13"
+  export RELEASE="gemini-1b-2022-jun-18"
   export SUBSPACE_NODENAME=$(cat $HOME/subspace_docker/docker-compose.yml | grep "\-\-name" | awk -F\" '{print $4}')
   export WALLET_ADDRESS=$(cat $HOME/subspace_docker/docker-compose.yml | grep "\-\-reward-address" | awk -F\" '{print $4}')
+  export PLOT_SIZE=$(cat $HOME/subspace_docker/docker-compose.yml | grep "\-\-plot-size" | awk -F\" '{print $4}')
 }
 
 function eof_docker_compose {
@@ -78,7 +79,7 @@ function eof_docker_compose {
         "--node-rpc-url", "ws://node:9944",
         "--ws-server-listen-addr", "0.0.0.0:9955",
         "--reward-address", "$WALLET_ADDRESS",
-        "--plot-size", "50G"
+        "--plot-size", "$PLOT_SIZE"
       ]
   volumes:
     node-data:
