@@ -24,5 +24,7 @@ colors
 line
 logo
 line
+stop_delete
+line
 echo -e "${GREEN}Ноду остановили, стораджи очистили. Ждем дальнейших новостей от команды${NORMAL}"
 line
