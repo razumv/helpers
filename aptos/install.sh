@@ -39,12 +39,12 @@ function download_aptos_cli {
 
 function prepare_config {
   mkdir ${HOME}/${WORKSPACE}
-  wget -qO ${HOME}/${WORKSPACE}/docker-compose.yaml https://raw.githubusercontent.com/razumv/helpers/main/aptos/docker-compose.yaml
-  wget -qO ${HOME}/${WORKSPACE}/validator.yaml https://raw.githubusercontent.com/razumv/helpers/main/aptos/validator.yaml
-  wget -qO ${HOME}/${WORKSPACE}/fullnode.yaml https://raw.githubusercontent.com/razumv/helpers/main/aptos/fullnode.yaml
+  wget -qO $HOME/${WORKSPACE}/docker-compose.yaml https://raw.githubusercontent.com/aptos-labs/aptos-core/main/docker/compose/aptos-node/docker-compose.yaml
+  wget -qO $HOME/${WORKSPACE}/validator.yaml https://raw.githubusercontent.com/aptos-labs/aptos-core/main/docker/compose/aptos-node/validator.yaml
 }
 
 function generate_keys {
+  mkdir -p ${HOME}/${WORKSPACE}/keys
   aptos genesis generate-keys --output-dir ${HOME}/${WORKSPACE}
 }
 
@@ -57,7 +57,6 @@ function configure_validator {
 }
 
 function generate_root_key {
-  mkdir -p ${HOME}/${WORKSPACE}/keys
   aptos key generate --output-file ${HOME}/${WORKSPACE}/keys/root
 }
 
@@ -121,8 +120,8 @@ line
 download_aptos_cli
 prepare_config
 generate_keys
-configure_validator
 generate_root_key
+configure_validator
 add_layout
 download_framework
 line
