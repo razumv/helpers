@@ -52,19 +52,18 @@ function prepare_validator {
     --full-node-host `wget -qO- eth0.me`:6182
 
   tee $HOME/aptos_testnet/layout.yaml > /dev/null <<EOF
-  ---
-  root_key: "F22409A93D1CD12D2FC92B5F8EB84CDCD24C348E32B3E7A720F3D2E288E63394"
-  users:
-   - $aptos_username
-  chain_id: 40
-  min_stake: 0
-  max_stake: 100000
-  min_lockup_duration_secs: 0
-  max_lockup_duration_secs: 2592000
-  epoch_duration_secs: 86400
-  initial_lockup_timestamp: 1656615600
-  min_price_per_gas_unit: 1
-  allow_new_validators: true
+root_key: "F22409A93D1CD12D2FC92B5F8EB84CDCD24C348E32B3E7A720F3D2E288E63394"
+users:
+ - $aptos_username
+chain_id: 40
+min_stake: 0
+max_stake: 100000
+min_lockup_duration_secs: 0
+max_lockup_duration_secs: 2592000
+epoch_duration_secs: 86400
+initial_lockup_timestamp: 1656615600
+min_price_per_gas_unit: 1
+allow_new_validators: true
 EOF
 
   wget -q https://github.com/aptos-labs/aptos-core/releases/download/aptos-framework-v0.2.0/framework.zip
