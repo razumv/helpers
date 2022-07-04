@@ -39,6 +39,8 @@ function prepare_config {
 }
 
 function prepare_validator {
+  mkdir -p $HOME/aptos_testnet/keys/
+
   aptos genesis generate-keys --output-dir $HOME/aptos_testnet
 
   aptos key generate --output-file $HOME/aptos_testnet/keys/root
