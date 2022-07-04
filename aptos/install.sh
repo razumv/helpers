@@ -41,19 +41,19 @@ function prepare_config {
 
 function generate_keys {
   mkdir -p ${HOME}/aptos_testnet/keys
-  aptos genesis generate-keys --output-dir ${HOME}/aptos_testnet
+  aptos genesis generate-keys --output-dir $HOME/aptos_testnet
 }
 
 function configure_validator {
   aptos genesis set-validator-configuration \
-  --keys-dir ${HOME}/aptos_testnet --local-repository-dir ${HOME}/aptos_testnet \
-  --username $aptos_username \
-  --validator-host `wget -qO- eth0.me`:6180 \
-  --full-node-host `wget -qO- eth0.me`:6182
+    --keys-dir $HOME/aptos_testnet --local-repository-dir $HOME/aptos_testnet \
+    --username "$aptos_username" \
+    --validator-host `wget -qO- eth0.me`:6180 \
+    --full-node-host `wget -qO- eth0.me`:6182
 }
 
 function generate_root_key {
-  aptos key generate --output-file ${HOME}/aptos_testnet/keys/root
+  aptos key generate --output-file $HOME/aptos_testnet/keys/root
 }
 
 function add_layout {
@@ -81,7 +81,7 @@ function download_framework {
 }
 
 function compile_genesis_waypoint {
-  aptos genesis generate-genesis --local-repository-dir ${HOME}/aptos_testnet --output-dir ${HOME}/aptos_testnet
+  aptos genesis generate-genesis --local-repository-dir $HOME/aptos_testnet --output-dir $HOME/aptos_testnet
 }
 
 function up_validator {
