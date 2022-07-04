@@ -18,7 +18,6 @@ function install_docker {
 
 function set_vars {
   echo "export aptos_username=${aptos_username}"  >> ${HOME}/.bash_profile
-  source ${HOME}/.bash_profile
 }
 
 function update_deps {
