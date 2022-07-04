@@ -38,48 +38,37 @@ function prepare_config {
   wget -qO $HOME/aptos_testnet/validator.yaml https://raw.githubusercontent.com/aptos-labs/aptos-core/main/docker/compose/aptos-node/validator.yaml
 }
 
-function generate_keys {
-  mkdir -p ${HOME}/aptos_testnet/keys
+function prepare_validator {
   aptos genesis generate-keys --output-dir $HOME/aptos_testnet
-}
 
-function configure_validator {
+  aptos key generate --output-file $HOME/aptos_testnet/keys/root
+
   aptos genesis set-validator-configuration \
     --keys-dir $HOME/aptos_testnet --local-repository-dir $HOME/aptos_testnet \
     --username "$aptos_username" \
     --validator-host `wget -qO- eth0.me`:6180 \
     --full-node-host `wget -qO- eth0.me`:6182
-}
 
-function generate_root_key {
-  aptos key generate --output-file $HOME/aptos_testnet/keys/root
-}
-
-function add_layout {
-  tee ${HOME}/aptos_testnet/layout.yaml > /dev/null <<EOF
----
-root_key: "F22409A93D1CD12D2FC92B5F8EB84CDCD24C348E32B3E7A720F3D2E288E63394"
-users:
-  - ${aptos_username}
-chain_id: 40
-min_stake: 0
-max_stake: 100000
-min_lockup_duration_secs: 0
-max_lockup_duration_secs: 2592000
-epoch_duration_secs: 86400
-initial_lockup_timestamp: 1656615600
-min_price_per_gas_unit: 1
-allow_new_validators: true
+  tee $HOME/aptos_testnet/layout.yaml > /dev/null <<EOF
+  ---
+  root_key: "F22409A93D1CD12D2FC92B5F8EB84CDCD24C348E32B3E7A720F3D2E288E63394"
+  users:
+   - $aptos_username
+  chain_id: 40
+  min_stake: 0
+  max_stake: 100000
+  min_lockup_duration_secs: 0
+  max_lockup_duration_secs: 2592000
+  epoch_duration_secs: 86400
+  initial_lockup_timestamp: 1656615600
+  min_price_per_gas_unit: 1
+  allow_new_validators: true
 EOF
-}
 
-function download_framework {
-  wget -qO ${HOME}/aptos_testnet/framework.zip https://github.com/aptos-labs/aptos-core/releases/download/aptos-framework-v0.1.0/framework.zip
-  unzip -o ${HOME}/aptos_testnet/framework.zip -d ${HOME}/aptos_testnet/
-  rm ${HOME}/aptos_testnet/framework.zip
-}
+  wget -q https://github.com/aptos-labs/aptos-core/releases/download/aptos-framework-v0.2.0/framework.zip
+  unzip -o framework.zip -d $HOME/aptos_testnet/
+  rm framework.zip
 
-function compile_genesis_waypoint {
   aptos genesis generate-genesis --local-repository-dir $HOME/aptos_testnet --output-dir $HOME/aptos_testnet
 }
 
@@ -113,13 +102,7 @@ update_deps
 line
 download_aptos_cli
 prepare_config
-generate_keys
-generate_root_key
-configure_validator
-add_layout
-download_framework
-line
-compile_genesis_waypoint
+prepare_validator
 line
 up_validator
 line
