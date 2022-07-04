@@ -52,6 +52,7 @@ function prepare_validator {
     --full-node-host `wget -qO- eth0.me`:6182
 
   tee $HOME/aptos_testnet/layout.yaml > /dev/null <<EOF
+---
 root_key: "F22409A93D1CD12D2FC92B5F8EB84CDCD24C348E32B3E7A720F3D2E288E63394"
 users:
  - $aptos_username
