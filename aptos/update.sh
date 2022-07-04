@@ -8,10 +8,9 @@ function download_aptos_cli {
 }
 
 function add_layout {
-  ROOT_KEY=F22409A93D1CD12D2FC92B5F8EB84CDCD24C348E32B3E7A720F3D2E288E63394
-  tee ${HOME}/${WORKSPACE}/layout.yaml > /dev/null <<EOF
+  tee ${HOME}/aptos_testnet/layout.yaml > /dev/null <<EOF
 ---
-root_key: "${ROOT_KEY}"
+root_key: "F22409A93D1CD12D2FC92B5F8EB84CDCD24C348E32B3E7A720F3D2E288E63394"
 users:
   - ${aptos_username}
 chain_id: 40
@@ -27,17 +26,17 @@ EOF
 }
 
 function download_framework {
-  wget -qO ${HOME}/${WORKSPACE}/framework.zip https://github.com/aptos-labs/aptos-core/releases/download/aptos-framework-v0.1.0/framework.zip
-  unzip -o ${HOME}/${WORKSPACE}/framework.zip -d ${HOME}/${WORKSPACE}/
-  rm ${HOME}/${WORKSPACE}/framework.zip
+  wget -qO ${HOME}/aptos_testnet/framework.zip https://github.com/aptos-labs/aptos-core/releases/download/aptos-framework-v0.1.0/framework.zip
+  unzip -o ${HOME}/aptos_testnet/framework.zip -d ${HOME}/aptos_testnet/
+  rm ${HOME}/aptos_testnet/framework.zip
 }
 
 function configure_validator {
   aptos genesis set-validator-configuration \
-  --keys-dir ${HOME}/${WORKSPACE} --local-repository-dir ${HOME}/${WORKSPACE} \
+  --keys-dir ${HOME}/aptos_testnet --local-repository-dir ${HOME}/aptos_testnet \
   --username $aptos_username \
-  --validator-host $PUBLIC_IP:6180 \
-  --full-node-host $PUBLIC_IP:6182
+  --validator-host `wget -qO- eth0.me`:6180 \
+  --full-node-host `wget -qO- eth0.me`:6182
 }
 
 source $HOME/.bash_profile
