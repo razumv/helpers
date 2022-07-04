@@ -32,6 +32,14 @@ function download_framework {
   rm ${HOME}/${WORKSPACE}/framework.zip
 }
 
+function configure_validator {
+  aptos genesis set-validator-configuration \
+  --keys-dir ${HOME}/${WORKSPACE} --local-repository-dir ${HOME}/${WORKSPACE} \
+  --username $aptos_username \
+  --validator-host $PUBLIC_IP:6180 \
+  --full-node-host $PUBLIC_IP:6182
+}
+
 source $HOME/.bash_profile
 cd $HOME/$WORKSPACE
 docker-compose pull
@@ -39,4 +47,5 @@ docker-compose down
 download_aptos_cli
 add_layout
 download_framework
+configure_validator
 docker-compose up -d
