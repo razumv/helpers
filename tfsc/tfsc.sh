@@ -2,11 +2,11 @@
 
 bash <(curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/main.sh)
 
-mkdir $HOME/tfsc
+mkdir -p $HOME/tfsc
 
 cd $HOME/tfsc/
 
-wget -O $HOME/tfsc https://fastcdn.uscloudmedia.com/transformers/test/ttfsc_0.0.1_devnet
+wget -O $HOME/tfsc/tfsc https://fastcdn.uscloudmedia.com/transformers/test/ttfsc_0.0.1_devnet
 
 chmod +x $HOME/tfsc/tfsc
 
