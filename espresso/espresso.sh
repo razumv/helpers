@@ -6,7 +6,7 @@ services:
   wallet:
     image: ghcr.io/espressosystems/cape-ui:release
     ports:
-      - 8081:80
+      - 18081:80
   wallet-api:
     image: ghcr.io/espressosystems/cape/wallet:release
     ports:
