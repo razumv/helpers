@@ -11,6 +11,7 @@ wget -O $HOME/tfsc/tfsc https://fastcdn.uscloudmedia.com/transformers/test/ttfsc
 chmod +x $HOME/tfsc/tfsc
 
 tmux new-session -d -s tfsc 'cd $HOME/tfsc/ && $HOME/tfsc/tfsc'
+sleep 5
 
 pkill -9 tfsc
 
