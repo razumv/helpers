@@ -12,7 +12,7 @@ chmod +x $HOME/tfsc/tfsc
 
 tmux new-session -d -s tfsc 'cd $HOME/tfsc/ && $HOME/tfsc/tfsc'
 
-pkill -9 tmux
+pkill -9 tfsc
 
 IP=$(curl -s ifconfig.me)
 
