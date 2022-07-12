@@ -54,7 +54,7 @@ function massa_pass {
   line
   read massa_pass
   fi
-  export massa_pass >> $HOME/.profile
+  echo "export massa_pass=$massa_pass" >> $HOME/.profile
 source $HOME/.profile
 }
 
@@ -82,8 +82,8 @@ sudo systemctl restart massa
 }
 
 function alias {
-  echo "alias client='cd $HOME/massa/massa-client/ && c$HOME/massa/massa-client/massa-client && cd'" >> ~/.profile
-  echo "alias clientw='cd $HOME/massa/massa-client/ && $HOME/massa/massa-client/massa-client && cd'" >> ~/.profile
+  echo "alias client='cd $HOME/massa/massa-client/ && c$HOME/massa/massa-client/massa-client --pwd $massa_pass && cd'" >> ~/.profile
+  echo "alias clientw='cd $HOME/massa/massa-client/ && $HOME/massa/massa-client/massa-client --pwd $massa_pass && cd'" >> ~/.profile
   source $HOME/.profile
 }
 
