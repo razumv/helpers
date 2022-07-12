@@ -25,10 +25,8 @@ function install {
 }
 
 function routable_ip {
-  sudo tee <<EOF >/dev/null $HOME/massa/massa-node/config/config.toml
-[network]
-routable_ip = "wget -qO- eth0.me"
-EOF
+  sed -i 's/.*routable_ip/# \0/' "$HOME/massa/massa-node/base_config/config.toml"
+  sed -i "/\[network\]/a routable_ip=\"$(curl -s ifconfig.me)\"" "$HOME/massa/massa-node/base_config/config.toml"
 
 }
 
