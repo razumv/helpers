@@ -81,6 +81,12 @@ sudo systemctl enable massa
 sudo systemctl restart massa
 }
 
+function alias {
+  echo "alias client='cd $HOME/massa/massa-client/ && c$HOME/massa/massa-client/massa-client && cd'" >> ~/.profile
+  echo "alias clientw='cd $HOME/massa/massa-client/ && $HOME/massa/massa-client/massa-client && cd'" >> ~/.profile
+  source $HOME/.profile
+}
+
 colors
 line
 logo
@@ -94,4 +100,5 @@ replace_bootstraps
 line
 systemd
 line
+alias
 echo "Готово, ваш пароль от клиента - $massa_pass"
