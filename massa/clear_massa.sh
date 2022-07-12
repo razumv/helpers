@@ -88,6 +88,7 @@ line
 logo
 line
 massa_pass
+delete
 install_12
 routable_ip
 line
