@@ -15,19 +15,18 @@ function line {
 }
 
 function delete {
-  systemctl stop massa
+  sudo systemctl stop massa
   rm -rf $HOME/massa
 }
 
 function install {
   wget https://github.com/massalabs/massa/releases/download/TEST.12.0/massa_TEST.12.0_release_linux.tar.gz
-  tar zxvf massa_TEST.12.0_release_linux.tar.gz
+  tar zxvf massa_TEST.12.0_release_linux.tar.gz -C $HOME/
 }
 
 function routable_ip {
   sed -i 's/.*routable_ip/# \0/' "$HOME/massa/massa-node/base_config/config.toml"
   sed -i "/\[network\]/a routable_ip=\"$(curl -s ifconfig.me)\"" "$HOME/massa/massa-node/base_config/config.toml"
-
 }
 
 function replace_bootstraps {
@@ -55,7 +54,7 @@ function massa_pass {
   read massa_pass
   fi
   echo "export massa_pass=$massa_pass" >> $HOME/.profile
-source $HOME/.profile
+  source $HOME/.profile
 }
 
 function systemd {
