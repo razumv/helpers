@@ -7,7 +7,7 @@ if [ ! -e $HOME/massa/massa-client/massa-client ]; then
   chmod +x $HOME/massa/massa-client/massa-client
 fi
 #
-cd $HOME/massa/massa-client
+cd $HOME/massa/massa-client --pwd $massa_pass
 massa_wallet_address=$(./massa-client wallet_info | grep Address | awk '{ print $2 }')
 while true
 do
