@@ -27,8 +27,9 @@ function source_git {
     git clone https://github.com/penumbra-zone/penumbra
   fi
   cd $HOME/penumbra
+  git reset --hard
   git fetch
-  git checkout 020-aitne && cargo update
+  git checkout 021-eurydome.1 && cargo update
 }
 
 function build_penumbra {
