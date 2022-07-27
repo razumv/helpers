@@ -27,6 +27,7 @@ function source_git {
     git clone https://github.com/penumbra-zone/penumbra
   fi
   cd $HOME/penumbra
+  git reset --hard
   git fetch
   git checkout 022-hegemone && cargo update
 }

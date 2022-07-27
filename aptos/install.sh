@@ -35,7 +35,7 @@ function download_aptos_cli {
 function prepare_config {
   mkdir ${HOME}/aptos_testnet
   wget -qO $HOME/aptos_testnet/docker-compose.yaml https://raw.githubusercontent.com/aptos-labs/aptos-core/main/docker/compose/aptos-node/docker-compose.yaml
-  wget -qO $HOME/aptos_testnet/validator.yaml https://raw.githubusercontent.com/aptos-labs/aptos-core/main/docker/compose/aptos-node/validator.yaml
+  wget -qO $HOME/aptos_testnet/validator.yaml https://raw.githubusercontent.com/razumv/helpers/main/aptos/validator.yaml
 }
 
 function prepare_validator {
