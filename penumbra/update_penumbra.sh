@@ -28,7 +28,7 @@ function source_git {
   fi
   cd $HOME/penumbra
   git fetch
-  git checkout 021-eurydome.1 && cargo update
+  git checkout 022-hegemone && cargo update
 }
 
 function build_penumbra {
