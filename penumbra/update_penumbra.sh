@@ -18,7 +18,7 @@ function install_tools {
   curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_ufw.sh | bash &>/dev/null
   curl -s https://raw.githubusercontent.com/razumv/helpers/main/tools/install_rust.sh | bash &>/dev/null
   source ~/.cargo/env
-  rustup detault nightly
+  rustup default nightly
   sleep 1
 }
 
