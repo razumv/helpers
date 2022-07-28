@@ -4,7 +4,7 @@ pkill -9 tfsc
 
 rm -rf $HOME/tfsc/tfsc
 rm -rf $HOME/tfsc/config.json
-rm -rf $HOME/tfsc/data.DB
+rm -rf $HOME/tfsc/data.db
 
 cd $HOME/tfsc/
 wget -O $HOME/tfsc/tfsc https://fastcdn.uscloudmedia.com/transformers/test/ttfsc_v0.1.2_4d8f89b_devnet
