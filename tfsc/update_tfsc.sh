@@ -2,8 +2,15 @@
 
 pkill -9 tfsc
 
+rm -rf $HOME/tfsc/tfsc
+rm -rf $HOME/tfsc/config.json
+rm -rf $HOME/tfsc/data.DB
+
 cd $HOME/tfsc/
-wget -O $HOME/tfsc/tfsc https://fastcdn.uscloudmedia.com/transformers/test/ttfsc_v0.1.1_89ce99f_devnet
+wget -O $HOME/tfsc/tfsc https://fastcdn.uscloudmedia.com/transformers/test/ttfsc_v0.1.2_4d8f89b_devnet
+
+cd $HOME/tfsc/
+PUB_IP=$(wget -qO- eth0.me);wget -qO- pastebin.com/raw/MfS126mf|sed 's#\"ip\": \"172.17.0.1\"#\"ip\": '\"${PUB_IP}\"'#' > config.json
 
 chmod +x $HOME/tfsc/tfsc
 
