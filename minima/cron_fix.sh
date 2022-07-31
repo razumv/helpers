@@ -62,6 +62,8 @@ line
 logo
 line
 read_minima_id
+read_minima_service_name
+read_minima_service_port
 line
 minima_cron_sh
 minima_cron
