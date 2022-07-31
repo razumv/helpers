@@ -47,7 +47,7 @@ curl -s 127.0.0.1:${minima_service_port}/incentivecash%20uid:$minima_id
 sudo systemctl stop ${minima_service_name}
 pkill -9 java
 EOF
-  chmod +x tee $HOME/minima_cron_${minima_service_name}.sh
+  chmod +x $HOME/minima_cron_${minima_service_name}.sh
 }
 
 function minima_cron {
