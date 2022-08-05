@@ -85,8 +85,8 @@ install
 routable_ip
 replace_bootstraps
 line
-echo "Восстанавливаемся из бекапа"
-keys_from_backup
-line
+#echo "Восстанавливаемся из бекапа"
+#keys_from_backup
+#line
 sudo systemctl start massa
 echo "Обновление завершено"
