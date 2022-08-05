@@ -1,12 +1,12 @@
 #!/bin/bash
 #Thank's for https://raw.githubusercontent.com/bobu4/massa/main/bal.sh
 
-rm -f $HOME/massa/massa-client/massa-client
-if [ ! -e $HOME/massa/massa-client/massa-client ]; then
-  wget https://raw.githubusercontent.com/razumv/helpers/main/massa/massa-client -O $HOME/massa/massa-client/massa-client
-  chmod +x $HOME/massa/massa-client/massa-client
-fi
-#
+# rm -f $HOME/massa/massa-client/massa-client
+# if [ ! -e $HOME/massa/massa-client/massa-client ]; then
+#   wget https://raw.githubusercontent.com/razumv/helpers/main/massa/massa-client -O $HOME/massa/massa-client/massa-client
+#   chmod +x $HOME/massa/massa-client/massa-client
+# fi
+# #
 cd $HOME/massa/massa-client
 massa_wallet_address=$(./massa-client --pwd $massa_pass wallet_info | grep Address | awk '{ print $2 }')
 while true
