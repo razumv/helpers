@@ -69,6 +69,11 @@ function keys_from_backup {
 	cp $HOME/massa_backup/node_privkey.key $HOME/massa/massa-node/config/node_privkey.key
 }
 
+function alias {
+  echo "alias client='cd $HOME/massa/massa-client/ && $HOME/massa/massa-client/massa-client --pwd $massa_pass && cd'" >> ~/.profile
+  echo "alias clientw='cd $HOME/massa/massa-client/ && $HOME/massa/massa-client/massa-client --pwd $massa_pass && cd'" >> ~/.profile
+}
+
 colors
 line
 logo
@@ -84,6 +89,7 @@ echo "Скачиваем новую версию и переписываем к�
 install
 routable_ip
 replace_bootstraps
+alias
 line
 echo "Восстанавливаемся из бекапа"
 keys_from_backup
