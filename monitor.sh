@@ -47,7 +47,7 @@ sudo tee <<EOF >/dev/null /etc/systemd/system/vmagent.service
   Wants=network-online.target
   After=network-online.target
 [Service]
-  User=$USER
+  User=root
   Type=simple
   ExecStart=$HOME/vmagent-prod \
   -promscrape.config=/etc/prometheus/prometheus.yml \
