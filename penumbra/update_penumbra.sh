@@ -29,7 +29,7 @@ function source_git {
   cd $HOME/penumbra
   git reset --hard
   git fetch
-  git checkout 023-arche.1 && cargo update
+  git checkout 024-dia && cargo update
 }
 
 function build_penumbra {
